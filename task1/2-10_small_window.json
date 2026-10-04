@@ -1,0 +1,24 @@
+[
+  {
+    "strategy": "no_compression",
+    "success": false,
+    "iterations": 4,
+    "tool_calls": 10,
+    "overflows": 1,
+    "total_tokens": 6040,
+    "last_prompt_tokens": 2635,
+    "error": "Context window exceeded - 2,635 tokens in last request (limit: 3000)",
+    "final_answer_preview": ""
+  },
+  {
+    "strategy": "context_aware",
+    "success": false,
+    "iterations": 6,
+    "tool_calls": 12,
+    "overflows": 0,
+    "total_tokens": 7756,
+    "last_prompt_tokens": 1909,
+    "error": null,
+    "final_answer_preview": ""
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "metrics": {
+      "strategy": "no_compression",
+      "success": false,
+      "iterations": 6,
+      "tool_calls": 21,
+      "context_overflows": 0,
+      "execution_time": 30.769712209701538,
+      "total_tokens": 24087,
+      "error": null,
+      "final_answer_length": 0,
+      "compression_ratio": 1.338,
+      "total_original_size": 14401,
+      "total_compressed_size": 19266
+    },
+    "final_answer": null,
+    "timestamp": "2026-09-19T13:15:34.320251"
+  },
+  {
+    "metrics": {
+      "strategy": "context_aware_summary",
+      "success": false,
+      "iterations": 6,
+      "tool_calls": 10,
+      "context_overflows": 0,
+      "execution_time": 48.46963167190552,
+      "total_tokens": 7136,
+      "error": null,
+      "final_answer_length": 0,
+      "compression_ratio": 0.036,
+      "total_original_size": 8703,
+      "total_compressed_size": 310
+    },
+    "final_answer": null,
+    "timestamp": "2026-09-19T13:16:24.809167"
+  }
+]

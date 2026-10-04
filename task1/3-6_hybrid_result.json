@@ -1,0 +1,1508 @@
+{
+  "config": {
+    "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "reranker_model": null,
+    "top_k": 10,
+    "k_rrf": 60,
+    "eval_k": 3,
+    "chunk_size": 280,
+    "chunk_overlap": 40,
+    "device": "cpu"
+  },
+  "summary": {
+    "sparse": {
+      "recall@k": 0.8333333333333334,
+      "mrr": 0.7916666666666666,
+      "ndcg@k": 0.8025774794642881,
+      "latency_ms": {
+        "mean": 32.64886666147504,
+        "p50": 0.10069995187222958,
+        "p95": 390.4672000207938
+      }
+    },
+    "dense": {
+      "recall@k": 1.0,
+      "mrr": 0.9166666666666666,
+      "ndcg@k": 0.9384882922619097,
+      "latency_ms": {
+        "mean": 4.6338583342731,
+        "p50": 2.9029000434093177,
+        "p95": 14.480799960438162
+      }
+    },
+    "rrf": {
+      "recall@k": 1.0,
+      "mrr": 1.0,
+      "ndcg@k": 1.0,
+      "latency_ms": {
+        "mean": 37.290274995029904,
+        "p50": 3.0273000011220574,
+        "p95": 404.9578999984078
+      }
+    },
+    "weighted": {
+      "recall@k": 1.0,
+      "mrr": 0.9583333333333334,
+      "ndcg@k": 0.9692441461309548,
+      "latency_ms": {
+        "mean": 37.294958339771256,
+        "p50": 3.032500040717423,
+        "p95": 404.9638999858871
+      }
+    }
+  },
+  "per_query": [
+    {
+      "query": "XR-7003",
+      "expected": [
+        "xr_7003"
+      ],
+      "category": "technical-code",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "xr_7003",
+              "score": 3.3578
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "xr_7001",
+              "score": 0.5247
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.5195
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.5032
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.5024
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.5003
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 0.5,
+          "ndcg@k": 0.6309
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0325
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0164
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "xr_7003",
+              "score": 1.9882
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 1.0
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.9516
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.9497
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.9451
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.13040000339969993,
+          "dense": 7.952800020575523,
+          "rrf_fusion": 0.013700046110898256,
+          "weighted_fusion": 0.02069998299703002
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.13040000339969993,
+          "dense": 7.952800020575523,
+          "rrf": 8.096900070086122,
+          "weighted": 8.103900006972253
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "XR-7005",
+      "expected": [
+        "xr_7005"
+      ],
+      "category": "technical-code",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "xr_7005",
+              "score": 3.3578
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "xr_7001",
+              "score": 0.5208
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.5163
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.5068
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.505
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.5038
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 0.5,
+          "ndcg@k": 0.6309
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "xr_7005",
+              "score": 0.0325
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0164
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "xr_7005",
+              "score": 1.9889
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 1.0
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.9652
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.9609
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.9577
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.08640001760795712,
+          "dense": 4.643599968403578,
+          "rrf_fusion": 0.006499991286545992,
+          "weighted_fusion": 0.01090002479031682
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.08640001760795712,
+          "dense": 4.643599968403578,
+          "rrf": 4.736499977298081,
+          "weighted": 4.740900010801852
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "HTTP-403",
+      "expected": [
+        "http_403"
+      ],
+      "category": "technical-code",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "http_403",
+              "score": 3.234
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "http_403",
+              "score": 0.7748
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.5378
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.534
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.4965
+            },
+            {
+              "doc_id": "http_400",
+              "score": 0.4916
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "http_403",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.0161
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "http_400",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "http_403",
+              "score": 2.0
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.6946
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.6898
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.6415
+            },
+            {
+              "doc_id": "http_400",
+              "score": 0.6352
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.05319999763742089,
+          "dense": 2.550399978645146,
+          "rrf_fusion": 0.005499983672052622,
+          "weighted_fusion": 0.00990001717582345
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.05319999763742089,
+          "dense": 2.550399978645146,
+          "rrf": 2.6090999599546194,
+          "weighted": 2.6134999934583902
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "HTTP-400",
+      "expected": [
+        "http_400"
+      ],
+      "category": "technical-code",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "http_400",
+              "score": 3.234
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "http_400",
+              "score": 0.692
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.5854
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.4883
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.419
+            },
+            {
+              "doc_id": "http_403",
+              "score": 0.4135
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "http_400",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.0161
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "http_403",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "http_400",
+              "score": 2.0
+            },
+            {
+              "doc_id": "http_500",
+              "score": 0.803
+            },
+            {
+              "doc_id": "http_401",
+              "score": 0.6233
+            },
+            {
+              "doc_id": "http_404",
+              "score": 0.4951
+            },
+            {
+              "doc_id": "http_403",
+              "score": 0.4851
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.04810001701116562,
+          "dense": 2.1702999947592616,
+          "rrf_fusion": 0.005199981387704611,
+          "weighted_fusion": 0.009000010322779417
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.04810001701116562,
+          "dense": 2.1702999947592616,
+          "rrf": 2.223599993158132,
+          "weighted": 2.2274000220932066
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "Alexander Humphrey",
+      "expected": [
+        "name_alexander_humphrey"
+      ],
+      "category": "exact-name",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "name_alexander_humphrey",
+              "score": 5.1114
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 2.5557
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 2.5557
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "name_alexander_humphrey",
+              "score": 0.3733
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.2051
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 0.1688
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.0825
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0468
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "name_alexander_humphrey",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.0323
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 0.0317
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "name_alexander_humphrey",
+              "score": 2.0
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.5184
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 0.4143
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.1672
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.065
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.05570001667365432,
+          "dense": 2.2911999840289354,
+          "rrf_fusion": 0.005299982149153948,
+          "weighted_fusion": 0.009800016414374113
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.05570001667365432,
+          "dense": 2.2911999840289354,
+          "rrf": 2.3521999828517437,
+          "weighted": 2.356700017116964
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "a beginner friendly language with tidy syntax",
+      "expected": [
+        "sem_readable"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "sem_readable",
+              "score": 2.9118
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.7496
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.7496
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.7496
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.7496
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "sem_readable",
+              "score": 0.5064
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.1005
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0864
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 0.08
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0575
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "sem_readable",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0315
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.0306
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0297
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.0294
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "sem_readable",
+              "score": 2.0
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.135
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.1051
+            },
+            {
+              "doc_id": "name_amelia_humphrey",
+              "score": 0.0913
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0561
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.10069995187222958,
+          "dense": 2.7339000371284783,
+          "rrf_fusion": 0.007899943739175797,
+          "weighted_fusion": 0.012300035450607538
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.10069995187222958,
+          "dense": 2.7339000371284783,
+          "rrf": 2.8424999327398837,
+          "weighted": 2.8469000244513154
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "reclaiming unused heap space without programmer effort",
+      "expected": [
+        "sem_gc"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [],
+          "recall@k": 0.0,
+          "mrr": 0.0,
+          "ndcg@k": 0.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "sem_gc",
+              "score": 0.4511
+            },
+            {
+              "doc_id": "sem_readable",
+              "score": 0.0974
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.0925
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0792
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0589
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0164
+            },
+            {
+              "doc_id": "sem_readable",
+              "score": 0.0161
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "sem_gc",
+              "score": 1.0
+            },
+            {
+              "doc_id": "sem_readable",
+              "score": 0.2334
+            },
+            {
+              "doc_id": "name_alexander_hughes",
+              "score": 0.2228
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.1939
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.1499
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.09689998114481568,
+          "dense": 2.6777000166475773,
+          "rrf_fusion": 0.005300040356814861,
+          "weighted_fusion": 0.007599999662488699
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.09689998114481568,
+          "dense": 2.6777000166475773,
+          "rrf": 2.779900038149208,
+          "weighted": 2.7821999974548817
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "how vegetation turns light into food",
+      "expected": [
+        "sem_photo"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 3.5307
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 2.4648
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 0.5,
+          "ndcg@k": 0.6309
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "sem_photo",
+              "score": 0.5604
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.3152
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.1562
+            },
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.1018
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0875
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0325
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0325
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 1.532
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 1.0
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.2283
+            },
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.1244
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.097
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 0.5,
+          "ndcg@k": 0.6309
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.09400001727044582,
+          "dense": 2.7151000103913248,
+          "rrf_fusion": 0.005300040356814861,
+          "weighted_fusion": 0.009000010322779417
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.09400001727044582,
+          "dense": 2.7151000103913248,
+          "rrf": 2.8144000680185854,
+          "weighted": 2.81810003798455
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "hiding a note so eavesdroppers cannot understand it",
+      "expected": [
+        "sem_crypto"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "sem_crypto",
+              "score": 5.2654
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 1.4711
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.8428
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.7496
+            },
+            {
+              "doc_id": "xr_7002",
+              "score": 0.7496
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.49
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.129
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.1289
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.1279
+            },
+            {
+              "doc_id": "sem_readable",
+              "score": 0.1243
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0308
+            },
+            {
+              "doc_id": "xr_7001",
+              "score": 0.0308
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.0306
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.0303
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "sem_crypto",
+              "score": 2.0
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.1649
+            },
+            {
+              "doc_id": "xr_7006",
+              "score": 0.151
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.1509
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.1484
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.11679995805025101,
+          "dense": 2.9029000434093177,
+          "rrf_fusion": 0.007599999662488699,
+          "weighted_fusion": 0.012800039257854223
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.11679995805025101,
+          "dense": 2.9029000434093177,
+          "rrf": 3.0273000011220574,
+          "weighted": 3.032500040717423
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "植物如何把阳光转化为食物",
+      "expected": [
+        "sem_photo"
+      ],
+      "category": "multilingual",
+      "methods": {
+        "sparse": {
+          "top": [],
+          "recall@k": 0.0,
+          "mrr": 0.0,
+          "ndcg@k": 0.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "sem_photo",
+              "score": 0.203
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.1643
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.1263
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.1256
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.1193
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0164
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.0161
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0156
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "sem_photo",
+              "score": 1.0
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.5444
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0971
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0891
+            },
+            {
+              "doc_id": "xr_7005",
+              "score": 0.0154
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 390.4672000207938,
+          "dense": 14.480799960438162,
+          "rrf_fusion": 0.00990001717582345,
+          "weighted_fusion": 0.015900004655122757
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 390.4672000207938,
+          "dense": 14.480799960438162,
+          "rrf": 404.9578999984078,
+          "weighted": 404.9638999858871
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "how does water move between the ocean and the sky",
+      "expected": [
+        "doc_watercycle"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 9.8355
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 2.6283
+            },
+            {
+              "doc_id": "http_400",
+              "score": 1.444
+            },
+            {
+              "doc_id": "http_401",
+              "score": 1.444
+            },
+            {
+              "doc_id": "http_403",
+              "score": 1.444
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.7004
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.183
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.162
+            },
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.0651
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0585
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.032
+            },
+            {
+              "doc_id": "name_alexander_humphrey",
+              "score": 0.0294
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0161
+            },
+            {
+              "doc_id": "http_400",
+              "score": 0.0159
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "doc_watercycle",
+              "score": 2.0
+            },
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.3439
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.2339
+            },
+            {
+              "doc_id": "sem_crypto",
+              "score": 0.0594
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0496
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.3580999909900129,
+          "dense": 4.511100007221103,
+          "rrf_fusion": 0.009599956683814526,
+          "weighted_fusion": 0.014999997802078724
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.3580999909900129,
+          "dense": 4.511100007221103,
+          "rrf": 4.87879995489493,
+          "weighted": 4.884199996013194
+        },
+        "rank_changes": []
+      }
+    },
+    {
+      "query": "how are volcanoes formed from molten rock",
+      "expected": [
+        "doc_volcano"
+      ],
+      "category": "semantic",
+      "methods": {
+        "sparse": {
+          "top": [
+            {
+              "doc_id": "doc_volcano",
+              "score": 3.4557
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 2.7155
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 2.0863
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "dense": {
+          "top": [
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.7515
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.2896
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0735
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0224
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0215
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "rrf": {
+          "top": [
+            {
+              "doc_id": "doc_volcano",
+              "score": 0.0328
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.0323
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "sem_gc",
+              "score": 0.0159
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0156
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        },
+        "weighted": {
+          "top": [
+            {
+              "doc_id": "doc_volcano",
+              "score": 2.0
+            },
+            {
+              "doc_id": "doc_watercycle",
+              "score": 0.8291
+            },
+            {
+              "doc_id": "sem_photo",
+              "score": 0.0746
+            },
+            {
+              "doc_id": "xr_7003",
+              "score": 0.0049
+            },
+            {
+              "doc_id": "xr_7004",
+              "score": 0.0035
+            }
+          ],
+          "recall@k": 1.0,
+          "mrr": 1.0,
+          "ndcg@k": 1.0
+        }
+      },
+      "trace": {
+        "component_latency_ms": {
+          "sparse": 0.17889996524900198,
+          "dense": 5.976499989628792,
+          "rrf_fusion": 0.008800008799880743,
+          "weighted_fusion": 0.013899989426136017
+        },
+        "end_to_end_latency_ms": {
+          "sparse": 0.17889996524900198,
+          "dense": 5.976499989628792,
+          "rrf": 6.1641999636776745,
+          "weighted": 6.16929994430393
+        },
+        "rank_changes": []
+      }
+    }
+  ],
+  "elapsed_sec": 0.45,
+  "eval_k": 3
+}

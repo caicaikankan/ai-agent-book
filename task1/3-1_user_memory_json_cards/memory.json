@@ -1,0 +1,54 @@
+{
+  "user_id": "demo_user",
+  "type": "json_cards",
+  "updated_at": "2026-09-19T10:58:15.085056",
+  "memory_cards": {
+    "personal": {
+      "identity": {
+        "name": {
+          "value": "Alice",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.078944"
+        }
+      },
+      "preferences": {
+        "coding_language": {
+          "value": "Python",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.083058"
+        },
+        "ide": {
+          "value": "VS Code",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.084057"
+        },
+        "theme": {
+          "value": "Dark Mode",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.085056"
+        }
+      }
+    },
+    "work": {
+      "employment": {
+        "job_title": {
+          "value": "Product Manager",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.081049"
+        },
+        "company": {
+          "value": "TechCorp",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.082089"
+        }
+      },
+      "projects": {
+        "current": {
+          "value": "New mobile app project",
+          "source": "session-79bd6fc3",
+          "updated_at": "2026-09-19T10:58:15.085056"
+        }
+      }
+    }
+  }
+}

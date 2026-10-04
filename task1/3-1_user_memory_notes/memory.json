@@ -1,0 +1,66 @@
+{
+  "user_id": "demo_user",
+  "type": "notes",
+  "updated_at": "2026-09-19T11:02:32.894211",
+  "notes": [
+    {
+      "note_id": "701db9d9-dbbd-4c13-8241-4b806af02a18",
+      "content": "Alice is a Product Manager at TechCorp",
+      "session_id": "session-ae48f0c9",
+      "created_at": "2026-09-19T11:02:32.891576",
+      "updated_at": "2026-09-19T11:02:32.891576",
+      "tags": [
+        "work",
+        "job-title",
+        "company"
+      ]
+    },
+    {
+      "note_id": "e82a76b5-ebb0-4df7-8f96-4ceff4ff9ed7",
+      "content": "Alice is currently working on a new mobile app project for TechCorp",
+      "session_id": "session-ae48f0c9",
+      "created_at": "2026-09-19T11:02:32.892681",
+      "updated_at": "2026-09-19T11:02:32.892681",
+      "tags": [
+        "work",
+        "project",
+        "mobile-app"
+      ]
+    },
+    {
+      "note_id": "0e475192-5b3e-4ec7-b50b-35467c4aa567",
+      "content": "Alice prefers Python for scripting",
+      "session_id": "session-ae48f0c9",
+      "created_at": "2026-09-19T11:02:32.893203",
+      "updated_at": "2026-09-19T11:02:32.893203",
+      "tags": [
+        "technical",
+        "programming-language",
+        "preference"
+      ]
+    },
+    {
+      "note_id": "7ff536e1-c2b0-4e0f-96c7-925b01e65db2",
+      "content": "Alice uses VS Code as her IDE",
+      "session_id": "session-ae48f0c9",
+      "created_at": "2026-09-19T11:02:32.893203",
+      "updated_at": "2026-09-19T11:02:32.893203",
+      "tags": [
+        "technical",
+        "tools",
+        "preference"
+      ]
+    },
+    {
+      "note_id": "2d43cabe-774b-4a4a-b383-7b9cc6caad73",
+      "content": "Alice prefers dark themes",
+      "session_id": "session-ae48f0c9",
+      "created_at": "2026-09-19T11:02:32.894211",
+      "updated_at": "2026-09-19T11:02:32.894211",
+      "tags": [
+        "preference",
+        "ui"
+      ]
+    }
+  ]
+}

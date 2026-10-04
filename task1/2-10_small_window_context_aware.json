@@ -1,0 +1,11 @@
+{
+  "strategy": "context_aware",
+  "window": 3000,
+  "success": false,
+  "iterations": 10,
+  "tool_calls": 18,
+  "overflows": 4,
+  "total_tokens": 22546,
+  "last_prompt_tokens": 3298,
+  "final_answer": null
+}

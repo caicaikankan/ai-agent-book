@@ -1,0 +1,183 @@
+{
+  "dataset": "evaluation/offline_qa.json",
+  "corpus": "laws",
+  "top_k": 5,
+  "timestamp": "2026-09-19 13:11:10",
+  "results": [
+    {
+      "id": "easy_1",
+      "question": "故意伤害致人重伤的，如何处罚？",
+      "difficulty": "easy",
+      "gold_articles": [
+        "第二百三十四条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [
+          "第二百三十四条"
+        ],
+        "recall": 1.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第二百三十四条"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "easy_2",
+      "question": "正当防卫是怎么规定的？",
+      "difficulty": "easy",
+      "gold_articles": [
+        "第二十条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [
+          "第二十条"
+        ],
+        "recall": 1.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第二十条"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "easy_3",
+      "question": "醉酒驾驶机动车如何处罚？",
+      "difficulty": "easy",
+      "gold_articles": [
+        "第一百三十三条之一"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [
+          "第一百三十三条之一"
+        ],
+        "recall": 1.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第一百三十三条之一"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "hard_1",
+      "question": "故意杀人罪判几年？",
+      "difficulty": "hard",
+      "gold_articles": [
+        "第二百三十二条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [],
+        "recall": 0.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第二百三十二条"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "hard_2",
+      "question": "盗窃罪的立案标准是什么？",
+      "difficulty": "hard",
+      "gold_articles": [
+        "第二百六十四条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [],
+        "recall": 0.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第二百六十四条"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "hard_3",
+      "question": "诈骗罪的量刑标准是什么？",
+      "difficulty": "hard",
+      "gold_articles": [
+        "第二百六十六条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [],
+        "recall": 0.0
+      },
+      "agentic": {
+        "num_searches": 1,
+        "covered": [
+          "第二百六十六条"
+        ],
+        "recall": 1.0
+      }
+    },
+    {
+      "id": "hard_4",
+      "question": "醉酒过失致人重伤且有盗窃前科，应如何量刑？",
+      "difficulty": "hard",
+      "gold_articles": [
+        "第二百三十五条",
+        "第一百三十三条之一",
+        "第六十五条"
+      ],
+      "naive": {
+        "num_searches": 1,
+        "covered": [
+          "第二百三十五条"
+        ],
+        "recall": 0.3333333333333333
+      },
+      "agentic": {
+        "num_searches": 3,
+        "covered": [
+          "第二百三十五条",
+          "第一百三十三条之一",
+          "第六十五条"
+        ],
+        "recall": 1.0
+      }
+    }
+  ],
+  "summary": {
+    "overall": {
+      "count": 7,
+      "naive_recall": 0.4761904761904762,
+      "agentic_recall": 1.0,
+      "naive_searches": 1.0,
+      "agentic_searches": 1.2857142857142858
+    },
+    "easy": {
+      "count": 3,
+      "naive_recall": 1.0,
+      "agentic_recall": 1.0,
+      "naive_searches": 1.0,
+      "agentic_searches": 1.0
+    },
+    "hard": {
+      "count": 4,
+      "naive_recall": 0.08333333333333333,
+      "agentic_recall": 1.0,
+      "naive_searches": 1.0,
+      "agentic_searches": 1.5
+    }
+  }
+}
