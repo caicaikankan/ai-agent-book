@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《深入理解 AI Agent》知识地图</title>
+<style>
+:root {
+  --bg:#0f1420; --card:#1a2234; --ink:#e8edf7; --muted:#93a0b8;
+  --build:#4f8cff; --lift:#b06bff; --line:#2a3450;
+  --ok:#37c97a; --book:#e8b53d; --design:#7a8aa8; --mine:#ff7a59;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:linear-gradient(180deg,#0c111d,var(--bg)); color:var(--ink);
+  font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif; line-height:1.6; }
+.hero { padding:48px 24px 24px; text-align:center; }
+.hero h1 { margin:0 0 8px; font-size:30px; letter-spacing:1px; }
+.hero p { color:var(--muted); margin:4px; }
+.legend { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:16px; font-size:13px; }
+.legend span { display:inline-flex; align-items:center; gap:6px; color:var(--muted); }
+.dot { width:12px; height:12px; border-radius:50%; display:inline-block; }
+.wrap { max-width:1080px; margin:0 auto; padding:16px 20px 80px; }
+.partlabel { margin:36px 0 8px; font-size:13px; letter-spacing:3px; color:var(--muted);
+  border-bottom:1px solid var(--line); padding-bottom:8px; }
+.chapter { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin:18px 0; box-shadow:0 8px 30px rgba(0,0,0,.25); }
+.chapter header { display:flex; gap:14px; align-items:flex-start; }
+.ch-no { font-size:26px; }
+h2 { margin:0; font-size:20px; }
+.insight { margin:2px 0 0; color:var(--muted); font-size:14px; }
+.part-构建 { border-left:4px solid var(--build); }
+.part-提升 { border-left:4px solid var(--lift); }
+.concepts { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
+.chip { background:rgba(79,140,255,.12); border:1px solid rgba(79,140,255,.35);
+  color:#bcd4ff; padding:3px 10px; border-radius:999px; font-size:12.5px; }
+.part-提升 .chip { background:rgba(176,107,255,.12); border-color:rgba(176,107,255,.4); color:#e3ccff; }
+ul.experiments { list-style:none; padding:0; margin:8px 0 0; }
+ul.experiments li { padding:10px 2px; border-top:1px dashed var(--line); font-size:14px; }
+.folder { color:#9fc0ff; font-weight:600; margin-left:4px; }
+.desc { color:var(--muted); font-size:13px; }
+.st-ok { color:var(--ok); } .st-book { color:var(--book); }
+.st-design { color:var(--design); } .st-block { color:#ff6b6b; }
+.done { display:inline-block; margin-left:8px; background:rgba(255,122,89,.15);
+  border:1px solid var(--mine); color:var(--mine); padding:1px 8px; border-radius:6px; font-size:12px; }
+footer { text-align:center; color:var(--muted); font-size:12.5px; padding:24px; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>《深入理解 AI Agent：设计原理与工程实践》知识地图</h1>
+  <p>10 章 · 109 个实验 · 一条主线：<b>Agent = LLM + 上下文 + 工具</b></p>
+  <p>第一部分（Ch.1–6）如何构建 Agent ｜ 第二部分（Ch.7–10）如何提升 Agent</p>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--ok)"></i>✅ 可运行实验</span>
+    <span><i class="dot" style="background:var(--book)"></i>📖 复现指南（外部仓库）</span>
+    <span><i class="dot" style="background:var(--design)"></i>🚧 设计文档/正文实验</span>
+    <span><i class="dot" style="background:var(--mine)"></i>我已实跑（30 个）</span>
+  </div>
+</div>
+<div class="wrap">
+  <div class="partlabel">第一部分 · 如何构建 AGENT（Ch.1–6）</div>
+  
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🟢</div>
+    <div>
+      <h2>第 1 章 · AI Agent 入门</h2>
+      <p class='insight'>能跑的 Demo 与可靠产品之间的差距在 Harness，不在模型（4 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>Agent = LLM + 上下文 + 工具</span><span class='chip'>三层次理解：实现/直觉/学术</span><span class='chip'>ReAct 循环</span><span class='chip'>工作流 → 自主 Agent 光谱</span><span class='chip'>Harness = 管理+接口+约束+验证+纠正</span></div>
+  <ul class='experiments'><li><b>1-1</b> <span class='st-ok'>✅</span> <span class='folder'>context</span><span class='done' title='本人已实跑，产物在 task0'>我跑过 · task0</span><br><span class='desc'>系统性消融实验展示 Agent 上下文各组件的重要性；支持阿里云百炼直连 Qwen、SiliconFlow Qwen、字节 Doubao、月之暗面 Kimi 等多提供商</span></li><li><b>1-2</b> <span class='st-ok'>✅</span> <span class='folder'>web-search-agent</span><br><span class='desc'>Kimi K3 模型即 Agent，具备基础深度搜索能力，能进行多轮搜索和信息整合</span></li><li><b>1-3</b> <span class='st-ok'>✅</span> <span class='folder'>search-codegen</span><br><span class='desc'>模型自主多轮搜索 + 服务端代码执行的 Deep Research 闭环，先澄清意图再执行；官方 GPT-5.6 路径保留，阿里云百炼 qwen3.7-plus（hosted web_search + code_interpreter）实测通过东盟首都距离与比特币技术分析全部验收门</span></li><li><b>1-4</b> <span class='st-ok'>✅</span> <span class='folder'>image-gen-workflow</span><br><span class='desc'>具体/宽泛两类需求 × 工作流（kimi-k3 改写 + 通义万相）与原生（Gemini / GPT-Image 2）双路线真实对照：具体需求下原生更忠实（海报文案被改写节点丢进负面词），宽泛需求下改写的场景具象化带来想象力，但 GPT-Image 2 自己就能补观点——适配层被模型内化的实证</span></li></ul>
+</section>
+
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🟢</div>
+    <div>
+      <h2>第 2 章 · 上下文工程</h2>
+      <p class='insight'>上下文决定能力上限；前缀越稳定，缓存命中越高（9 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>消息结构与核心循环</span><span class='chip'>KV Cache 三铁律</span><span class='chip'>提示工程与注入攻防</span><span class='chip'>Agent Skills 渐进披露</span><span class='chip'>系统状态栏</span><span class='chip'>上下文压缩</span></div>
+  <ul class='experiments'><li><b>2-1</b> <span class='st-ok'>✅</span> <span class='folder'>local_llm_serving</span><br><span class='desc'>跨平台本地 LLM 部署，自动选 vLLM/Ollama 后端，展示 0.6B 小模型也能有出色工具调用</span></li><li><b>2-2, 2-8</b> <span class='st-ok'>✅</span> <span class='folder'>attention_visualization</span><br><span class='desc'>可视化 LLM 完整 token 序列与注意力权重分布，理解模型如何处理上下文、推理与调用工具</span></li><li><b>2-3</b> <span class='st-ok'>✅</span> <span class='folder'>kv-cache</span><span class='done' title='本人已实跑，产物在 task1'>我跑过 · task1</span><br><span class='desc'>探索不同上下文管理模式对 KV Cache 的影响，演示错误模式如何破坏缓存效率</span></li><li><b>2-4</b> <span class='st-ok'>✅</span> <span class='folder'>prompt-engineering</span><br><span class='desc'>扩展 Tau-Bench，量化语气风格、指令组织、工具描述等因素对任务完成率的影响</span></li><li><b>2-5</b> <span class='st-ok'>✅</span> <span class='folder'>prompt-injection</span><span class='done' title='本人已实跑，产物在 task1'>我跑过 · task1</span><br><span class='desc'>3 种攻击场景 × 4 种防御配置的对照实验，直观展示逐层叠加防御后注入成功率下降</span></li><li><b>2-6</b> <span class='st-ok'>✅</span> <span class='folder'>agent-skills-ppt</span><br><span class='desc'>固定 Anthropic 官方 PPTX Skill + 真实论文 PDF，运行时可为 Claude Code 或等价的 Kimi Code CLI（已实测通过：13 页演示文稿、4 张论文原图、完整渐进式披露轨迹），旧 python-pptx 同构 demo 不作为正文验收</span></li><li><b>2-7</b> <span class='st-design'>🚧</span> <span class='folder'>正文实验</span><br><span class='desc'>从个人范文创建“去 AI 味”写作 Skill；练习 Skill 的触发条件、规则、示例、作用域与迭代维护，不依赖独立代码项目</span></li><li><b>2-9</b> <span class='st-ok'>✅</span> <span class='folder'>system-hint</span><br><span class='desc'>研究系统提示对 Agent 行为的影响，探索如何通过优化系统提示提升性能</span></li><li><b>2-10</b> <span class='st-ok'>✅</span> <span class='folder'>context-compression</span><span class='done' title='本人已实跑，产物在 task1'>我跑过 · task1</span><br><span class='desc'>实现并对比摘要、关键信息提取、语义压缩等多种策略，保持能力的同时减少 token</span></li></ul>
+</section>
+
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🔵</div>
+    <div>
+      <h2>第 3 章 · 用户记忆和知识库</h2>
+      <p class='insight'>把上下文从单次会话延伸为跨会话积累的持久知识（12 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>记忆四策略</span><span class='chip'>分块与稠密检索</span><span class='chip'>BM25 与混合检索 RRF</span><span class='chip'>重排序</span><span class='chip'>RAPTOR / GraphRAG</span><span class='chip'>Agentic RAG</span><span class='chip'>上下文感知检索</span><span class='chip'>双层记忆</span></div>
+  <ul class='experiments'><li><b>3-1, 3-2</b> <span class='st-ok'>✅</span> <span class='folder'>user-memory</span><span class='done' title='本人已实跑，产物在 task1/2'>我跑过 · task1/2</span><br><span class='desc'>长期用户记忆系统，让 Agent 记住偏好与历史交互、提供个性化服务</span></li><li><b>3-2</b> <span class='st-ok'>✅</span> <span class='folder'>mem0 · memobase</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>用 mem0、Memobase 两个开源框架各实现一版用户记忆，作为实验 3-2 的对照实现</span></li><li><b>3-3</b> <span class='st-ok'>✅</span> <span class='folder'>log-sanitization</span><br><span class='desc'>智能日志脱敏系统，基于本地 Ollama 模型检测并脱敏日志中的密钥和 PII 敏感数据</span></li><li><b>3-4</b> <span class='st-ok'>✅</span> <span class='folder'>dense-embedding</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>向量相似性搜索服务，对比 ANNOY（树）与 HNSW（图）两种 ANN 算法的权衡</span></li><li><b>3-5</b> <span class='st-ok'>✅</span> <span class='folder'>sparse-embedding</span><br><span class='desc'>从零实现基于 BM25 的稀疏向量搜索引擎，可视化内部工作机制</span></li><li><b>3-6</b> <span class='st-ok'>✅</span> <span class='folder'>retrieval-pipeline</span><span class='done' title='本人已实跑，产物在 task1'>我跑过 · task1</span><br><span class='desc'>稠密 + 稀疏 + 神经重排序的完整流水线，用测试用例展示混合检索的互补效果</span></li><li><b>3-7</b> <span class='st-ok'>✅</span> <span class='folder'>structured-index</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>实现并对比 RAPTOR（递归抽象树）与 GraphRAG（知识图谱）两种结构化索引</span></li><li><b>3-8</b> <span class='st-ok'>✅</span> <span class='folder'>agentic-rag</span><span class='done' title='本人已实跑，产物在 task1'>我跑过 · task1</span><br><span class='desc'>对比 Non-Agentic 与 Agentic RAG，展示 ReAct 主导的迭代检索在司法问答上的优势</span></li><li><b>3-9</b> <span class='st-ok'>✅</span> <span class='folder'>agentic-rag-for-user-memory</span><br><span class='desc'>用 Agentic RAG 管理用户对话历史，实现跨会话记忆检索</span></li><li><b>3-10</b> <span class='st-ok'>✅</span> <span class='folder'>contextual-retrieval</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>实现 Anthropic 的上下文感知检索，为分块生成前缀摘要，失败率降低 49–67%</span></li><li><b>3-11</b> <span class='st-ok'>✅</span> <span class='folder'>contextual-retrieval-for-user-memory</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>结合 Advanced JSON Cards 与上下文感知 RAG，形成双层记忆结构实现主动服务</span></li><li><b>3-12</b> <span class='st-ok'>✅</span> <span class='folder'>structured-knowledge-extraction</span><span class='done' title='本人已实跑，产物在 task2'>我跑过 · task2</span><br><span class='desc'>以司法判例跑通「因子发现 → 聚类原型 → 对话式建议」三段流水线</span></li></ul>
+</section>
+
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🔵</div>
+    <div>
+      <h2>第 4 章 · 工具</h2>
+      <p class='insight'>感知工具控信息量，执行工具控风险（5 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>MCP 协议</span><span class='chip'>五类工具</span><span class='chip'>主动工具发现/选择</span><span class='chip'>ACI 通用设计原则</span><span class='chip'>多模态感知三路线</span><span class='chip'>执行工具安全机制</span></div>
+  <ul class='experiments'><li><b>4-1</b> <span class='st-ok'>✅</span> <span class='folder'>active-tool-discovery</span><span class='done' title='本人已实跑，产物在 task3'>我跑过 · task3</span><br><span class='desc'>Qwen3-4B 真实对照中两组均 3/3 完成、准确率均 100%（未证明准确率提升）；主动发现的 schema 暴露和实测用时显著更低，但轨迹仍含无关调用与过早结束</span></li><li><b>4-2</b> <span class='st-ok'>✅</span> <span class='folder'>perception-tools</span><span class='done' title='本人已实跑，产物在 task3'>我跑过 · task3</span><br><span class='desc'>感知工具 MCP：网络搜索、多模态理解、文件系统、公共数据源（DuckDuckGo/Open-Meteo/Yahoo/OpenStreetMap），大多无需 API Key</span></li><li><b>4-3</b> <span class='st-ok'>✅</span> <span class='folder'>multimodal-agent</span><span class='done' title='本人已实跑，产物在 task3'>我跑过 · task3</span><br><span class='desc'>对比原生多模态、提取为文本、工具化分析三种策略在保真度、成本和灵活性上的权衡</span></li><li><b>4-4</b> <span class='st-ok'>✅</span> <span class='folder'>execution-tools</span><span class='done' title='本人已实跑，产物在 task3'>我跑过 · task3</span><br><span class='desc'>执行工具 MCP：20 次正式调用已通过 13/15 门禁，含 GitHub PR、Xvfb 桌面 Computer Use 与 KVM Android 实机操作；仅真实日历/邮件授权仍阻塞</span></li><li><b>4-5</b> <span class='st-ok'>✅</span> <span class='folder'>collaboration-tools</span><span class='done' title='本人已实跑，产物在 task3'>我跑过 · task3</span><br><span class='desc'>协作工具 MCP：浏览器自动化、HITL、Email/Telegram/Slack/Discord 通知、定时器，支持管理员审批</span></li></ul>
+</section>
+
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🟣</div>
+    <div>
+      <h2>第 5 章 · Coding Agent 与通用 Agent</h2>
+      <p class='insight'>代码是能在运行时创造新工具的元能力（16 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>七工具 Coding Agent</span><span class='chip'>测试修复循环</span><span class='chip'>文件系统中枢</span><span class='chip'>代码即元能力</span><span class='chip'>辅助思考</span><span class='chip'>动态造工具</span><span class='chip'>Agent 自举</span></div>
+  <ul class='experiments'><li><b>5-1</b> <span class='st-ok'>✅</span> <span class='folder'>provider-failover</span><br><span class='desc'>六种厂商组合 × 三种做法的真实接管：中立格式 6/6 切换成功并算对总额，原样直传 3/6、剥离思考 4/6，四次失败都是厂商真实报错；最反直觉的一格是直传能过、老实剥干净反而被拒</span></li><li><b>5-2</b> <span class='st-ok'>✅</span> <span class='folder'>provider-failover</span><br><span class='desc'>流式输出在思考／正文／参数三处被切断后的恢复对照：正文断点上续写省 15%~66% 输出 token，参数断点上却会拼出「合法但写错」的参数，元指令在每个单元上都比整轮重发更贵</span></li><li><b>5-3</b> <span class='st-ok'>✅</span> <span class='folder'>code-for-math</span><br><span class='desc'>30 道 AIME 2024 同模型真实对照：代码臂全部调用沙箱（含 sympy/numpy/scipy），53.3% vs 纯 CoT 36.7%，但差异未达显著（p=0.125）；正式负结论与原始收据均保留</span></li><li><b>5-4</b> <span class='st-ok'>✅</span> <span class='folder'>code-for-logic</span><br><span class='desc'>固定版本 K&K 数据集 84 题真实对照：代码臂 100% 调用 python-constraint，实测 39.3% vs 纯思考 75.0%，未达到正文预期的 90%；完整负结论如实保留</span></li><li><b>5-5</b> <span class='st-ok'>✅</span> <span class='folder'>small-model-codified-rules</span><br><span class='desc'>本地 Qwen3-4B 的 60×2 配对 τ-bench 风格活动：代码化规则臂 91.7% vs 控制组 95.0%（p=0.6875），未显著提升；服务端真值、checklist 和完整 120 条轨迹均已验证</span></li><li><b>5-6</b> <span class='st-ok'>✅</span> <span class='folder'>paper-to-ppt</span><br><span class='desc'>固定真实论文 PDF 的 20 页双臂正式对照：三张原图均带页码/裁剪/变换/哈希来源；两组独立 Vision 均以 95 分通过，质量持平，但双 Agent 峰值上下文 24,186 vs 单 Agent 92,601（低 3.83×）</span></li><li><b>5-7</b> <span class='st-ok'>✅</span> <span class='folder'>paper-to-video</span><br><span class='desc'>12 页真实幻灯片逐页经 Kimi K3 生成讲解词、Qwen-VL-Max 对照像素审核、Fish Audio S1 合成；ffmpeg 成片 513.010 秒，最大页漂移 0.024 秒，全部真实收据与失败重试均保留</span></li><li><b>5-8</b> <span class='st-ok'>✅</span> <span class='folder'>video-edit</span><br><span class='desc'>一段多场景视频 + 一句自然语言需求，两步 Vision 定位剪出片段，Reviewer 抽帧核对不合格则迭代</span></li><li><b>5-9</b> <span class='st-ok'>✅</span> <span class='folder'>cad-vs-diffusion</span><br><span class='desc'>同一法兰盘规格双路线实测：Kimi 写的 17 行 CadQuery 全尺寸零偏差；Hunyuan3D-2.1（HF 公共 Space）4 个通孔全丢、外径偏差 −99.4%。M5→M6 变更：代码路线改一行参数、0 次 LLM 调用、其余尺寸零漂移；生成路线整体重跑且外径漂移 +283%、轴向翻转。绿植对照组自然度 3 vs 8，适用边界反转</span></li><li><b>5-10</b> <span class='st-ok'>✅</span> <span class='folder'>adaptive-log-parser</span><span class='done' title='本人已实跑，产物在 task4'>我跑过 · task4</span><br><span class='desc'>遇到无法解析的新格式时不报错，交给代码 Agent 生成 parse 函数，测试通过后热更新进引擎，全程无人介入</span></li><li><b>5-11</b> <span class='st-ok'>✅</span> <span class='folder'>log-diagnosis</span><br><span class='desc'>诊断 Agent 读真实 HTTP 轨迹/架构文档/PRD，定位根因、生成回归测试并在修复前后重放；正式活动通过官方 GitHub MCP 创建了真实 Issue（保留脱敏收据）</span></li><li><b>5-12</b> <span class='st-ok'>✅</span> <span class='folder'>dynamic-form</span><span class='done' title='本人已实跑，产物在 task4'>我跑过 · task4</span><br><span class='desc'>信息不全时动态生成含级联逻辑的 HTML 表单让用户一次性补全，汇总 JSON 交回 Agent</span></li><li><b>5-13</b> <span class='st-ok'>✅</span> <span class='folder'>erp-agent</span><br><span class='desc'>中文自然语言转 SQL 由 DB 执行，artifact 模式让 LLM 只生成 SQL 制品不搬运数据，省 token 又防错</span></li><li><b>5-14</b> <span class='st-ok'>✅</span> <span class='folder'>conversational-ui</span><br><span class='desc'>自然语言提 UI 定制需求（颜色/字体/文案/布局），Agent 改 React 源码借 Vite HMR 即时生效</span></li><li><b>5-15</b> <span class='st-ok'>✅</span> <span class='folder'>permission-embedded-data-objects</span><br><span class='desc'>在 PostgreSQL 之上的权限内嵌对象存储：应用层代码可以动态生成，但每次读写仍由数据层强制执行权限、校验、引用完整性和受控后果反应</span></li><li><b>5-16</b> <span class='st-ok'>✅</span> <span class='folder'>agent-creator</span><br><span class='desc'>模板/从零双臂均已通过结构、编译、测试、真实 Kimi K3 任务和语义门禁；正式对照完整结束。模板质量非劣且创建更高效，但正文预期的“质量与效率同时严格占优”未出现——这是已完成实验的诚实负结果，不是未完成状态</span></li></ul>
+</section>
+
+<section class='chapter part-构建'>
+  <header>
+    <div class='ch-no'>🟣</div>
+    <div>
+      <h2>第 6 章 · 交互：观察与动作空间的扩展</h2>
+      <p class='insight'>四类交互共享唤醒/安全点/取消/抢占/快慢路径分离（14 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>异步与事件驱动</span><span class='chip'>实时语音尺度</span><span class='chip'>Computer Use</span><span class='chip'>机器人操作</span><span class='chip'>唤醒/安全点/取消/抢占</span><span class='chip'>快慢路径分离</span></div>
+  <ul class='experiments'><li><b>6-1</b> <span class='st-ok'>✅</span> <span class='folder'>agent-with-event-trigger</span><br><span class='desc'>FastAPI 事件驱动 Agent，原生异步集成前三组 MCP 工具，通过 HTTP API 接收 Web/IM/GitHub/定时器事件</span></li><li><b>6-2</b> <span class='st-ok'>✅</span> <span class='folder'>async-agent</span><span class='done' title='本人已实跑，产物在 task4'>我跑过 · task4</span><br><span class='desc'>asyncio 单线程事件驱动框架 Flux：事件队列按紧急度分派、异步工具并行、运行中打断、长任务取消与状态查询</span></li><li><b>6-3</b> <span class='st-ok'>✅</span> <span class='folder'>astra-async-steering</span><br><span class='desc'>比较同步工具、模型原生异步与回合中途引导，理解等待、用户更新和任务恢复之间的关系</span></li><li><b>6-4</b> <span class='st-ok'>✅</span> <span class='folder'>live-audio</span><br><span class='desc'>真实单轮证据完成麦克风媒体 → Silero VAD → 本地 Whisper → ARK 流式 LLM → Fish S1；5 个媒体/模型 hash 当前均匹配，但证据本身没有顶层 hash manifest，且不代表并发或生产负载基准</span></li><li><b>6-5</b> <span class='st-ok'>✅</span> <span class='folder'>streaming-speech</span><br><span class='desc'>canonical 本地验收运行 Qwen2-Audio 递增前缀与 600ms VAD + Whisper：8/8 执行/溯源门禁通过，但预期行为只复现 2/6，实测前缀 8.4–11.3s，不能声称真流式低延迟</span></li><li><b>6-6</b> <span class='st-ok'>✅</span> <span class='folder'>end-to-end-speech</span><br><span class='desc'>真实本地运行在单张 RTX PRO 6000 上执行固定 revision 的 MiniCPM-o 4.5：端到端与自级联均为 3/4，但语义/副语言失败互补；真实 24kHz 语音输出及 11/11 验收已保留</span></li><li><b>6-7</b> <span class='st-ok'>✅</span> <span class='folder'>controllable-tts</span><br><span class='desc'>真实 Fish Audio S1 4×3×2=24 条参考音库与 A/B/C 媒体齐全；三次位置平衡的真实 Voxtral 音频盲评中 C 组最高且真人客服感 4.67/5，但 B>A 未复现；验收将完成状态与负结果分开报告</span></li><li><b>6-8</b> <span class='st-ok'>✅</span> <span class='folder'>Anthropic 原生 Computer Use 记录 + claude-quickstarts/computer-use-demo/</span><br><span class='desc'>正式运行从固定源码本地构建镜像，用 claude-sonnet-4-5-20250929 完成 16 次真实响应与 15 个原生 computer 动作；Google reCAPTCHA 未交互，转向可见 Open-Meteo JSON 后回答 70.2°F、晴朗，全部确定性门禁通过</span></li><li><b>6-9</b> <span class='st-ok'>✅</span> <span class='folder'>computer-use-open-model + browser-use/</span><br><span class='desc'>正式开放模型运行使用 qwen/qwen3-vl-32b-instruct：Google CAPTCHA 后转 weather.com，16 步完成；16/16 API 响应模型一致、15 张截图、只读动作和答案 grounding 全部通过确定性验收</span></li><li><b>6-10</b> <span class='st-ok'>✅</span> <span class='folder'>xlerobot-teleoperation</span><br><span class='desc'>真机遥操作 XLeRobot 整理桌面：把红色杯子放进托盘、把黄色废纸放进垃圾盒，最后重新观察并确认状态</span></li><li><b>6-11</b> <span class='st-ok'>✅</span> <span class='folder'>xlerobot-teleoperation</span><br><span class='desc'>在模拟器中测量同一桌面任务的理想控制上限，不代表真机已经运行</span></li><li><b>6-12</b> <span class='st-ok'>✅</span> <span class='folder'>gemini-xlerobot-navigation</span><br><span class='desc'>使用 Gemini Robotics-ER 1.5 自主驱动真实 XLeRobot 完成同一整理桌面任务</span></li><li><b>6-13</b> <span class='st-ok'>✅</span> <span class='folder'>gemini-xlerobot-navigation</span><br><span class='desc'>在模拟器中比较开环、逐步检查和预测式闭环三种同任务策略</span></li><li><b>6-14</b> <span class='st-ok'>✅</span> <span class='folder'>rgb-sim2real-grasping</span><br><span class='desc'>对同一桌面任务进行 RGB 跨环境测试，检查视觉策略对背景、外观、光照和噪声变化的适应性</span></li></ul>
+</section>
+  <div class="partlabel">第二部分 · 如何提升 AGENT（Ch.7–10）</div>
+  
+<section class='chapter part-提升'>
+  <header>
+    <div class='ch-no'>🟡</div>
+    <div>
+      <h2>第 7 章 · Agent 的评估</h2>
+      <p class='insight'>没有评估，就分不清设计提升与随机波动（14 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>评估环境三型</span><span class='chip'>数据集设计</span><span class='chip'>LLM-as-a-Judge</span><span class='chip'>统计显著性</span><span class='chip'>评估驱动选型</span><span class='chip'>可观测性</span></div>
+  <ul class='experiments'><li><b>7-1</b> <span class='st-ok'>✅</span> <span class='folder'>tau2-bench-eval</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>已在固定上游提交上完成 5 个 telecom 双控任务：4/5 通过；保存原始轨迹、成本、内容哈希及错选线路导致漏做流量加油的失败分析</span></li><li><b>7-2</b> <span class='st-ok'>✅</span> <span class='folder'>experiment-7-2-human-benchmark</span><br><span class='desc'>Codex 作为人工操作员，预注册并完成 GAIA、AndroidWorld、SWE-bench Verified、τ²-bench、Terminal-Bench、OSWorld-Verified 各简单/中等/困难一题，共 18/18 个首轮正式结果：13 通过、5 失败；逐题保留任务、轨迹、官方评估及成败解释</span></li><li><b>7-3</b> <span class='st-ok'>✅</span> <span class='folder'>user-memory-evaluation</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>四档多维 Rubric 已在 60 用例 × 3 系统的 180/180 条真实评判记录上完整执行</span></li><li><b>7-4</b> <span class='st-ok'>✅</span> <span class='folder'>user-memory-system-evaluation</span><br><span class='desc'>60 用例 × 3 系统共 180/180 条真实轨迹，零错误且原生币种定价完整</span></li><li><b>7-5</b> <span class='st-ok'>✅</span> <span class='folder'>tts-quality-eval</span><br><span class='desc'>真实验收完成 OpenAI/Fish 两 provider × 四类语料的 8/8 双音频 Voxtral 四维评审；候选/参考音频逐项哈希，早期 Gemini/OpenRouter 失败证据仍保留</span></li><li><b>7-6</b> <span class='st-ok'>✅</span> <span class='folder'>android-world/failure-attribution</span><br><span class='desc'>对已保留的 T3A 日志做离线失败归因。全体统计（自原始日志重算）：53 个任务块，其中 1 块是基准自身 initialize_task 崩溃后跳过的，真正失败为 52 条；24/52 是 Agent 自称完成后被验证器否掉；9 条目标必须依赖当前日期，其中仅 2 条拿到过它（且是顺带从表单默认值 Sun, Oct 15 读到的）；自述 “界面无变化” 一类观察出现 55 次、覆盖 18/52 条轨迹。抽样标注 10 条，步号引用在构建时逐条核验：9 条静默失败、7 条首错发生在 assistant message，置信度 5 高 / 4 中 / 1 低。本次为**第三轮**：第二轮把 10 条中的 7 条首错步号前移，第三轮又订正了两项全体统计与一条记录的偏差描述，每处改动连同理由保留。另含 3 个轨迹前缀回归任务与 3 处对 t3a_failed_analysis.md 的更正</span></li><li><b>7-7</b> <span class='st-ok'>✅</span> <span class='folder'>user-memory-policy-eval</span><br><span class='desc'>已用真实 openai/gpt-5.6-sol 经 OpenRouter 完成 11 个 trajectory-prefix bad case × JSON/Markdown/Python-like 三种表示，共 33/33 个 API 单元、0 个 API 错误；三种表示均为 6/11 通过，结果和哈希保存在 results/policy_prefix_live.json 与 results/manifest.json</span></li><li><b>7-8</b> <span class='st-ok'>✅</span> <span class='folder'>elo-leaderboard</span><br><span class='desc'>正式全量验收处理 1,799,991 条公开 Arena 记录（1,670,250 条盲选票、129 个模型），在线 Elo 与 Bradley-Terry 排名 Spearman 0.787、Top-20 重合 12/20；胜率矩阵、17 个月度快照、三张图与 D3 动画均由同一 manifest 哈希绑定并复核通过</span></li><li><b>7-9</b> <span class='st-ok'>✅</span> <span class='folder'>model-action-threshold</span><br><span class='desc'>同一中性 Coding Harness 下完成 GPT-5.6-sol / Claude Sonnet 5 × 三任务 × 三次重复的 18/18 单元实测；manifest零 API 错误并绑定完整轨迹与汇总哈希</span></li><li><b>7-10</b> <span class='st-ok'>✅</span> <span class='folder'>agent-cost-analysis</span><br><span class='desc'>多轮 Agent 任务（客服退款）全链路成本拆解 + KV-cache 友好设计/上下文压缩的 A/B 节省量化</span></li><li><b>7-11</b> <span class='st-design'>🚧</span> <span class='folder'>model-benchmark</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>完整 8K/32K/128K × 512/2048、限流爬坡、Agent 成本与 168 小时可用性 campaign 已实现；目前尚无验收证据，不能替代完整长期实验</span></li><li><b>7-12</b> <span class='st-ok'>✅</span> <span class='folder'>user-memory-system-evaluation</span><br><span class='desc'>全矩阵验收完成 60 用例 × 24 单元（4 嵌入 × 3 reranker × 2 主模型）共 1,440/1,440 条真实轨迹，零错误、零未定价用量，检索/任务指标与交互分析完整；独立验证器复核通过（ALL CHECKS PASSED），后端替代方案如实记录于 readiness 证据</span></li><li><b>7-13</b> <span class='st-ok'>✅</span> <span class='folder'>android-world</span><br><span class='desc'>完整候选实验证据保留 116 任务 × 5 轮的 580/580 条唯一 episode（包括评估失败），运行时错误为零：严格 T3A 成功 26 条（4.4828%），平均 evaluator reward 0.133621，由 77 条满分状态与 1 条 0.5 部分 reward 组成。实验在完成官方初始化且配齐 24/24 应用的 Pixel 6/API-33 上执行，本地 Qwen2.5-7B（revision a09a35458c702b33eeacc393d103063234e8bc28）通过 vLLM 0.19.0 运行于 RTX PRO 6000 Blackwell 96 GB。执行与证据已完成，但未批准部署；候选 Qwen 与配对源 Doubao 不同，因而不支持同模型提升或非劣性结论</span></li><li><b>7-14</b> <span class='st-ok'>✅</span> <span class='folder'>openvla-robotwin2-eval</span><br><span class='desc'>正式单卡运行完成 chunk 1/25 各 128 IID + 128 OOD episodes，严格门禁及 512 个 rollout hash 全通过；chunk 1 为 0/256、chunk 25 为 26/256，低绝对成功率作为真实结果保留</span></li></ul>
+</section>
+
+<section class='chapter part-提升'>
+  <header>
+    <div class='ch-no'>🔴</div>
+    <div>
+      <h2>第 8 章 · 模型后训练</h2>
+      <p class='insight'>SFT 记忆、RL 泛化；数据与环境比算法更重要（18 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>预训练 / Mid-training</span><span class='chip'>SFT 记忆</span><span class='chip'>RL 泛化</span><span class='chip'>奖励设计演进</span><span class='chip'>多轮信用分配</span><span class='chip'>蒸馏</span><span class='chip'>样本效率</span></div>
+  <ul class='experiments'><li><b>8-1, 8-2</b> <span class='st-ok'>✅</span> <span class='folder'>learning-from-experience</span><br><span class='desc'>同一确定性寻宝环境下完成 10,000 局 Q-learning、100 局贪婪评估与官方 Moonshot kimi-k3 第一局实测；双臂证据保留 17/17 原始 API 回执且零 fallback</span></li><li><b>8-3</b> <span class='st-ok'>✅</span> <span class='folder'>MiniMind-pretrain · MiniMind-pretrain/minimind/</span><br><span class='desc'>规范训练报告绑定原始与 QK-Norm + Muon 两臂在预训练、SFT、DPO 后的 49 份历史输出、8 次匿名 ARK 盲评、源码/数据/环境复现契约与完整 hash；盲评总分 3.6250 对 2.0417（+1.5833，7 胜 1 平），历史 loss 日志缺失的边界明确保留，checkpoint 不随书分发也不作为验收门槛</span></li><li><b>8-4</b> <span class='st-ok'>✅</span> <span class='folder'>MiniMind-pretrain</span><br><span class='desc'>规范训练报告保留 8 配置 × 8 图片的 64 份历史输出及 8 次真实图像感知匿名 ARK 评审，固定原版/改进版源码、数据、CLIP 与评估图片哈希；评审中原版 SFT 最高（1.9062），同 SFT 基座的 QK-Norm+Muon 两阶段均未占优。历史 revision/checkpoint 缺失被明确限定，checkpoint 不随书分发也不作为验收门槛</span></li><li><b>8-5</b> <span class='st-ok'>✅</span> <span class='folder'>continued-pretraining</span><br><span class='desc'>规范训练报告绑定 RTX-4090 三阶段原始输出、15 份生成、5 次匿名 ARK 盲评、源码与当前复现 revision；韩语最终阶段 +1.7777，英语下降 0.8333，泡菜事实错误明确保留，checkpoint 不随书分发也不作为验收门槛</span></li><li><b>8-6</b> <span class='st-ok'>✅</span> <span class='folder'>sesame · orpheus</span><br><span class='desc'>有界本地 GPU 实验已完成两条真实语音 SFT 轨道：各 60 次 LoRA 更新、留出集损失、40 个基线/微调音频、自动代理指标、哈希与失败样例；不据此声称主观音质</span></li><li><b>8-7</b> <span class='st-design'>🚧</span> <span class='folder'>MultilingualReasoning</span><br><span class='desc'>多语言思考 SFT 实现；需训练 checkpoint 与跨语言基准前后对照才算完成</span></li><li><b>8-8</b> <span class='st-ok'>✅</span> <span class='folder'>prompt-distillation</span><br><span class='desc'>正式保留运行包含 160/160 训练与 80/80 留出 Kimi K3 教师回执、真实 CUDA 训练的 SmolLM2-135M-Instruct LoRA checkpoint，并通过 8/8 门禁；留出集教师 100%、基线 0%、训练后学生 95%</span></li><li><b>8-9</b> <span class='st-ok'>✅</span> <span class='folder'>cot-distillation</span><br><span class='desc'>24/24 Kimi K3 教师轨迹均已完成并经规则过滤，23 条进入 SFT；真实 CUDA checkpoint 与同题三臂对照已保留。学生 2/24 对基线 1/24 的提升不显著（p=1.0），作为负结果如实报告</span></li><li><b>8-10</b> <span class='st-ok'>✅</span> <span class='folder'>AdaptThink 配套说明 · AdaptThink-original/</span><br><span class='desc'>历史训练报告记录公开 W&B 主运行 wubbn5tj：8×H100，step 300 三基准响应长度均显著下降，但 AIME mean@16 下降 0.42 pp；运行继续至 step 410 后崩溃，checkpoint 不随书分发，且未保留独立 checkpoint 评估回执</span></li><li><b>8-11</b> <span class='st-book'>📖</span> <span class='folder'>SFTvsRL/</span><br><span class='desc'>bojieli/SFTvsRL 的 GeneralPoints-L/VL：同预算 SFT 与 PPO 的 ID/OOD 记忆—泛化对照</span></li><li><b>8-12</b> <span class='st-book'>📖</span> <span class='folder'>SpatialReasoning 配套说明 · SFTvsRL/</span><br><span class='desc'>同一 bojieli/SFTvsRL checkout 的 V-IRL-L/VL 训练与跨城市/规则 OOD 评估，不是独立 SpatialReasoning 代码仓库</span></li><li><b>8-13</b> <span class='st-book'>📖</span> <span class='folder'>SimpleVLA-RL 配套说明 · SimpleVLA-RL/SimpleVLA-RL/</span><br><span class='desc'>PRIME-RL/SimpleVLA-RL 主仓与内嵌 verl/ 已固定；OpenVLA-OFT、LIBERO/RoboTwin、checkpoint、Flash Attention、CUDA/driver 和 simulator assets 仍未形成经验证的完整依赖锁</span></li><li><b>8-14</b> <span class='st-book'>📖</span> <span class='folder'>retool 配套说明 · verl/ · SandboxFusion/</span><br><span class='desc'>ReTool 配方来自 bojieli/verl，实时代码执行依赖 bojieli/SandboxFusion；不是一个名为 retool 的独立源码仓库</span></li><li><b>8-15</b> <span class='st-book'>📖</span> <span class='folder'>AWorld-train 配套说明 · AWorld/</span><br><span class='desc'>bojieli/AWorld 中的 GAIA MCP 沙盒与训练入口，bojieli/verl 为训练后端</span></li><li><b>8-16</b> <span class='st-book'>📖</span> <span class='folder'>RLVP 配套说明 · RLVP/rlvp/</span><br><span class='desc'>完整训练/评估代码来自固定到 1ad30bc… 的 19PINE-AI/rlvp；当前 checkout 缺失，训练未运行</span></li><li><b>8-17</b> <span class='st-ok'>✅</span> <span class='folder'>premature-completion-dpo</span><br><span class='desc'>从"过早结束" bad case 到 DPO 修复的完整链路：bad case → 偏好对 → 7B+LoRA 单卡训练 → 未完成任务集与已完成任务保留集验证；本地 RTX PRO 6000 已完成训练，固定候选比较中未完成任务集选对率 25.0% → 91.7%，保留集保持 100%</span></li><li><b>8-18</b> <span class='st-ok'>✅</span> <span class='folder'>curly-quote-sft</span><br><span class='desc'>中文弯引号作用域 Bad Case：人工审计合成数据 + 显式 Skill 正反规则 → Qwen3-8B bf16 LoRA SFT → 9 种代码语言和 10 种文章体裁回归；manifest；RTX PRO 6000 真实训练已完成，1024/256/256（训练/留出/边界），适配后 exact 96.9%/97.7%，保护区保持 100%</span></li><li><b>8-19</b> <span class='st-ok'>✅</span> <span class='folder'>exact-copy-sft</span><br><span class='desc'>old_string/特殊字符串精确复制 Bad Case：未见随机字符串、相似字符串选择和工具 JSON 参数 → Qwen3-8B bf16 LoRA SFT；manifest；RTX PRO 6000 真实训练已完成，1024/256/256（训练/留出/边界），byte-exact 基座 37.5%→适配 78.9%，边界 80.1%；另有 Qwen3/Qwen2.5/Mistral tokenizer 审计</span></li></ul>
+</section>
+
+<section class='chapter part-提升'>
+  <header>
+    <div class='ch-no'>🟠</div>
+    <div>
+      <h2>第 9 章 · Agent 的持续进化</h2>
+      <p class='insight'>更新载体取决于能力如何被表达与验证（9 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>三类学习信号</span><span class='chip'>四种更新载体</span><span class='chip'>验证器</span><span class='chip'>灰度与回滚</span><span class='chip'>Prompt 自动优化</span><span class='chip'>自修改 Agent</span></div>
+  <ul class='experiments'><li><b>9-1</b> <span class='st-ok'>✅</span> <span class='folder'>trajectory-verifier</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>实验 9-1：28 条真实客服调用、8 次 Judge 调用与 8 条专家标注样本已通过验收；证据同时记录关键违规稳定性主张未复现</span></li><li><b>9-2</b> <span class='st-ok'>✅</span> <span class='folder'>tau2-escalation-experience</span><br><span class='desc'>实验 9-2：τ²-bench telecom 上由模型从 19 条失败轨迹提炼转接与工具使用规则；迁移集 114 条通过率 12.3% → 19.3%，零回归；证据保留提炼回执、三臂策略哈希与行为指标</span></li><li><b>9-3</b> <span class='st-ok'>✅</span> <span class='folder'>prompt-auto-optimization</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>实验 9-3：真实任务 Agent、LLM Judge 与 Coding Agent 跑完初始/自动/人工三组完整保留集和边界集；原始回执与发布门槛已保存</span></li><li><b>9-4</b> <span class='st-design'>🚧</span> <span class='folder'>正文对照实验</span><br><span class='desc'>从用户反馈中进化“需求澄清 + Spec 确认”Skill；正文给出三臂 A/B 设计、指标和发布门槛，配套实现待补充</span></li><li><b>9-5</b> <span class='st-ok'>✅</span> <span class='folder'>browser-use-rpa</span><br><span class='desc'>实验 9-5：真实 ARK Agent + Chromium 在可重置本地消息站完成探索、独立验证、参数化回放、假成功对照与页面变化失效</span></li><li><b>9-6</b> <span class='st-ok'>✅</span> <span class='folder'>self-modifying-agent</span><br><span class='desc'>实验 9-6：真实 Coding Agent 从重复故障生成补丁，并与确定性提案、故意过宽的反例通过同一回归/灰度/回滚发布门；证据保留接受与拒绝历史</span></li><li><b>9-7</b> <span class='st-ok'>✅</span> <span class='folder'>harness-safety-gate</span><br><span class='desc'>实验 9-7：用户纠正/点踩/事后审计触发“高风险调用确认门禁”提案，经 AST 静态检查、未完成任务回放和正常操作回放；确定性提案通过，真实 gpt-4o-mini 提案因检查失败被安全拒绝，整体验收通过</span></li><li><b>9-8</b> <span class='st-book'>📖</span> <span class='folder'>hermes-self-evolution</span><br><span class='desc'>实验 9-8：把整本书和源码交给 Hermes；它读完后选择一项改进，亲手修改自己，并把每次 Reviewer 的退回变成下一轮学习，直到通过</span></li><li><b>9-9</b> <span class='st-ok'>✅</span> <span class='folder'>self-evolution-eval</span><span class='done' title='本人已实跑，产物在 task7'>我跑过 · task7</span><br><span class='desc'>实验 9-9：static、append-only、evolving 三臂 × 3 seeds × 14 任务共 126 次真实调用；证据保留迁移、规则替换、保持与配对统计</span></li></ul>
+</section>
+
+<section class='chapter part-提升'>
+  <header>
+    <div class='ch-no'>🟠</div>
+    <div>
+      <h2>第 10 章 · 多 Agent 协作</h2>
+      <p class='insight'>每个多 Agent 决策都能在单 Agent 三要素中找到对应（5 个实验索引）</p>
+    </div>
+  </header>
+  <div class='concepts'><span class='chip'>上下文 × 拓扑分类</span><span class='chip'>三种通信机制</span><span class='chip'>管理者模式</span><span class='chip'>A2A 协议</span><span class='chip'>六种失败模式</span><span class='chip'>级联终止</span></div>
+  <ul class='experiments'><li><b>10-1</b> <span class='st-ok'>✅</span> <span class='folder'>multi-role-transfer</span><span class='done' title='本人已实跑，产物在 task5'>我跑过 · task5</span><br><span class='desc'>正式 v2 对照完成 30 对任务、12 条边界轨迹、289 份模型回执、31 份 Tavily 回执和 60 次异源盲测；修复 Skill 路径首步跳过 Skill 的 Harness 策略门后，Skill 确定性通过率 15/30、Transfer 2/30，结论与成本/延迟权衡均已由 manifest 固定</span></li><li><b>10-2</b> <span class='st-ok'>✅</span> <span class='folder'>book-translation</span><span class='done' title='本人已实跑，产物在 task5'>我跑过 · task5</span><br><span class='desc'>正式 ARK v4在英文版第 1–2 章的 242,090 字节、23 图、14 代码块上完成 26 单元双臂对照：12/12 门禁、39 份原始裁判回执和 37 个溯源 hash 均通过；Manager 上下文缩小 20.43×、token 减少 6.48×且匿名质量 4.654 > 4.481，但慢 6.57%，宽泛术语一致率与 Markdown 精确保真也出现明确负结果</span></li><li><b>10-4</b> <span class='st-ok'>✅</span> <span class='folder'>parallel-web-research</span><span class='done' title='本人已实跑，产物在 task5'>我跑过 · task5</span><br><span class='desc'>同一次真实验收运行覆盖 10 站点串并行与 4 会话级联：12/12 门禁通过、实测加速 1.872×、24 份完整浏览器观测、3 份带 response ID/usage 的 ARK 原始响应和 114 条总线事件均由运行时 manifest 绑定；7 个实际源码/输入 hash 与全部 artifact hash 已复核一致，凭据扫描为零</span></li><li><b>10-5</b> <span class='st-book'>📖</span> <span class='folder'>Generative Agents 正式复现 + generative_agents/</span><br><span class='desc'>Qwen 3.7 Flash 正式运行完成三组各 25 Agent、17,280 步、两个虚拟日的完整社会实验；148,856 份真实 provider 回执零逻辑错误，14/14 门禁通过。自定义气候韧性工作坊未扩散出发起人，是保留的负结果；关闭反思后证据关联反思为零，基线在 25 人盲评中以 17:8 获偏好且四项均分更高</span></li><li><b>10-6</b> <span class='st-ok'>✅</span> <span class='folder'>voice-werewolf</span><br><span class='desc'>同一次 v11 真实验收完成 3 个昼夜投票循环、6 次 LLM 工具→macOS say→OpenRouter 原生音频 ASR 回环、信息隔离和规则胜负；四项策略门禁全通过，13 个唯一响应 ID、1,650 音频 token、27 个非空 TTS 事件、动作历史和裁判溯源均保留，独立验证复核 6/6 音频动作边界</span></li></ul>
+</section>
+</div>
+<footer>Task 6 结业作品 · 知识地图 ｜ 数据由各章 README 自动提取生成，实验说明为教程原文摘录 ｜ 2026-10-04</footer>
+</body>
+</html>

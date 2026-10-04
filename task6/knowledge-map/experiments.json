@@ -1,0 +1,728 @@
+{
+  "1": {
+    "title": "AI Agent 入门",
+    "part": "构建",
+    "insight": "能跑的 Demo 与可靠产品之间的差距在 Harness，不在模型",
+    "level": "🟢",
+    "count": 4,
+    "items": [
+      {
+        "id": "1-1",
+        "folder": "context",
+        "status": "✅",
+        "desc": "系统性消融实验展示 Agent 上下文各组件的重要性；支持阿里云百炼直连 Qwen、SiliconFlow Qwen、字节 Doubao、月之暗面 Kimi 等多提供商"
+      },
+      {
+        "id": "1-2",
+        "folder": "web-search-agent",
+        "status": "✅",
+        "desc": "Kimi K3 模型即 Agent，具备基础深度搜索能力，能进行多轮搜索和信息整合"
+      },
+      {
+        "id": "1-3",
+        "folder": "search-codegen",
+        "status": "✅",
+        "desc": "模型自主多轮搜索 + 服务端代码执行的 Deep Research 闭环，先澄清意图再执行；官方 GPT-5.6 路径保留，阿里云百炼 qwen3.7-plus（hosted web_search + code_interpreter）实测通过东盟首都距离与比特币技术分析全部验收门"
+      },
+      {
+        "id": "1-4",
+        "folder": "image-gen-workflow",
+        "status": "✅",
+        "desc": "具体/宽泛两类需求 × 工作流（kimi-k3 改写 + 通义万相）与原生（Gemini / GPT-Image 2）双路线真实对照：具体需求下原生更忠实（海报文案被改写节点丢进负面词），宽泛需求下改写的场景具象化带来想象力，但 GPT-Image 2 自己就能补观点——适配层被模型内化的实证"
+      }
+    ]
+  },
+  "2": {
+    "title": "上下文工程",
+    "part": "构建",
+    "insight": "上下文决定能力上限；前缀越稳定，缓存命中越高",
+    "level": "🟢",
+    "count": 9,
+    "items": [
+      {
+        "id": "2-1",
+        "folder": "local_llm_serving",
+        "status": "✅",
+        "desc": "跨平台本地 LLM 部署，自动选 vLLM/Ollama 后端，展示 0.6B 小模型也能有出色工具调用"
+      },
+      {
+        "id": "2-2, 2-8",
+        "folder": "attention_visualization",
+        "status": "✅",
+        "desc": "可视化 LLM 完整 token 序列与注意力权重分布，理解模型如何处理上下文、推理与调用工具"
+      },
+      {
+        "id": "2-3",
+        "folder": "kv-cache",
+        "status": "✅",
+        "desc": "探索不同上下文管理模式对 KV Cache 的影响，演示错误模式如何破坏缓存效率"
+      },
+      {
+        "id": "2-4",
+        "folder": "prompt-engineering",
+        "status": "✅",
+        "desc": "扩展 Tau-Bench，量化语气风格、指令组织、工具描述等因素对任务完成率的影响"
+      },
+      {
+        "id": "2-5",
+        "folder": "prompt-injection",
+        "status": "✅",
+        "desc": "3 种攻击场景 × 4 种防御配置的对照实验，直观展示逐层叠加防御后注入成功率下降"
+      },
+      {
+        "id": "2-6",
+        "folder": "agent-skills-ppt",
+        "status": "✅",
+        "desc": "固定 Anthropic 官方 PPTX Skill + 真实论文 PDF，运行时可为 Claude Code 或等价的 Kimi Code CLI（已实测通过：13 页演示文稿、4 张论文原图、完整渐进式披露轨迹），旧 python-pptx 同构 demo 不作为正文验收"
+      },
+      {
+        "id": "2-7",
+        "folder": "正文实验",
+        "status": "🚧",
+        "desc": "从个人范文创建“去 AI 味”写作 Skill；练习 Skill 的触发条件、规则、示例、作用域与迭代维护，不依赖独立代码项目"
+      },
+      {
+        "id": "2-9",
+        "folder": "system-hint",
+        "status": "✅",
+        "desc": "研究系统提示对 Agent 行为的影响，探索如何通过优化系统提示提升性能"
+      },
+      {
+        "id": "2-10",
+        "folder": "context-compression",
+        "status": "✅",
+        "desc": "实现并对比摘要、关键信息提取、语义压缩等多种策略，保持能力的同时减少 token"
+      }
+    ]
+  },
+  "3": {
+    "title": "用户记忆和知识库",
+    "part": "构建",
+    "insight": "把上下文从单次会话延伸为跨会话积累的持久知识",
+    "level": "🔵",
+    "count": 12,
+    "items": [
+      {
+        "id": "3-1, 3-2",
+        "folder": "user-memory",
+        "status": "✅",
+        "desc": "长期用户记忆系统，让 Agent 记住偏好与历史交互、提供个性化服务"
+      },
+      {
+        "id": "3-2",
+        "folder": "mem0 · memobase",
+        "status": "✅",
+        "desc": "用 mem0、Memobase 两个开源框架各实现一版用户记忆，作为实验 3-2 的对照实现"
+      },
+      {
+        "id": "3-3",
+        "folder": "log-sanitization",
+        "status": "✅",
+        "desc": "智能日志脱敏系统，基于本地 Ollama 模型检测并脱敏日志中的密钥和 PII 敏感数据"
+      },
+      {
+        "id": "3-4",
+        "folder": "dense-embedding",
+        "status": "✅",
+        "desc": "向量相似性搜索服务，对比 ANNOY（树）与 HNSW（图）两种 ANN 算法的权衡"
+      },
+      {
+        "id": "3-5",
+        "folder": "sparse-embedding",
+        "status": "✅",
+        "desc": "从零实现基于 BM25 的稀疏向量搜索引擎，可视化内部工作机制"
+      },
+      {
+        "id": "3-6",
+        "folder": "retrieval-pipeline",
+        "status": "✅",
+        "desc": "稠密 + 稀疏 + 神经重排序的完整流水线，用测试用例展示混合检索的互补效果"
+      },
+      {
+        "id": "3-7",
+        "folder": "structured-index",
+        "status": "✅",
+        "desc": "实现并对比 RAPTOR（递归抽象树）与 GraphRAG（知识图谱）两种结构化索引"
+      },
+      {
+        "id": "3-8",
+        "folder": "agentic-rag",
+        "status": "✅",
+        "desc": "对比 Non-Agentic 与 Agentic RAG，展示 ReAct 主导的迭代检索在司法问答上的优势"
+      },
+      {
+        "id": "3-9",
+        "folder": "agentic-rag-for-user-memory",
+        "status": "✅",
+        "desc": "用 Agentic RAG 管理用户对话历史，实现跨会话记忆检索"
+      },
+      {
+        "id": "3-10",
+        "folder": "contextual-retrieval",
+        "status": "✅",
+        "desc": "实现 Anthropic 的上下文感知检索，为分块生成前缀摘要，失败率降低 49–67%"
+      },
+      {
+        "id": "3-11",
+        "folder": "contextual-retrieval-for-user-memory",
+        "status": "✅",
+        "desc": "结合 Advanced JSON Cards 与上下文感知 RAG，形成双层记忆结构实现主动服务"
+      },
+      {
+        "id": "3-12",
+        "folder": "structured-knowledge-extraction",
+        "status": "✅",
+        "desc": "以司法判例跑通「因子发现 → 聚类原型 → 对话式建议」三段流水线"
+      }
+    ]
+  },
+  "4": {
+    "title": "工具",
+    "part": "构建",
+    "insight": "感知工具控信息量，执行工具控风险",
+    "level": "🔵",
+    "count": 5,
+    "items": [
+      {
+        "id": "4-1",
+        "folder": "active-tool-discovery",
+        "status": "✅",
+        "desc": "Qwen3-4B 真实对照中两组均 3/3 完成、准确率均 100%（未证明准确率提升）；主动发现的 schema 暴露和实测用时显著更低，但轨迹仍含无关调用与过早结束"
+      },
+      {
+        "id": "4-2",
+        "folder": "perception-tools",
+        "status": "✅",
+        "desc": "感知工具 MCP：网络搜索、多模态理解、文件系统、公共数据源（DuckDuckGo/Open-Meteo/Yahoo/OpenStreetMap），大多无需 API Key"
+      },
+      {
+        "id": "4-3",
+        "folder": "multimodal-agent",
+        "status": "✅",
+        "desc": "对比原生多模态、提取为文本、工具化分析三种策略在保真度、成本和灵活性上的权衡"
+      },
+      {
+        "id": "4-4",
+        "folder": "execution-tools",
+        "status": "✅",
+        "desc": "执行工具 MCP：20 次正式调用已通过 13/15 门禁，含 GitHub PR、Xvfb 桌面 Computer Use 与 KVM Android 实机操作；仅真实日历/邮件授权仍阻塞"
+      },
+      {
+        "id": "4-5",
+        "folder": "collaboration-tools",
+        "status": "✅",
+        "desc": "协作工具 MCP：浏览器自动化、HITL、Email/Telegram/Slack/Discord 通知、定时器，支持管理员审批"
+      }
+    ]
+  },
+  "5": {
+    "title": "Coding Agent 与通用 Agent",
+    "part": "构建",
+    "insight": "代码是能在运行时创造新工具的元能力",
+    "level": "🟣",
+    "count": 16,
+    "items": [
+      {
+        "id": "5-1",
+        "folder": "provider-failover",
+        "status": "✅",
+        "desc": "六种厂商组合 × 三种做法的真实接管：中立格式 6/6 切换成功并算对总额，原样直传 3/6、剥离思考 4/6，四次失败都是厂商真实报错；最反直觉的一格是直传能过、老实剥干净反而被拒"
+      },
+      {
+        "id": "5-2",
+        "folder": "provider-failover",
+        "status": "✅",
+        "desc": "流式输出在思考／正文／参数三处被切断后的恢复对照：正文断点上续写省 15%~66% 输出 token，参数断点上却会拼出「合法但写错」的参数，元指令在每个单元上都比整轮重发更贵"
+      },
+      {
+        "id": "5-3",
+        "folder": "code-for-math",
+        "status": "✅",
+        "desc": "30 道 AIME 2024 同模型真实对照：代码臂全部调用沙箱（含 sympy/numpy/scipy），53.3% vs 纯 CoT 36.7%，但差异未达显著（p=0.125）；正式负结论与原始收据均保留"
+      },
+      {
+        "id": "5-4",
+        "folder": "code-for-logic",
+        "status": "✅",
+        "desc": "固定版本 K&K 数据集 84 题真实对照：代码臂 100% 调用 python-constraint，实测 39.3% vs 纯思考 75.0%，未达到正文预期的 90%；完整负结论如实保留"
+      },
+      {
+        "id": "5-5",
+        "folder": "small-model-codified-rules",
+        "status": "✅",
+        "desc": "本地 Qwen3-4B 的 60×2 配对 τ-bench 风格活动：代码化规则臂 91.7% vs 控制组 95.0%（p=0.6875），未显著提升；服务端真值、checklist 和完整 120 条轨迹均已验证"
+      },
+      {
+        "id": "5-6",
+        "folder": "paper-to-ppt",
+        "status": "✅",
+        "desc": "固定真实论文 PDF 的 20 页双臂正式对照：三张原图均带页码/裁剪/变换/哈希来源；两组独立 Vision 均以 95 分通过，质量持平，但双 Agent 峰值上下文 24,186 vs 单 Agent 92,601（低 3.83×）"
+      },
+      {
+        "id": "5-7",
+        "folder": "paper-to-video",
+        "status": "✅",
+        "desc": "12 页真实幻灯片逐页经 Kimi K3 生成讲解词、Qwen-VL-Max 对照像素审核、Fish Audio S1 合成；ffmpeg 成片 513.010 秒，最大页漂移 0.024 秒，全部真实收据与失败重试均保留"
+      },
+      {
+        "id": "5-8",
+        "folder": "video-edit",
+        "status": "✅",
+        "desc": "一段多场景视频 + 一句自然语言需求，两步 Vision 定位剪出片段，Reviewer 抽帧核对不合格则迭代"
+      },
+      {
+        "id": "5-9",
+        "folder": "cad-vs-diffusion",
+        "status": "✅",
+        "desc": "同一法兰盘规格双路线实测：Kimi 写的 17 行 CadQuery 全尺寸零偏差；Hunyuan3D-2.1（HF 公共 Space）4 个通孔全丢、外径偏差 −99.4%。M5→M6 变更：代码路线改一行参数、0 次 LLM 调用、其余尺寸零漂移；生成路线整体重跑且外径漂移 +283%、轴向翻转。绿植对照组自然度 3 vs 8，适用边界反转"
+      },
+      {
+        "id": "5-10",
+        "folder": "adaptive-log-parser",
+        "status": "✅",
+        "desc": "遇到无法解析的新格式时不报错，交给代码 Agent 生成 parse 函数，测试通过后热更新进引擎，全程无人介入"
+      },
+      {
+        "id": "5-11",
+        "folder": "log-diagnosis",
+        "status": "✅",
+        "desc": "诊断 Agent 读真实 HTTP 轨迹/架构文档/PRD，定位根因、生成回归测试并在修复前后重放；正式活动通过官方 GitHub MCP 创建了真实 Issue（保留脱敏收据）"
+      },
+      {
+        "id": "5-12",
+        "folder": "dynamic-form",
+        "status": "✅",
+        "desc": "信息不全时动态生成含级联逻辑的 HTML 表单让用户一次性补全，汇总 JSON 交回 Agent"
+      },
+      {
+        "id": "5-13",
+        "folder": "erp-agent",
+        "status": "✅",
+        "desc": "中文自然语言转 SQL 由 DB 执行，artifact 模式让 LLM 只生成 SQL 制品不搬运数据，省 token 又防错"
+      },
+      {
+        "id": "5-14",
+        "folder": "conversational-ui",
+        "status": "✅",
+        "desc": "自然语言提 UI 定制需求（颜色/字体/文案/布局），Agent 改 React 源码借 Vite HMR 即时生效"
+      },
+      {
+        "id": "5-15",
+        "folder": "permission-embedded-data-objects",
+        "status": "✅",
+        "desc": "在 PostgreSQL 之上的权限内嵌对象存储：应用层代码可以动态生成，但每次读写仍由数据层强制执行权限、校验、引用完整性和受控后果反应"
+      },
+      {
+        "id": "5-16",
+        "folder": "agent-creator",
+        "status": "✅",
+        "desc": "模板/从零双臂均已通过结构、编译、测试、真实 Kimi K3 任务和语义门禁；正式对照完整结束。模板质量非劣且创建更高效，但正文预期的“质量与效率同时严格占优”未出现——这是已完成实验的诚实负结果，不是未完成状态"
+      }
+    ]
+  },
+  "6": {
+    "title": "交互：观察与动作空间的扩展",
+    "part": "构建",
+    "insight": "四类交互共享唤醒/安全点/取消/抢占/快慢路径分离",
+    "level": "🟣",
+    "count": 14,
+    "items": [
+      {
+        "id": "6-1",
+        "folder": "agent-with-event-trigger",
+        "status": "✅",
+        "desc": "FastAPI 事件驱动 Agent，原生异步集成前三组 MCP 工具，通过 HTTP API 接收 Web/IM/GitHub/定时器事件"
+      },
+      {
+        "id": "6-2",
+        "folder": "async-agent",
+        "status": "✅",
+        "desc": "asyncio 单线程事件驱动框架 Flux：事件队列按紧急度分派、异步工具并行、运行中打断、长任务取消与状态查询"
+      },
+      {
+        "id": "6-3",
+        "folder": "astra-async-steering",
+        "status": "✅",
+        "desc": "比较同步工具、模型原生异步与回合中途引导，理解等待、用户更新和任务恢复之间的关系"
+      },
+      {
+        "id": "6-4",
+        "folder": "live-audio",
+        "status": "✅",
+        "desc": "真实单轮证据完成麦克风媒体 → Silero VAD → 本地 Whisper → ARK 流式 LLM → Fish S1；5 个媒体/模型 hash 当前均匹配，但证据本身没有顶层 hash manifest，且不代表并发或生产负载基准"
+      },
+      {
+        "id": "6-5",
+        "folder": "streaming-speech",
+        "status": "✅",
+        "desc": "canonical 本地验收运行 Qwen2-Audio 递增前缀与 600ms VAD + Whisper：8/8 执行/溯源门禁通过，但预期行为只复现 2/6，实测前缀 8.4–11.3s，不能声称真流式低延迟"
+      },
+      {
+        "id": "6-6",
+        "folder": "end-to-end-speech",
+        "status": "✅",
+        "desc": "真实本地运行在单张 RTX PRO 6000 上执行固定 revision 的 MiniCPM-o 4.5：端到端与自级联均为 3/4，但语义/副语言失败互补；真实 24kHz 语音输出及 11/11 验收已保留"
+      },
+      {
+        "id": "6-7",
+        "folder": "controllable-tts",
+        "status": "✅",
+        "desc": "真实 Fish Audio S1 4×3×2=24 条参考音库与 A/B/C 媒体齐全；三次位置平衡的真实 Voxtral 音频盲评中 C 组最高且真人客服感 4.67/5，但 B>A 未复现；验收将完成状态与负结果分开报告"
+      },
+      {
+        "id": "6-8",
+        "folder": "Anthropic 原生 Computer Use 记录 + claude-quickstarts/computer-use-demo/",
+        "status": "✅",
+        "desc": "正式运行从固定源码本地构建镜像，用 claude-sonnet-4-5-20250929 完成 16 次真实响应与 15 个原生 computer 动作；Google reCAPTCHA 未交互，转向可见 Open-Meteo JSON 后回答 70.2°F、晴朗，全部确定性门禁通过"
+      },
+      {
+        "id": "6-9",
+        "folder": "computer-use-open-model + browser-use/",
+        "status": "✅",
+        "desc": "正式开放模型运行使用 qwen/qwen3-vl-32b-instruct：Google CAPTCHA 后转 weather.com，16 步完成；16/16 API 响应模型一致、15 张截图、只读动作和答案 grounding 全部通过确定性验收"
+      },
+      {
+        "id": "6-10",
+        "folder": "xlerobot-teleoperation",
+        "status": "✅",
+        "desc": "真机遥操作 XLeRobot 整理桌面：把红色杯子放进托盘、把黄色废纸放进垃圾盒，最后重新观察并确认状态"
+      },
+      {
+        "id": "6-11",
+        "folder": "xlerobot-teleoperation",
+        "status": "✅",
+        "desc": "在模拟器中测量同一桌面任务的理想控制上限，不代表真机已经运行"
+      },
+      {
+        "id": "6-12",
+        "folder": "gemini-xlerobot-navigation",
+        "status": "✅",
+        "desc": "使用 Gemini Robotics-ER 1.5 自主驱动真实 XLeRobot 完成同一整理桌面任务"
+      },
+      {
+        "id": "6-13",
+        "folder": "gemini-xlerobot-navigation",
+        "status": "✅",
+        "desc": "在模拟器中比较开环、逐步检查和预测式闭环三种同任务策略"
+      },
+      {
+        "id": "6-14",
+        "folder": "rgb-sim2real-grasping",
+        "status": "✅",
+        "desc": "对同一桌面任务进行 RGB 跨环境测试，检查视觉策略对背景、外观、光照和噪声变化的适应性"
+      }
+    ]
+  },
+  "7": {
+    "title": "Agent 的评估",
+    "part": "提升",
+    "insight": "没有评估，就分不清设计提升与随机波动",
+    "level": "🟡",
+    "count": 14,
+    "items": [
+      {
+        "id": "7-1",
+        "folder": "tau2-bench-eval",
+        "status": "✅",
+        "desc": "已在固定上游提交上完成 5 个 telecom 双控任务：4/5 通过；保存原始轨迹、成本、内容哈希及错选线路导致漏做流量加油的失败分析"
+      },
+      {
+        "id": "7-2",
+        "folder": "experiment-7-2-human-benchmark",
+        "status": "✅",
+        "desc": "Codex 作为人工操作员，预注册并完成 GAIA、AndroidWorld、SWE-bench Verified、τ²-bench、Terminal-Bench、OSWorld-Verified 各简单/中等/困难一题，共 18/18 个首轮正式结果：13 通过、5 失败；逐题保留任务、轨迹、官方评估及成败解释"
+      },
+      {
+        "id": "7-3",
+        "folder": "user-memory-evaluation",
+        "status": "✅",
+        "desc": "四档多维 Rubric 已在 60 用例 × 3 系统的 180/180 条真实评判记录上完整执行"
+      },
+      {
+        "id": "7-4",
+        "folder": "user-memory-system-evaluation",
+        "status": "✅",
+        "desc": "60 用例 × 3 系统共 180/180 条真实轨迹，零错误且原生币种定价完整"
+      },
+      {
+        "id": "7-5",
+        "folder": "tts-quality-eval",
+        "status": "✅",
+        "desc": "真实验收完成 OpenAI/Fish 两 provider × 四类语料的 8/8 双音频 Voxtral 四维评审；候选/参考音频逐项哈希，早期 Gemini/OpenRouter 失败证据仍保留"
+      },
+      {
+        "id": "7-6",
+        "folder": "android-world/failure-attribution",
+        "status": "✅",
+        "desc": "对已保留的 T3A 日志做离线失败归因。全体统计（自原始日志重算）：53 个任务块，其中 1 块是基准自身 initialize_task 崩溃后跳过的，真正失败为 52 条；24/52 是 Agent 自称完成后被验证器否掉；9 条目标必须依赖当前日期，其中仅 2 条拿到过它（且是顺带从表单默认值 Sun, Oct 15 读到的）；自述 “界面无变化” 一类观察出现 55 次、覆盖 18/52 条轨迹。抽样标注 10 条，步号引用在构建时逐条核验：9 条静默失败、7 条首错发生在 assistant message，置信度 5 高 / 4 中 / 1 低。本次为**第三轮**：第二轮把 10 条中的 7 条首错步号前移，第三轮又订正了两项全体统计与一条记录的偏差描述，每处改动连同理由保留。另含 3 个轨迹前缀回归任务与 3 处对 t3a_failed_analysis.md 的更正"
+      },
+      {
+        "id": "7-7",
+        "folder": "user-memory-policy-eval",
+        "status": "✅",
+        "desc": "已用真实 openai/gpt-5.6-sol 经 OpenRouter 完成 11 个 trajectory-prefix bad case × JSON/Markdown/Python-like 三种表示，共 33/33 个 API 单元、0 个 API 错误；三种表示均为 6/11 通过，结果和哈希保存在 results/policy_prefix_live.json 与 results/manifest.json"
+      },
+      {
+        "id": "7-8",
+        "folder": "elo-leaderboard",
+        "status": "✅",
+        "desc": "正式全量验收处理 1,799,991 条公开 Arena 记录（1,670,250 条盲选票、129 个模型），在线 Elo 与 Bradley-Terry 排名 Spearman 0.787、Top-20 重合 12/20；胜率矩阵、17 个月度快照、三张图与 D3 动画均由同一 manifest 哈希绑定并复核通过"
+      },
+      {
+        "id": "7-9",
+        "folder": "model-action-threshold",
+        "status": "✅",
+        "desc": "同一中性 Coding Harness 下完成 GPT-5.6-sol / Claude Sonnet 5 × 三任务 × 三次重复的 18/18 单元实测；manifest零 API 错误并绑定完整轨迹与汇总哈希"
+      },
+      {
+        "id": "7-10",
+        "folder": "agent-cost-analysis",
+        "status": "✅",
+        "desc": "多轮 Agent 任务（客服退款）全链路成本拆解 + KV-cache 友好设计/上下文压缩的 A/B 节省量化"
+      },
+      {
+        "id": "7-11",
+        "folder": "model-benchmark",
+        "status": "🚧",
+        "desc": "完整 8K/32K/128K × 512/2048、限流爬坡、Agent 成本与 168 小时可用性 campaign 已实现；目前尚无验收证据，不能替代完整长期实验"
+      },
+      {
+        "id": "7-12",
+        "folder": "user-memory-system-evaluation",
+        "status": "✅",
+        "desc": "全矩阵验收完成 60 用例 × 24 单元（4 嵌入 × 3 reranker × 2 主模型）共 1,440/1,440 条真实轨迹，零错误、零未定价用量，检索/任务指标与交互分析完整；独立验证器复核通过（ALL CHECKS PASSED），后端替代方案如实记录于 readiness 证据"
+      },
+      {
+        "id": "7-13",
+        "folder": "android-world",
+        "status": "✅",
+        "desc": "完整候选实验证据保留 116 任务 × 5 轮的 580/580 条唯一 episode（包括评估失败），运行时错误为零：严格 T3A 成功 26 条（4.4828%），平均 evaluator reward 0.133621，由 77 条满分状态与 1 条 0.5 部分 reward 组成。实验在完成官方初始化且配齐 24/24 应用的 Pixel 6/API-33 上执行，本地 Qwen2.5-7B（revision a09a35458c702b33eeacc393d103063234e8bc28）通过 vLLM 0.19.0 运行于 RTX PRO 6000 Blackwell 96 GB。执行与证据已完成，但未批准部署；候选 Qwen 与配对源 Doubao 不同，因而不支持同模型提升或非劣性结论"
+      },
+      {
+        "id": "7-14",
+        "folder": "openvla-robotwin2-eval",
+        "status": "✅",
+        "desc": "正式单卡运行完成 chunk 1/25 各 128 IID + 128 OOD episodes，严格门禁及 512 个 rollout hash 全通过；chunk 1 为 0/256、chunk 25 为 26/256，低绝对成功率作为真实结果保留"
+      }
+    ]
+  },
+  "8": {
+    "title": "模型后训练",
+    "part": "提升",
+    "insight": "SFT 记忆、RL 泛化；数据与环境比算法更重要",
+    "level": "🔴",
+    "count": 18,
+    "items": [
+      {
+        "id": "8-1, 8-2",
+        "folder": "learning-from-experience",
+        "status": "✅",
+        "desc": "同一确定性寻宝环境下完成 10,000 局 Q-learning、100 局贪婪评估与官方 Moonshot kimi-k3 第一局实测；双臂证据保留 17/17 原始 API 回执且零 fallback"
+      },
+      {
+        "id": "8-3",
+        "folder": "MiniMind-pretrain · MiniMind-pretrain/minimind/",
+        "status": "✅",
+        "desc": "规范训练报告绑定原始与 QK-Norm + Muon 两臂在预训练、SFT、DPO 后的 49 份历史输出、8 次匿名 ARK 盲评、源码/数据/环境复现契约与完整 hash；盲评总分 3.6250 对 2.0417（+1.5833，7 胜 1 平），历史 loss 日志缺失的边界明确保留，checkpoint 不随书分发也不作为验收门槛"
+      },
+      {
+        "id": "8-4",
+        "folder": "MiniMind-pretrain",
+        "status": "✅",
+        "desc": "规范训练报告保留 8 配置 × 8 图片的 64 份历史输出及 8 次真实图像感知匿名 ARK 评审，固定原版/改进版源码、数据、CLIP 与评估图片哈希；评审中原版 SFT 最高（1.9062），同 SFT 基座的 QK-Norm+Muon 两阶段均未占优。历史 revision/checkpoint 缺失被明确限定，checkpoint 不随书分发也不作为验收门槛"
+      },
+      {
+        "id": "8-5",
+        "folder": "continued-pretraining",
+        "status": "✅",
+        "desc": "规范训练报告绑定 RTX-4090 三阶段原始输出、15 份生成、5 次匿名 ARK 盲评、源码与当前复现 revision；韩语最终阶段 +1.7777，英语下降 0.8333，泡菜事实错误明确保留，checkpoint 不随书分发也不作为验收门槛"
+      },
+      {
+        "id": "8-6",
+        "folder": "sesame · orpheus",
+        "status": "✅",
+        "desc": "有界本地 GPU 实验已完成两条真实语音 SFT 轨道：各 60 次 LoRA 更新、留出集损失、40 个基线/微调音频、自动代理指标、哈希与失败样例；不据此声称主观音质"
+      },
+      {
+        "id": "8-7",
+        "folder": "MultilingualReasoning",
+        "status": "🚧",
+        "desc": "多语言思考 SFT 实现；需训练 checkpoint 与跨语言基准前后对照才算完成"
+      },
+      {
+        "id": "8-8",
+        "folder": "prompt-distillation",
+        "status": "✅",
+        "desc": "正式保留运行包含 160/160 训练与 80/80 留出 Kimi K3 教师回执、真实 CUDA 训练的 SmolLM2-135M-Instruct LoRA checkpoint，并通过 8/8 门禁；留出集教师 100%、基线 0%、训练后学生 95%"
+      },
+      {
+        "id": "8-9",
+        "folder": "cot-distillation",
+        "status": "✅",
+        "desc": "24/24 Kimi K3 教师轨迹均已完成并经规则过滤，23 条进入 SFT；真实 CUDA checkpoint 与同题三臂对照已保留。学生 2/24 对基线 1/24 的提升不显著（p=1.0），作为负结果如实报告"
+      },
+      {
+        "id": "8-10",
+        "folder": "AdaptThink 配套说明 · AdaptThink-original/",
+        "status": "✅",
+        "desc": "历史训练报告记录公开 W&B 主运行 wubbn5tj：8×H100，step 300 三基准响应长度均显著下降，但 AIME mean@16 下降 0.42 pp；运行继续至 step 410 后崩溃，checkpoint 不随书分发，且未保留独立 checkpoint 评估回执"
+      },
+      {
+        "id": "8-11",
+        "folder": "SFTvsRL/",
+        "status": "📖",
+        "desc": "bojieli/SFTvsRL 的 GeneralPoints-L/VL：同预算 SFT 与 PPO 的 ID/OOD 记忆—泛化对照"
+      },
+      {
+        "id": "8-12",
+        "folder": "SpatialReasoning 配套说明 · SFTvsRL/",
+        "status": "📖",
+        "desc": "同一 bojieli/SFTvsRL checkout 的 V-IRL-L/VL 训练与跨城市/规则 OOD 评估，不是独立 SpatialReasoning 代码仓库"
+      },
+      {
+        "id": "8-13",
+        "folder": "SimpleVLA-RL 配套说明 · SimpleVLA-RL/SimpleVLA-RL/",
+        "status": "📖",
+        "desc": "PRIME-RL/SimpleVLA-RL 主仓与内嵌 verl/ 已固定；OpenVLA-OFT、LIBERO/RoboTwin、checkpoint、Flash Attention、CUDA/driver 和 simulator assets 仍未形成经验证的完整依赖锁"
+      },
+      {
+        "id": "8-14",
+        "folder": "retool 配套说明 · verl/ · SandboxFusion/",
+        "status": "📖",
+        "desc": "ReTool 配方来自 bojieli/verl，实时代码执行依赖 bojieli/SandboxFusion；不是一个名为 retool 的独立源码仓库"
+      },
+      {
+        "id": "8-15",
+        "folder": "AWorld-train 配套说明 · AWorld/",
+        "status": "📖",
+        "desc": "bojieli/AWorld 中的 GAIA MCP 沙盒与训练入口，bojieli/verl 为训练后端"
+      },
+      {
+        "id": "8-16",
+        "folder": "RLVP 配套说明 · RLVP/rlvp/",
+        "status": "📖",
+        "desc": "完整训练/评估代码来自固定到 1ad30bc… 的 19PINE-AI/rlvp；当前 checkout 缺失，训练未运行"
+      },
+      {
+        "id": "8-17",
+        "folder": "premature-completion-dpo",
+        "status": "✅",
+        "desc": "从\"过早结束\" bad case 到 DPO 修复的完整链路：bad case → 偏好对 → 7B+LoRA 单卡训练 → 未完成任务集与已完成任务保留集验证；本地 RTX PRO 6000 已完成训练，固定候选比较中未完成任务集选对率 25.0% → 91.7%，保留集保持 100%"
+      },
+      {
+        "id": "8-18",
+        "folder": "curly-quote-sft",
+        "status": "✅",
+        "desc": "中文弯引号作用域 Bad Case：人工审计合成数据 + 显式 Skill 正反规则 → Qwen3-8B bf16 LoRA SFT → 9 种代码语言和 10 种文章体裁回归；manifest；RTX PRO 6000 真实训练已完成，1024/256/256（训练/留出/边界），适配后 exact 96.9%/97.7%，保护区保持 100%"
+      },
+      {
+        "id": "8-19",
+        "folder": "exact-copy-sft",
+        "status": "✅",
+        "desc": "old_string/特殊字符串精确复制 Bad Case：未见随机字符串、相似字符串选择和工具 JSON 参数 → Qwen3-8B bf16 LoRA SFT；manifest；RTX PRO 6000 真实训练已完成，1024/256/256（训练/留出/边界），byte-exact 基座 37.5%→适配 78.9%，边界 80.1%；另有 Qwen3/Qwen2.5/Mistral tokenizer 审计"
+      }
+    ]
+  },
+  "9": {
+    "title": "Agent 的持续进化",
+    "part": "提升",
+    "insight": "更新载体取决于能力如何被表达与验证",
+    "level": "🟠",
+    "count": 9,
+    "items": [
+      {
+        "id": "9-1",
+        "folder": "trajectory-verifier",
+        "status": "✅",
+        "desc": "实验 9-1：28 条真实客服调用、8 次 Judge 调用与 8 条专家标注样本已通过验收；证据同时记录关键违规稳定性主张未复现"
+      },
+      {
+        "id": "9-2",
+        "folder": "tau2-escalation-experience",
+        "status": "✅",
+        "desc": "实验 9-2：τ²-bench telecom 上由模型从 19 条失败轨迹提炼转接与工具使用规则；迁移集 114 条通过率 12.3% → 19.3%，零回归；证据保留提炼回执、三臂策略哈希与行为指标"
+      },
+      {
+        "id": "9-3",
+        "folder": "prompt-auto-optimization",
+        "status": "✅",
+        "desc": "实验 9-3：真实任务 Agent、LLM Judge 与 Coding Agent 跑完初始/自动/人工三组完整保留集和边界集；原始回执与发布门槛已保存"
+      },
+      {
+        "id": "9-4",
+        "folder": "正文对照实验",
+        "status": "🚧",
+        "desc": "从用户反馈中进化“需求澄清 + Spec 确认”Skill；正文给出三臂 A/B 设计、指标和发布门槛，配套实现待补充"
+      },
+      {
+        "id": "9-5",
+        "folder": "browser-use-rpa",
+        "status": "✅",
+        "desc": "实验 9-5：真实 ARK Agent + Chromium 在可重置本地消息站完成探索、独立验证、参数化回放、假成功对照与页面变化失效"
+      },
+      {
+        "id": "9-6",
+        "folder": "self-modifying-agent",
+        "status": "✅",
+        "desc": "实验 9-6：真实 Coding Agent 从重复故障生成补丁，并与确定性提案、故意过宽的反例通过同一回归/灰度/回滚发布门；证据保留接受与拒绝历史"
+      },
+      {
+        "id": "9-7",
+        "folder": "harness-safety-gate",
+        "status": "✅",
+        "desc": "实验 9-7：用户纠正/点踩/事后审计触发“高风险调用确认门禁”提案，经 AST 静态检查、未完成任务回放和正常操作回放；确定性提案通过，真实 gpt-4o-mini 提案因检查失败被安全拒绝，整体验收通过"
+      },
+      {
+        "id": "9-8",
+        "folder": "hermes-self-evolution",
+        "status": "📖",
+        "desc": "实验 9-8：把整本书和源码交给 Hermes；它读完后选择一项改进，亲手修改自己，并把每次 Reviewer 的退回变成下一轮学习，直到通过"
+      },
+      {
+        "id": "9-9",
+        "folder": "self-evolution-eval",
+        "status": "✅",
+        "desc": "实验 9-9：static、append-only、evolving 三臂 × 3 seeds × 14 任务共 126 次真实调用；证据保留迁移、规则替换、保持与配对统计"
+      }
+    ]
+  },
+  "10": {
+    "title": "多 Agent 协作",
+    "part": "提升",
+    "insight": "每个多 Agent 决策都能在单 Agent 三要素中找到对应",
+    "level": "🟠",
+    "count": 5,
+    "items": [
+      {
+        "id": "10-1",
+        "folder": "multi-role-transfer",
+        "status": "✅",
+        "desc": "正式 v2 对照完成 30 对任务、12 条边界轨迹、289 份模型回执、31 份 Tavily 回执和 60 次异源盲测；修复 Skill 路径首步跳过 Skill 的 Harness 策略门后，Skill 确定性通过率 15/30、Transfer 2/30，结论与成本/延迟权衡均已由 manifest 固定"
+      },
+      {
+        "id": "10-2",
+        "folder": "book-translation",
+        "status": "✅",
+        "desc": "正式 ARK v4在英文版第 1–2 章的 242,090 字节、23 图、14 代码块上完成 26 单元双臂对照：12/12 门禁、39 份原始裁判回执和 37 个溯源 hash 均通过；Manager 上下文缩小 20.43×、token 减少 6.48×且匿名质量 4.654 > 4.481，但慢 6.57%，宽泛术语一致率与 Markdown 精确保真也出现明确负结果"
+      },
+      {
+        "id": "10-4",
+        "folder": "parallel-web-research",
+        "status": "✅",
+        "desc": "同一次真实验收运行覆盖 10 站点串并行与 4 会话级联：12/12 门禁通过、实测加速 1.872×、24 份完整浏览器观测、3 份带 response ID/usage 的 ARK 原始响应和 114 条总线事件均由运行时 manifest 绑定；7 个实际源码/输入 hash 与全部 artifact hash 已复核一致，凭据扫描为零"
+      },
+      {
+        "id": "10-5",
+        "folder": "Generative Agents 正式复现 + generative_agents/",
+        "status": "📖",
+        "desc": "Qwen 3.7 Flash 正式运行完成三组各 25 Agent、17,280 步、两个虚拟日的完整社会实验；148,856 份真实 provider 回执零逻辑错误，14/14 门禁通过。自定义气候韧性工作坊未扩散出发起人，是保留的负结果；关闭反思后证据关联反思为零，基线在 25 人盲评中以 17:8 获偏好且四项均分更高"
+      },
+      {
+        "id": "10-6",
+        "folder": "voice-werewolf",
+        "status": "✅",
+        "desc": "同一次 v11 真实验收完成 3 个昼夜投票循环、6 次 LLM 工具→macOS say→OpenRouter 原生音频 ASR 回环、信息隔离和规则胜负；四项策略门禁全通过，13 个唯一响应 ID、1,650 音频 token、27 个非空 TTS 事件、动作历史和裁判溯源均保留，独立验证复核 6/6 音频动作边界"
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+﻿=== Mini Agent 演示（模型：Qwen/Qwen3-8B）===
+
+[RAG 检索] 用户：Agent 的核心公式是什么？请给出依据。
+d:\ai-agent-book\.venv\Scripts\python.exe : Building prefix dict from the default dictionary ...
+At line:15 char:4381
++ ... pgrep\bin'; d:\ai-agent-book\.venv\Scripts\python.exe -u d:\ai-agent- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Building prefix... dictionary ...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Loading model from cache C:\Users\XGY\AppData\Local\Temp\jieba.cache
+Loading model cost 0.328 seconds.
+Prefix dict has been built successfully.
+  [状态栏] step=1 消息数=2 上下文≈309 字符
+  [状态栏] step=2 消息数=4 上下文≈3311 字符
+  助手：《深入理解 AI Agent：设计原理与工程实践》中明确指出，AI Agent 的核心公式为：**Agent = LLM + 上下文 + 工具**。这一公式在书的后记部分（afterword.md）被作为开篇提出的基石概念，全书十章均围绕这三层架构展开。具体而言：
+
+1. **LLM（大语言模型）**：作为 Agent 的“大脑”，负责决策和生成（来自后记中的学术层定义）。
+2. **上下文**：涵盖当前任务的输入信息及历史交互数据，是 Agent 的“眼睛”（第二章详细讨论上下文工程）。
+3. **工具**：定义 Agent 与外部环境交互的能力，如搜索、API 调用等，是其“手脚”（第四章专门解析工具设计）。
+
+这一公式在第一章（AI Agent 入门）中被进一步拆解为实现层、直觉层和学术层的三层理解，并通过 ReAct 循环（思考→行动→观察）作为核心运行机制（第一章内容）。
+
+[写入记忆] 用户：记住：我的学习目标是在年底独立开发一个 RAG Agent 项目。
+  [状态栏] step=1 消息数=6 上下文≈3835 字符
+  [状态栏] step=2 消息数=8 上下文≈4261 字符
+  助手：已记录你的学习目标：**“我的学习目标是在年底独立开发一个 RAG Agent 项目”**（事实ID:1，保存时间:2026-10-04 11:32:48）。这个目标将作为你后续学习路径规划的依据。
+
+--- 新会话开始（清空对话历史，长期记忆保留）---
+
+[新会话调用跨会话记忆] 用户：我的学习目标是什么？
+  [状态栏] step=1 消息数=2 上下文≈341 字符
+  助手：你的学习目标是在年底独立开发一个 RAG Agent 项目，这一目标已记录在你的长期记忆中。
+
+[计算器工具] 用户：我一共跑了 36 个实验，平均每个实验花费 0.25 元，计算总花费：36*0.25
+  [状态栏] step=1 消息数=4 上下文≈518 字符
+  [状态栏] step=2 消息数=6 上下文≈849 字符
+  助手：总花费为 36 × 0.25 = 9.0 元。这个计算结果来自数学运算，无需参考书籍内容。需要我帮你分析实验成本结构或优化预算吗？
+
+完整轨迹已保存：d:\ai-agent-book\task6\mini-agent\data\last_demo.json
