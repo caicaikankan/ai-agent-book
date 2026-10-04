@@ -1,0 +1,7 @@
+﻿positivity-alpha-jan           6/6
+completeness-district-jan      6/6
+trend-alpha-jan-feb            6/6
+quality-demo-feb               6/6
+stockout-demo-feb              6/6
+------------------------------------
+TOTAL                          30/30

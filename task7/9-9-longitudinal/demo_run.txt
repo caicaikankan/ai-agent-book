@@ -1,0 +1,10 @@
+﻿Experiment 9-9: does the Agent keep evolving?
+
+profile          learn  transfer   change   retain   safety  neg-xfer   tokens   storage
+evolving         0.500     1.000    0.500    1.000    0.857     0.125     1230       145
+append_only      0.500     1.000    0.000    0.667    0.857     0.375     1205       145
+static           0.000     0.000    0.000    0.000    0.429     0.000     1680         0
+
+Evolving-agent learning curve:
+L-refund-1:0.00 -> L-refund-2:0.50 -> L-identity-1:0.33 -> L-identity-2:0.50 -> L-baggage-1:0.40 -> L-baggage-2:0.50
+tasks after change signal to recover: 1

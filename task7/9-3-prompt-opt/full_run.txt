@@ -1,0 +1,73 @@
+##########################################################################
+# 实验 9-3：基于失败轨迹的系统提示词自动优化（航空客服场景）
+# LLM 提供商: openai（SiliconFlow 兼容端点）   模型: Qwen/Qwen3-8B
+# 用例数: 10（保留集 5 + 边界集 5）   Coding Agent 优化轮数上限: 3
+# 运行时间: 2026-10-03
+# 说明：本文件为控制台输出的摘要归档；完整逐条回复与 74 份原始 API 回执见 full_run.json
+##########################################################################
+
+【步骤 1】初始系统提示词评测
+  保留集(holdout)：
+    [✓] H1-改签        未转接且妥善处理
+    [✓] H2-行李额       未转接且妥善处理
+    [✗] H3-选座        未转接但处理不当（空回复）
+    [✓] H4-明确要人工    应转接：已转接
+    [✓] H5-紧急安全     应转接：已转接
+  边界集(boundary)：
+    [✗] B1-不可退票要退款  却转接了（过度转接）
+    [✗] B2-要求免改签费   未转接但处理不当
+    [✗] B3-小延误索赔    却转接了（过度转接）
+    [✗] B4-索要免费升舱   却转接了（过度转接）
+    [✗] B5-超额免费行李   未转接但处理不当
+  初始结果：保留集 4/5 (80%)，边界集 0/5 (0%)，过度转接 3/5
+
+【步骤 2】三维诊断（学习信号）
+  Scope: system_prompt.transfer_policy
+  rule_compliance: 0 failures
+  task_resolution: 6 failures（H3, B1-B5）
+  compliant_flexibility: 5 failures（B1-B5）
+  Diagnosis: 过度升级政策争议；保留明确要人工/安全紧急的强制转接，
+             普通争议须先解释政策并给出合规替代方案，再考虑转接。
+
+【步骤 3】Coding Agent 生成候选（round 1 一次成功：提交 2 / 成功 2）
+--- system_prompt.txt (before)
++++ system_prompt.txt (after)
+@@
+-3. 关于人工转接：仅当请求无法在你的行动范围内处理时，才转接人工客服。
+-4. 客户满意度是第一位的。为避免激化矛盾，当乘客表达不满、投诉，或提出你无法完全满足的诉求
+-   （例如要求超出政策的退款、赔偿、免费或费用减免）时，应当及时转接人工客服来处理……
++3. 关于人工转接：仅当乘客明确要求人工客服或涉及紧急安全情况时，才转接人工客服。
++4. 客户满意度是第一位的。在处理政策争议时，必须先向乘客详细解释相关政策，并提供符合规定的
++   替代解决方案，不得直接转接人工客服。
+  补丁长度变化：533 → 504 字符（-29，收缩而非膨胀）
+
+【步骤 4】候选评测 + 发布门槛
+  保留集：H1 ✗  H2 ✗  H3 ✓  H4 ✓  H5 ✓  → 3/5 (60%)
+  边界集：B1 ✗  B2 ✗  B3 ✗  B4 ✗  B5 ✓  → 1/5 (20%)
+  发布决定：reject_candidate
+    ✓ patch_is_nonempty
+    ✓ patch_is_auditable_old_to_new_edit
+    ✓ source_cases_are_recorded
+    ✗ holdout_did_not_regress   （4/5 → 3/5，H1/H2 退化）
+    ✓ boundary_improved         （0/5 → 1/5，B5 修复；过度转接全部消除）
+
+【步骤 5】人工调优版对照
+  保留集 4/5 (80%)，边界集 2/5 (40%)（B1、B5 妥善处理）
+
+【步骤 6】对比表
+  系统提示词版本        保留集(holdout)   边界集(boundary)
+  初始 prompt          4/5 (80%)        0/5 (0%)
+  自动优化后 prompt      3/5 (60%)        1/5 (20%)
+  人工调优版(对照)        4/5 (80%)        2/5 (40%)
+
+==========================================================================
+# 资源与验收数据（full_run.json）
+# 总耗时 campaign_elapsed_seconds = 1135.6（约 19 分钟），其中补丁生成 52.4s
+# Token：prompt 67601 / completion 26143 / 合计 93744
+# 真实调用：task_agent 52 次、llm_judge 21 次、coding_agent 1 次；无凭据回执 74 份
+# 10 项验收门禁（acceptance.gates）全部 passed，execution_accepted = true
+# 结果主张如实记录：boundary_improved=true，holdout_not_degraded=false，
+#   all_manuscript_result_claims_observed=false（未刷绿，候选确实引发回归）
+# 稳定版 prompt 未被覆盖；候选只写入 runtime/system_prompt_working.txt（已归档为
+#   candidate_system_prompt_working.txt），未进入灰度
+==========================================================================

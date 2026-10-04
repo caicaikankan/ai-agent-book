@@ -1,0 +1,35 @@
+﻿uv : test_calibration_report_supports_dimension_result_objects (test_calibration_report_dimension_result.TestCalibratio
+nReportDimensionResult.test_calibration_report_supports_dimension_result_objects)
+At line:15 char:4382
++ ... pgrep\bin'; uv run python -m unittest discover -s chapter9/trajectory ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_calibratio...result_objects):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Contract: calibration_report handles report dimensions containing DimensionResult objects. ... ok
+test_later_tool_success_does_not_ground_an_earlier_claim (test_claim_action_order.ClaimActionOrderTest.test_later_tool_
+success_does_not_ground_an_earlier_claim)
+A future action cannot support an already-emitted success claim. ... ok
+test_malformed_turns_fail_consistency_without_crashing (test_claim_action_order.ClaimActionOrderTest.test_malformed_tur
+ns_fail_consistency_without_crashing)
+Invalid timeline metadata must not abort the whole verification. ... ok
+test_prior_tool_success_grounds_a_later_claim (test_claim_action_order.ClaimActionOrderTest.test_prior_tool_success_gro
+unds_a_later_claim)
+A completed action is valid evidence for a subsequent success claim. ... ok
+test_same_turn_tool_success_does_not_ground_the_claim (test_claim_action_order.ClaimActionOrderTest.test_same_turn_tool
+_success_does_not_ground_the_claim)
+Tool execution cannot retroactively support text emitted with its call. ... ok
+test_derive_claims_and_promises_tolerates_non_dict_result (test_derive_claims_promises_null_result.TestDeriveClaimsProm
+isesNullResult.test_derive_claims_and_promises_tolerates_non_dict_result)
+Contract: _derive_claims_and_promises handles tool calls with None or non-dict result fields. ... ok
+test_review_route_excludes_risky_case_from_learning (test_real_campaign.RealCampaignAcceptanceTest.test_review_route_ex
+cludes_risky_case_from_learning) ... ok
+test_calibration_matches_experts (test_verifier.VerifierTest.test_calibration_matches_experts) ... ok
+test_false_promise_has_evidence (test_verifier.VerifierTest.test_false_promise_has_evidence) ... ok
+test_multidimensional_report_is_more_diagnostic_than_scalar (test_verifier.VerifierTest.test_multidimensional_report_is
+_more_diagnostic_than_scalar) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+OK
