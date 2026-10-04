@@ -1,0 +1,35 @@
+﻿.\.venv-mcp2\Scripts\python.exe : 调用工具 pubchem_search ...
+At line:15 char:4382
++ ... pgrep\bin'; .\.venv-mcp2\Scripts\python.exe cli.py run pubchem_search ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (调用工具 pubchem_search ...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+{
+  "success": true,
+  "message": {
+    "query": "aspirin",
+    "search_type": "name",
+    "compounds": [
+      {
+        "cid": 2244,
+        "name": "Aspirin",
+        "molecular_formula": "C9H8O4",
+        "molecular_weight": 180.16,
+        "smiles": null,
+        "inchi": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+        "synonyms": []
+      }
+    ],
+    "count": 1
+  },
+  "metadata": {
+    "query_type": "name",
+    "query_value": "aspirin",
+    "api_endpoint": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/property/Title,MolecularFormula,MolecularWeight,CanonicalSMILES,InChI/JSON",
+    "response_time": 0.5929804999614134,
+    "total_results": 1,
+    "rate_limit_delay": null,
+    "error_type": null
+  }
+}

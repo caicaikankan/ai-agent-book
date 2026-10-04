@@ -1,0 +1,201 @@
+{
+  "config": {
+    "num_tools": 35,
+    "top_k": 5,
+    "model": "gpt-5.6-luna",
+    "strategies": [
+      "all",
+      "retrieval",
+      "active"
+    ]
+  },
+  "offline": {
+    "benchmark": {
+      "num_tools": 35,
+      "top_k": 5,
+      "per_task": [
+        {
+          "name": "GitHub repo search",
+          "gold_tools": [
+            "github_search_repos"
+          ],
+          "retrieved": [
+            "github_search_repos",
+            "analytics_predict",
+            "cloud_create_vm",
+            "github_get_file",
+            "github_create_issue"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Read config file",
+          "gold_tools": [
+            "fs_read_file"
+          ],
+          "retrieved": [
+            "fs_read_file",
+            "github_get_file",
+            "web_download",
+            "fs_write_file",
+            "comm_read_email"
+          ],
+          "hit": true
+        },
+        {
+          "name": "List directory",
+          "gold_tools": [
+            "fs_list_directory"
+          ],
+          "retrieved": [
+            "fs_list_directory",
+            "fs_delete_file",
+            "github_list_issues",
+            "cloud_upload_storage",
+            "cloud_list_resources"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Summary statistics",
+          "gold_tools": [
+            "analytics_summarize"
+          ],
+          "retrieved": [
+            "analytics_summarize",
+            "analytics_correlation",
+            "analytics_predict",
+            "analytics_visualize"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Send email",
+          "gold_tools": [
+            "comm_send_email"
+          ],
+          "retrieved": [
+            "comm_send_email",
+            "analytics_summarize",
+            "comm_send_slack",
+            "comm_schedule_meeting",
+            "comm_read_email"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Deploy to production",
+          "gold_tools": [
+            "devops_deploy"
+          ],
+          "retrieved": [
+            "devops_deploy",
+            "devops_logs",
+            "devops_run_pipeline",
+            "devops_monitor"
+          ],
+          "hit": true
+        },
+        {
+          "name": "SQL query",
+          "gold_tools": [
+            "db_query"
+          ],
+          "retrieved": [
+            "db_query",
+            "devops_logs",
+            "db_delete",
+            "db_update",
+            "db_insert"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Upload to cloud",
+          "gold_tools": [
+            "cloud_upload_storage"
+          ],
+          "retrieved": [
+            "cloud_upload_storage",
+            "web_download",
+            "fs_read_file",
+            "fs_write_file",
+            "github_get_file"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Scrape prices",
+          "gold_tools": [
+            "web_scrape"
+          ],
+          "retrieved": [
+            "web_scrape",
+            "fs_list_directory",
+            "web_download",
+            "web_post",
+            "web_get"
+          ],
+          "hit": true
+        },
+        {
+          "name": "Monitor service",
+          "gold_tools": [
+            "devops_monitor"
+          ],
+          "retrieved": [
+            "devops_monitor",
+            "devops_run_pipeline",
+            "devops_logs",
+            "devops_deploy"
+          ],
+          "hit": true
+        }
+      ],
+      "strategies": {
+        "all-tools": {
+          "tools_in_context": 35,
+          "avg_schema_tokens": 3857,
+          "recall": 1.0
+        },
+        "retrieval": {
+          "tools_in_context": 5,
+          "avg_schema_tokens": 516.6,
+          "recall": 1.0
+        }
+      }
+    },
+    "scaling": [
+      {
+        "num_tools": 35,
+        "all_tools_tokens": 3857,
+        "retrieval_tokens": 516.6,
+        "retrieval_recall": 1.0
+      },
+      {
+        "num_tools": 50,
+        "all_tools_tokens": 5342,
+        "retrieval_tokens": 521.7,
+        "retrieval_recall": 1.0
+      },
+      {
+        "num_tools": 100,
+        "all_tools_tokens": 10292,
+        "retrieval_tokens": 521.7,
+        "retrieval_recall": 1.0
+      },
+      {
+        "num_tools": 200,
+        "all_tools_tokens": 20258,
+        "retrieval_tokens": 521.7,
+        "retrieval_recall": 1.0
+      },
+      {
+        "num_tools": 400,
+        "all_tools_tokens": 40258,
+        "retrieval_tokens": 521.7,
+        "retrieval_recall": 1.0
+      }
+    ]
+  }
+}

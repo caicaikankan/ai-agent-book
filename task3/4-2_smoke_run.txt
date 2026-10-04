@@ -1,0 +1,11 @@
+﻿.\.venv-mcp2\Scripts\python.exe : 2026-09-25 11:31:13,528 - root - INFO - Starting Perception Tools MCP server!
+At line:15 char:4382
++ ... pgrep\bin'; .\.venv-mcp2\Scripts\python.exe smoke_test_mcp_v2.py > "d ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-09-25 11:3...ols MCP server!:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-09-25 11:31:13,551 - root - INFO - 📖 Reading file: D:\ai-agent-book-main\chapter4\perception-tools\requirements.t
+xt
+2026-09-25 11:31:13,551 - root - INFO - ✅ Successfully read file (974 characters)
+MCP smoke test passed: sdk=2.2.0, protocol=2026-07-28, server=perception-tools, tools=127

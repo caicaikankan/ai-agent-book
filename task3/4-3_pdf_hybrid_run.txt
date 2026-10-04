@@ -1,0 +1,10 @@
+﻿Based on the bar chart titled "Acme Corp Quarterly Revenue 2024", we can determine the quarter with the highest revenue by comparing the heights of the bars and their corresponding labels.
+
+- **Q1:** Revenue was $120M.
+- **Q2:** Revenue was $150M.
+- **Q3:** Revenue was $95M.
+- **Q4:** Revenue was $180M.
+
+Comparing these values, $180M is the highest amount.
+
+Therefore, the quarter with the highest revenue was **Q4**, and the exact value was **$180M**.

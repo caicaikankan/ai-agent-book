@@ -1,0 +1,216 @@
+﻿FFFFF................................F.F..F....................... [ 92%]
+.....                                                                    [100%]
+================================== FAILURES ===================================
+_________________________________ test_config _________________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+______________________________ test_timer_tools _______________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_______________________________ test_hitl_tools _______________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+___________________________ test_notification_tools ___________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_____________________________ test_browser_tools ______________________________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+____________ HumanInputTimeoutTests.test_reads_one_available_line _____________
+
+self = <test_run_experiment_4_5.HumanInputTimeoutTests testMethod=test_reads_one_available_line>
+
+    async def test_reads_one_available_line(self) -> None:
+        read_descriptor, write_descriptor = os.pipe()
+        try:
+            os.write(write_descriptor, b"APPROVE: low risk\n")
+            with os.fdopen(read_descriptor, encoding="utf-8") as stream:
+>               line = await read_human_decision_line(stream, 1)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_run_experiment_4_5.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+run_experiment_4_5.py:86: in read_human_decision_line
+    return await asyncio.to_thread(
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+stream = <_io.TextIOWrapper name=11 mode='r' encoding='utf-8'>
+timeout_seconds = 1
+
+    def _readline_before_timeout(stream: Any, timeout_seconds: float) -> str:
+        """Read one byte stream line while ensuring the worker exits by its deadline."""
+        descriptor = stream.fileno()
+        encoding = getattr(stream, "encoding", None) or "utf-8"
+        deadline = time.monotonic() + timeout_seconds
+        data = bytearray()
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError
+>           readable, _, _ = select.select([descriptor], [], [], remaining)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。
+
+run_experiment_4_5.py:72: OSError
+____ HumanInputTimeoutTests.test_times_out_without_leaving_a_blocked_read _____
+
+self = <test_run_experiment_4_5.HumanInputTimeoutTests testMethod=test_times_out_without_leaving_a_blocked_read>
+
+    async def test_times_out_without_leaving_a_blocked_read(self) -> None:
+        read_descriptor, write_descriptor = os.pipe()
+        try:
+            with (
+                os.fdopen(read_descriptor, encoding="utf-8") as stream,
+                self.assertRaisesRegex(
+                    RuntimeError,
+                    "live human decision input timed out after 0.01 seconds",
+                ),
+            ):
+>               await read_human_decision_line(stream, 0.01)
+
+test_run_experiment_4_5.py:238: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+run_experiment_4_5.py:86: in read_human_decision_line
+    return await asyncio.to_thread(
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def _readline_before_timeout(stream: Any, timeout_seconds: float) -> str:
+        """Read one byte stream line while ensuring the worker exits by its deadline."""
+        descriptor = stream.fileno()
+        encoding = getattr(stream, "encoding", None) or "utf-8"
+        deadline = time.monotonic() + timeout_seconds
+        data = bytearray()
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError
+>           readable, _, _ = select.select([descriptor], [], [], remaining)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。
+
+run_experiment_4_5.py:72: OSError
+__________________ TestExcelBasics.test_write_and_read_data ___________________
+
+self = <test_excel_tools.TestExcelBasics object at 0x0000014C5E574290>
+
+    @pytest.mark.asyncio
+    async def test_write_and_read_data(self):
+        """Test writing and reading Excel data."""
+        excel_path = Path(tempfile.mktemp(suffix=".xlsx"))
+    
+        try:
+            # Write data
+            data = {
+                "Sheet1": [
+                    {"name": "Alice", "age": 30, "city": "NYC"},
+                    {"name": "Bob", "age": 25, "city": "LA"}
+                ]
+            }
+    
+            write_result = await write_excel_data(str(excel_path), data, overwrite=True)
+            assert write_result["success"] is True
+    
+            # Read data
+            read_result = await read_excel_data(str(excel_path))
+            assert read_result["success"] is True
+            assert read_result["sheet_count"] >= 1
+    
+            print(f"✅ Write and read: {read_result['sheet_count']} sheets")
+        finally:
+>           excel_path.unlink(missing_ok=True)
+
+test_excel_tools.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/XGY/AppData/Local/Temp/tmp9zmdzjpk.xlsx')
+missing_ok = True
+
+    def unlink(self, missing_ok=False):
+        """
+        Remove this file or link.
+        If the path is a directory, use rmdir() instead.
+        """
+        try:
+>           os.unlink(self)
+E           PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\Users\\XGY\\AppData\\Local\\Temp\\tmp9zmdzjpk.xlsx'
+
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\pathlib.py:1342: PermissionError
+---------------------------- Captured stdout call -----------------------------
+✅ Write and read: 1 sheets
+=========================== short test summary info ===========================
+FAILED test_basic.py::test_config - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED test_basic.py::test_timer_tools - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED test_basic.py::test_hitl_tools - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED test_basic.py::test_notification_tools - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED test_basic.py::test_browser_tools - Failed: async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+FAILED test_run_experiment_4_5.py::HumanInputTimeoutTests::test_reads_one_available_line - OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。
+FAILED test_run_experiment_4_5.py::HumanInputTimeoutTests::test_times_out_without_leaving_a_blocked_read - OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。
+FAILED test_excel_tools.py::TestExcelBasics::test_write_and_read_data - PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\Users\\XGY\\AppData\\Local\\Temp\\tmp9zmdzjpk.xlsx'
+8 failed, 63 passed, 6 subtests passed in 6.35s

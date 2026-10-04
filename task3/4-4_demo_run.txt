@@ -1,0 +1,65 @@
+﻿演示工作区：C:\Users\XGY\AppData\Local\Temp\exec_tools_demo_cx9qncey
+（离线路径，无需 API key；如已配置 key，审批/总结将走真实 LLM）
+
+================================================================
+1. file_write：写入词频统计脚本（自动语法校验）
+================================================================
+结果：success=True, verification=passed
+写入：C:\Users\XGY\AppData\Local\Temp\exec_tools_demo_cx9qncey\wordcount.py
+
+================================================================
+2. file_write：写入含语法错误的代码（linter 应拦截）
+================================================================
+结果：success=False
+校验反馈：Syntax validation failed: Syntax error at line 1: invalid syntax
+
+================================================================
+3. file_write：生成样本数据文件
+================================================================
+结果：success=True，写入 64 字节
+
+================================================================
+4. code_interpreter：运行统计逻辑（Python 沙盒）
+================================================================
+结果：success=True, returncode=0
+stdout:
+  apple: 4
+
+  banana: 3
+
+  cherry: 2
+
+
+
+================================================================
+5. virtual_terminal：用 shell 校验数据文件
+================================================================
+结果：success=True, returncode=0
+stdout:
+  1
+  --- 词数统计完成 ---
+
+
+================================================================
+6. code_interpreter：长输出自动截断并落盘
+================================================================
+上下文中保留的输出行数：102（原始 1000 行）
+完整输出落盘文件：C:\Users\XGY\AppData\Local\Temp\code_interpreter_output_z2q_f_e2.txt
+上下文中输出的尾部片段：
+  line 998: xxxxxxxxxxxxxxxxxxxx
+  line 999: xxxxxxxxxxxxxxxxxxxx
+
+  [如需完整输出，请使用 read_file 工具读取 C:\Users\XGY\AppData\Local\Temp\code_interpreter_output_z2q_f_e2.txt]
+
+================================================================
+7. virtual_terminal：危险命令触发审批
+================================================================
+结果：success=False
+说明：Command execution not approved: Approval check failed: API key not found for provider 'kimi'. Set KIMI_API_KEY or OPENROUTER_API_KEY.
+（审批未通过：危险命令被拦截、未执行。离线无 LLM 时按 fail-safe 拒绝，在线时也可能被真实 LLM 判定为高风险而拒绝。）
+
+================================================================
+演示完成
+================================================================
+覆盖的安全机制：自动 linter 校验、危险命令审批、长输出截断持久化。
+演示产物位于：C:\Users\XGY\AppData\Local\Temp\exec_tools_demo_cx9qncey

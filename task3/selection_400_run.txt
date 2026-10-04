@@ -1,0 +1,62 @@
+﻿
+╔════════════════════════════════════════════════════════════════════════════╗
+║              Active Tool Selection — Strategy Comparison                    ║
+║              Inspired by MCP-Zero (arXiv:2506.01056)                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+================================================================================
+  Offline Strategy Comparison (deterministic, no API)
+================================================================================
+
+Benchmark tasks: 10   Catalog size: 400 tools   Retrieval top-k: 5
+
++-----------------------------+--------------------+-----------------+---------------------------+
+| Strategy                    |   Tools in context |   Schema tokens | Recall (gold reachable)   |
++=============================+====================+=================+===========================+
+| all-tools (dump everything) |                400 |          40,258 | 100%                      |
++-----------------------------+--------------------+-----------------+---------------------------+
+| retrieval (top-5)           |                  5 |             522 | 100%                      |
++-----------------------------+--------------------+-----------------+---------------------------+
+
+=> Retrieval keeps 100% recall while cutting tool-schema tokens by 98.7% (40,258 -> 522).
+
+Per-task retrieval (top-k tools surfaced for each task):
+| Task                 | Gold tool            | Hit   | Retrieved (top-k)                                                                                 |
+|----------------------|----------------------|-------|---------------------------------------------------------------------------------------------------|
+| GitHub repo search   | github_search_repos  | ✓     | github_search_repos, analytics_predict, cloud_create_vm, github_get_file, github_create_issue     |
+| Read config file     | fs_read_file         | ✓     | fs_read_file, github_get_file, web_download, fs_write_file, comm_read_email                       |
+| List directory       | fs_list_directory    | ✓     | fs_list_directory, fs_delete_file, github_list_issues, cloud_upload_storage, cloud_list_resources |
+| Summary statistics   | analytics_summarize  | ✓     | analytics_summarize, analytics_correlation, analytics_predict, analytics_visualize                |
+| Send email           | comm_send_email      | ✓     | comm_send_email, analytics_summarize, comm_send_slack, comm_schedule_meeting, comm_read_email     |
+| Deploy to production | devops_deploy        | ✓     | devops_deploy, devops_logs, devops_run_pipeline, devops_monitor                                   |
+| SQL query            | db_query             | ✓     | db_query, devops_logs, db_delete, db_update, db_insert                                            |
+| Upload to cloud      | cloud_upload_storage | ✓     | cloud_upload_storage, web_download, fs_read_file, fs_write_file, github_get_file                  |
+| Scrape prices        | web_scrape           | ✓     | web_scrape, fs_list_directory, web_download, web_post, web_get                                    |
+| Monitor service      | devops_monitor       | ✓     | devops_monitor, svc2_op4, svc2_op3, svc2_op2, svc2_op1                                            |
+
+================================================================================
+  Scaling: token cost as the catalog grows
+================================================================================
+
++-----------------+--------------------+---------------------------+--------------------+
+|   Catalog tools |   all-tools tokens |   retrieval(top-5) tokens | retrieval recall   |
++=================+====================+===========================+====================+
+|             400 |             40,258 |                       522 | 100%               |
++-----------------+--------------------+---------------------------+--------------------+
+
+=> all-tools token cost grows with the catalog; retrieval stays roughly flat.
+
+[offline mode] 跳过所有需要 API 的评测。
+
+结果已写入 d:\ai-agent-book\task3\selection_400.json
+
+================================================================================
+  Takeaway
+================================================================================
+
+当工具数量增长到上百个时，把全部工具塞进上下文既浪费 token 又干扰决策；
+按需检索把"工具选择"问题转化为"知识检索"问题——在保持召回率的同时
+把工具描述的 token 成本压到很低，也减少了模型的选择错误。
+
+参考：MCP-Zero 论文 (https://arxiv.org/pdf/2506.01056)

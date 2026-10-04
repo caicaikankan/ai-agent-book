@@ -1,0 +1,154 @@
+﻿============================================================================================
+离线机制自检模式：本地哈希嵌入 + 脚本化 mock 模型（无需 API key）。
+  · token / 延迟为真实测量；准确率仅反映启发式路由，不代表真实模型能力。
+  · 观察点：三种策略的 token 差距，以及『检索预筛选一次性匹配』的结构性漏工具。
+============================================================================================
+[discovery] 正在用 local-hash-512 为 126 个工具生成嵌入向量 ...
+模型: mock-offline  |  嵌入: local-hash-512  |  工具库: 126 个  |  任务数: 8  |  策略: ['全量注入', '检索预筛选', '主动发现']
+
+============================================================================================
+任务 [finance+news]: 苹果公司最近股价怎么样？帮我看看有没有相关新闻能解释一下原因。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.04s
+           调用轨迹: ['get_stock_price', 'search_news']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入   1022 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['get_top_headlines', 'get_news_by_source', 'search_news', 'get_stock_price', 'get_stock_history', 'web_search', 'get_company_financials', 'get_dividend_history', 'convert_document', 'get_horoscope']
+           调用轨迹: ['get_stock_price', 'search_news']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[主动发现] 注入   1019 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='查询某股票的实时价格与涨跌幅' -> ['get_crypto_price', 'get_stock_price', 'get_traffic_info', 'get_analyst_ratings']
+           [discover_tools] need='按关键词检索相关的最新新闻' -> ['search_news', 'github_search_code', 'get_news_by_source', 'google_search']
+           发现并加载: ['get_analyst_ratings', 'get_crypto_price', 'get_news_by_source', 'get_stock_price', 'get_traffic_info', 'github_search_code', 'google_search', 'search_news']
+           调用轨迹: ['discover_tools', 'get_stock_price', 'discover_tools', 'search_news']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [arxiv+download]: 我想看看 transformer 领域最新的研究论文，帮我找几篇最新的，并把排在前三的下载下来。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['arxiv_search', 'download_file']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入    997 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['arxiv_get_paper', 's3_download', 'get_citations', 'google_search', 'bing_search', 'arxiv_search', 'get_news_by_source', 'download_file', 'universal_search', 'get_stock_history']
+           调用轨迹: ['arxiv_search', 'download_file']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[主动发现] 注入   1084 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='在学术论文库检索最新论文' -> ['semantic_scholar_search', 'arxiv_search', 'search_pubmed', 'search_news']
+           [discover_tools] need='从 URL 下载文件保存到本地' -> ['download_file', 's3_download', 'upload_file', 'delete_file']
+           发现并加载: ['arxiv_search', 'delete_file', 'download_file', 's3_download', 'search_news', 'search_pubmed', 'semantic_scholar_search', 'upload_file']
+           调用轨迹: ['discover_tools', 'arxiv_search', 'discover_tools', 'download_file']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [github+viz]: 帮我看看 pytorch/pytorch 这个仓库都有谁贡献最多，最好能画个各人提交量的图表。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['github_list_contributors', 'render_chart']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入   1069 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['github_get_commits', 'github_list_contributors', 'ask_knowledge_base', 'universal_search', 'render_chart', 'get_stock_price', 'get_stock_history', 'get_dividend_history', 'quick_answer', 'github_get_repo']
+           调用轨迹: ['github_list_contributors', 'render_chart']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[主动发现] 注入   1166 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='获取 GitHub 仓库的贡献者提交统计' -> ['github_get_commits', 'github_list_contributors', 'github_get_repo', 'github_get_pull_requests']
+           [discover_tools] need='根据数据渲染可视化图表' -> ['render_chart', 'code_interpreter', 'insert_record', 'get_recipe']
+           发现并加载: ['code_interpreter', 'get_recipe', 'github_get_commits', 'github_get_pull_requests', 'github_get_repo', 'github_list_contributors', 'insert_record', 'render_chart']
+           调用轨迹: ['discover_tools', 'github_list_contributors', 'discover_tools', 'render_chart']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [weather+calendar]: 这周日北京天气怎么样？要是晴天的话，帮我在日历里记一个'户外徒步'的活动。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['get_weather_forecast', 'create_calendar_event']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入   1087 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['create_calendar_event', 'get_current_weather', 'list_calendar_events', 'quick_answer', 'get_weather_forecast', 'get_top_headlines', 'web_search', 'github_list_contributors', 'github_get_commits', 'get_earnings_calendar']
+           调用轨迹: ['get_weather_forecast', 'create_calendar_event']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[主动发现] 注入   1070 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='查询某城市未来若干天的天气预报' -> ['get_weather_forecast', 'get_current_weather', 'get_holidays', 'get_traffic_info']
+           [discover_tools] need='在日历上创建一个事件' -> ['create_calendar_event', 'compress_files', 'list_calendar_events', 'generate_uuid']
+           发现并加载: ['compress_files', 'create_calendar_event', 'generate_uuid', 'get_current_weather', 'get_holidays', 'get_traffic_info', 'get_weather_forecast', 'list_calendar_events']
+           调用轨迹: ['discover_tools', 'get_weather_forecast', 'discover_tools', 'create_calendar_event']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [forex+weather]: 100 美元现在能换多少日元？顺便告诉我东京现在的天气怎么样。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['get_forex_rate', 'get_current_weather']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入   1043 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['list_calendar_events', 'get_weather_forecast', 'get_current_weather', 'search_pubmed', 'video_summarize', 'create_calendar_event', 'send_slack_message', 'quick_answer', 'arxiv_get_paper', 'convert_currency']
+           调用轨迹: ['get_current_weather']
+           判定: ❌ 出错（1/2 能力槽位命中｜漏用: ['get_forex_rate']）
+[主动发现] 注入   1085 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='查询两种法定货币的外汇汇率' -> ['get_forex_rate', 'convert_currency', 'currency_list', 'get_crypto_price']
+           [discover_tools] need='查询某城市的实时天气' -> ['get_current_weather', 'get_traffic_info', 'get_flight_status', 'get_holidays']
+           发现并加载: ['convert_currency', 'currency_list', 'get_crypto_price', 'get_current_weather', 'get_flight_status', 'get_forex_rate', 'get_holidays', 'get_traffic_info']
+           调用轨迹: ['discover_tools', 'get_forex_rate', 'discover_tools', 'get_current_weather']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [crypto+news]: 以太坊现在多少钱一个？另外有什么最新的相关消息吗？
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['get_crypto_price', 'search_news']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+[检索预筛选] 注入   1043 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['get_stock_price', 'google_search', 'bing_search', 'get_news_by_source', 'get_stock_history', 'search_news', 'get_weather_forecast', 'github_search_code', 'search_places', 'create_calendar_event']
+           调用轨迹: ['search_news']
+           判定: ❌ 出错（1/2 能力槽位命中｜漏用: ['get_crypto_price']）
+[主动发现] 注入   1004 tokens （暴露 11 个工具）  延迟  0.01s
+           [discover_tools] need='查询加密货币的实时价格' -> ['get_crypto_price', 'get_traffic_info', 'get_gas_price', 'get_commodity_price']
+           [discover_tools] need='按关键词检索相关的最新新闻' -> ['search_news', 'github_search_code', 'get_news_by_source', 'google_search']
+           发现并加载: ['get_commodity_price', 'get_crypto_price', 'get_gas_price', 'get_news_by_source', 'get_traffic_info', 'github_search_code', 'google_search', 'search_news']
+           调用轨迹: ['discover_tools', 'get_crypto_price', 'discover_tools', 'search_news']
+           判定: ✅ 精确选对（2/2 能力槽位命中）
+
+============================================================================================
+任务 [opinion(诱导)]: 帮我了解一下特斯拉这家公司最近的新闻舆论风向。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['search_news']
+           判定: ✅ 精确选对（1/1 能力槽位命中）
+[检索预筛选] 注入    965 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['get_stock_history', 'get_nft_metadata', 'get_news_by_source', 'get_top_headlines', 'get_earnings_calendar', 'github_get_commits', 'get_company_financials', 'summarize_article', 'google_search', 'bing_search']
+           调用轨迹: []
+           判定: ❌ 出错（0/1 能力槽位命中｜漏用: ['search_news']）
+[主动发现] 注入    660 tokens （暴露 7 个工具）  延迟  0.01s
+           [discover_tools] need='按关键词检索相关的最新新闻' -> ['search_news', 'github_search_code', 'get_news_by_source', 'google_search']
+           发现并加载: ['get_news_by_source', 'github_search_code', 'google_search', 'search_news']
+           调用轨迹: ['discover_tools', 'search_news']
+           判定: ✅ 精确选对（1/1 能力槽位命中）
+
+============================================================================================
+任务 [academic(诱导)]: 帮我了解一下最近'量子计算'方面有什么新的科研进展。
+--------------------------------------------------------------------------------------------
+[全量注入] 注入  11630 tokens （暴露 126 个工具）  延迟  0.00s
+           调用轨迹: ['arxiv_search']
+           判定: ✅ 精确选对（1/1 能力槽位命中）
+[检索预筛选] 注入   1010 tokens （暴露 10 个工具）  延迟  0.01s
+           预筛选命中: ['get_nft_metadata', 'get_distance', 'get_news_by_source', 'get_timezone', 'get_current_time', 'get_market_index', 'get_stock_history', 'scrape_webpage', 'get_top_headlines', 'get_reddit_posts']
+           调用轨迹: []
+           判定: ❌ 出错（0/1 能力槽位命中｜漏用: ['arxiv_search']）
+[主动发现] 注入    708 tokens （暴露 7 个工具）  延迟  0.01s
+           [discover_tools] need='在学术论文库检索最新论文' -> ['semantic_scholar_search', 'arxiv_search', 'search_pubmed', 'search_news']
+           发现并加载: ['arxiv_search', 'search_news', 'search_pubmed', 'semantic_scholar_search']
+           调用轨迹: ['discover_tools', 'arxiv_search']
+           判定: ✅ 精确选对（1/1 能力槽位命中）
+
+============================================================================================
+汇总对比（『精确选对』= 覆盖全部能力槽位 且 未错选通用兜底工具）
+============================================================================================
+策略                  精确选对      任务完成       平均注入token      总注入token     平均延迟(s)
+--------------------------------------------------------------------------------------------
+全量注入               8/8       8/8           11630         93040       0.008
+检索预筛选              4/8       4/8            1030          8236       0.005
+主动发现               8/8       8/8             974          7796       0.009
+--------------------------------------------------------------------------------------------
+注入 token：全量注入 93040 vs 主动发现 7796，平均每任务精简约 11.9 倍。
+
+结构化结果已写入: d:\ai-agent-book\task3\4-1_offline.json

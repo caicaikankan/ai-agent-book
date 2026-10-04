@@ -1,0 +1,53 @@
+================================================================================
+MULTIMODAL AGENT DEMO
+================================================================================
+
+================================================================================
+COMPARING EXTRACTION MODES
+File: test_files/sample_chart.png
+Query: Which quarter had the highest revenue, and what was the exact value?
+================================================================================
+
+
+------------------------------------------------------------
+1. NATIVE MULTIMODAL MODE (qwen-vl)
+------------------------------------------------------------
+Based on the bar chart titled "Acme Corp Quarterly Revenue 2024", we can determine the revenue for each quarter by reading the values labeled on top of each bar:
+
+- **Q1:** $120M
+- **Q2:** $150M
+- **Q3:** $95M
+- **Q4:** $180M
+
+Comparing these values, $180M is the highest.
+
+Therefore, the quarter with the highest revenue was **Q4**, with an exact value of **$180M**.
+
+------------------------------------------------------------
+2. EXTRACT TO TEXT MODE
+------------------------------------------------------------
+Extracting content to text...
+
+Extracted text:
+This is a vertical bar chart titled "Acme Corp Quarterly Revenue 2024," which displays the company's revenue for each quarter of the year 2024.
+
+The chart's vertical y-axis is labeled "Revenue (in $M)" and is scaled from 0 to 200, with major gridlines and tick marks at intervals of 25 (0, 25, 50, 75, 100, 125, 150, 175, 200). The horizontal x-axis represents the four quarters of the year, labeled Q1, Q2, Q3, and Q4.
+
+Each quarter is represented by a colored bar with its corresponding revenue value explicitly labeled on top:
+
+- **Q1 (Blue Bar):** Revenue is $120M.
+- **Q2 (Green Bar):** Revenue is $150M.
+- **Q3 (Red Bar):** Revenue is $95M.
+- **Q4 (Purple Bar):** Revenue is $180M.
+
+The chart visually demonstrates a fluctuating revenue trend throughout the year. Revenue increased from Q1 to Q2, then decreased in Q3, and saw the largest increase from Q3 to Q4, reaching the highest point of the year in the final quarter.
+
+Answering query with extracted text...
+**Q4** had the highest revenue, with an exact value of **$180M**.
+
+------------------------------------------------------------
+3. EXTRACT TO TEXT + MULTIMODAL TOOLS
+------------------------------------------------------------
+Using extract-to-text with tools enabled for follow-up questions...
+Extracted 1533 characters
+Error: [Errno 2] No such file or directory: 'Acme_Corp_Quarterly_Revenue_2024.png'

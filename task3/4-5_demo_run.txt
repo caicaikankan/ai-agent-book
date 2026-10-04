@@ -1,0 +1,124 @@
+﻿uv : Failed to send admin notification
+At line:15 char:3498
++ ... pgrep\bin'; uv run python main.py demo > "d:\ai-agent-book\task3\4-5_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Failed to send admin notification:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Failed to send admin notification
+==========================================================================
+端到端协作演示：客服协调 Agent 处理一笔退款
+（子 Agent 执行模式：离线模拟（未配置 OPENAI_API_KEY））
+==========================================================================
+
+[步骤 1/3] 委派子 Agent 审批退款，并对比两种上下文传递策略
+--------------------------------------------------------------------------
+（提示：未配置 OPENAI_API_KEY，子 Agent 的执行与 llm_generated 策略
+  会返回错误，仅用于展示接口与上下文构建；配置 Key 后可看到真实结果。）
+==========================================================================
+子 Agent 上下文传递策略对比 (minimal vs llm_generated)
+==========================================================================
+
+共同子任务: 根据用户情况，判断这笔退款是否可以自动批准，并给出理由。
+
+--------------------------------------------------------------------------
+策略: minimal
+--------------------------------------------------------------------------
+传给子 Agent 的上下文:
+    [FROM_MAIN_AGENT] 子任务：根据用户情况，判断这笔退款是否可以自动批准，并给出理由。
+    [FROM_MAIN_AGENT] 手动挑选的必要信息：{"business_rules": "7 天内、金额 < 500 元、gold 会员可自动批准退款。"}
+
+  上下文 token 数 (传入子 Agent): 86
+  额外准备开销 prep_tokens (LLM 生成上下文时的调用): 0
+  子 Agent 首轮 prompt_tokens (实际计费上下文): 0
+  是否泄漏支付卡号: 否
+
+  子 Agent 结果:
+    {"status": "done", "result": "[离线模拟] 已按角色「负责退款审批的客服助手 Agent」接收子任务，移交上下文约 86 tokens；未配置 OPENAI_API_KEY，此为占位结论（非真实模型输出）。", "missing": ""}
+
+--------------------------------------------------------------------------
+策略: llm_generated
+--------------------------------------------------------------------------
+传给子 Agent 的上下文:
+    [FROM_MAIN_AGENT] 子任务：根据用户情况，判断这笔退款是否可以自动批准，并给出理由。
+    [FROM_MAIN_AGENT] 由规则式离线摘要生成的移交上下文（未调用 LLM）：
+    {
+    "user_profile": {
+    "name": "张伟",
+    "region": "中国大陆",
+    "vip_level": "gold"
+    },
+    "conversation": [
+    {
+    "role": "user",
+    "content": "你好，我上周买的耳机坏了，想退款。"
+    },
+    {
+    "role": "assistant",
+    "content": "了解，请问订单号是多少？"
+    },
+    {
+    "role": "user",
+    "content": "订单号 A12345，金额 299 元，7 天内。"
+    },
+    {
+    "role": "assistant",
+    "content": "好的，我帮您核实退款政策。"
+    },
+    {
+    "role": "user",
+    "content": "顺便闲聊一句，最近天气真热。"
+    }
+    ],
+    "payment_info": {
+    },
+    "business_rules": "7 天内、金额 < 500 元、gold 会员可自动批准退款。"
+    }
+
+  上下文 token 数 (传入子 Agent): 291
+  额外准备开销 prep_tokens (LLM 生成上下文时的调用): 0
+  子 Agent 首轮 prompt_tokens (实际计费上下文): 0
+  是否泄漏支付卡号: 否
+
+  子 Agent 结果:
+    {"status": "done", "result": "[离线模拟] 已按角色「负责退款审批的客服助手 Agent」接收子任务，移交上下文约 291 tokens；未配置 OPENAI_API_KEY，此为占位结论（非真实模型输出）。", "missing": ""}
+
+==========================================================================
+对比小结
+==========================================================================
+  minimal        上下文    86 tok | 额外准备     0 tok | 泄漏隐私: False
+  llm_generated  上下文   291 tok | 额外准备     0 tok | 泄漏隐私: False
+
+  结论: minimal 最省 token、零额外调用、天然不泄漏隐私，但信息可能不足；
+        llm_generated 多花一次 LLM 调用换取更充分且经隐私过滤的上下文。
+
+[步骤 2/3] 大额操作触发 HITL：向管理员请求批准（含超时与默认行为）
+--------------------------------------------------------------------------
+→ 场景 A：管理员在超时前批准（后台模拟应答）
+{
+  "success": true,
+  "approved": true,
+  "request_id": "197f6a7f-3dfe-4af8-8f5d-43a488d219be",
+  "admin_notes": "核对无误，同意退款",
+  "message": "Request approved by administrator"
+}
+
+→ 场景 B：管理员未及时响应，触发超时与保守默认（不批准）
+{
+  "success": true,
+  "approved": false,
+  "request_id": "0821049e-ed98-4373-bf14-d5ba7e87623a",
+  "timeout": true,
+  "message": "Admin response timeout after 2 seconds"
+}
+
+[步骤 3/3] 多渠道通知协作者处理结果
+--------------------------------------------------------------------------
+  [email   ] 未发送（No email service configured）：退款工单 A12345：子 Agent 审批通过，管理员已确认，已放款。
+  [slack   ] 未发送（Slack webhook URL not configured）：退款工单 A12345：子 Agent 审批通过，管理员已确认，已放款。
+  [telegram] 未发送（Telegram bot token not configured）：退款工单 A12345：子 Agent 审批通过，管理员已确认，已放款。
+
+==========================================================================
+演示结束。真实发送通知/邮件需在 .env 配置对应渠道凭据；
+子 Agent 的真实 LLM 执行与 llm_generated 策略需配置 OPENAI_API_KEY。
+==========================================================================
