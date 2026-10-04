@@ -1,0 +1,43 @@
+﻿生成 bge-m3 向量 …
+  doc (300, 1024), query (20, 1024), 3.3s
+RP-forest (ANNOY 类) …
+  recall@10=0.990 build=69.7ms
+HNSW (usearch) …
+  recall@10=1.000 build=5.1ms
+{
+  "embedding_ms": 3340.578,
+  "rpforest": {
+    "build_ms": 69.672,
+    "recall_at_k": 0.99,
+    "query_latency_ms": {
+      "mean": 0.3657439979724586,
+      "p50": 0.3664999967440963,
+      "p95": 0.41797992307692766
+    },
+    "serialized_bytes": 15136512,
+    "incremental_update": {
+      "items_added": 60,
+      "latency_ms": 114.014,
+      "requires_full_rebuild": true,
+      "recall_at_k_after_update": 1.0
+    }
+  },
+  "hnsw": {
+    "build_ms": 5.08,
+    "recall_at_k": 1.0,
+    "query_latency_ms": {
+      "mean": 0.03400399815291166,
+      "p50": 0.03235001349821687,
+      "p95": 0.03653504536487162
+    },
+    "serialized_bytes": 1017712,
+    "incremental_update": {
+      "items_added": 60,
+      "latency_ms": 3.862,
+      "requires_full_rebuild": false,
+      "recall_at_k_after_update": 1.0
+    }
+  }
+}
+
+已写入 D:\ai-agent-book\task2\3-4_benchmark.json

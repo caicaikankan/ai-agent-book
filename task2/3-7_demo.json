@@ -1,0 +1,15 @@
+{
+  "queries": [
+    "运行 ADDPS 指令前，操作系统必须把哪个控制寄存器位置 1？",
+    "SSE 与 AVX 使用的向量寄存器有什么区别？",
+    "概述一下 x86 的 SIMD 指令集"
+  ],
+  "multi_hop": {
+    "query": "运行 ADDPS 指令前，操作系统必须把哪个控制寄存器位置 1？",
+    "start": "ADDPS",
+    "paths": [
+      "ADDPS --属于--> SSE --需要启用--> CR4.OSFXSR",
+      "ADDPS --属于--> SSE --要求清零--> CR0.EM"
+    ]
+  }
+}

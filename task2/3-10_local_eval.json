@@ -1,0 +1,95 @@
+{
+  "description": "3-10 本地 13 块语料对齐评测集（gold 经特征短句映射自官方 retrieval_eval.json）",
+  "queries": [
+    {
+      "id": "q01",
+      "query": "宪法是哪一年通过的？后来经过了几次修正？",
+      "gold_chunk_id": "宪法_chunk_0",
+      "author_gold_chunk_id": "宪法_chunk_0"
+    },
+    {
+      "id": "q02",
+      "query": "国家的根本任务是什么？",
+      "gold_chunk_id": "宪法_chunk_0",
+      "author_gold_chunk_id": "宪法_chunk_1"
+    },
+    {
+      "id": "q03",
+      "query": "我国处理民族关系的基本原则和对外政策中的五项原则是什么？",
+      "gold_chunk_id": "宪法_chunk_1",
+      "author_gold_chunk_id": "宪法_chunk_2"
+    },
+    {
+      "id": "q04",
+      "query": "少数民族聚居的地方如何实行区域自治？",
+      "gold_chunk_id": "宪法_chunk_1",
+      "author_gold_chunk_id": "宪法_chunk_3"
+    },
+    {
+      "id": "q05",
+      "query": "宪法如何保护个体经济、私营经济等非公有制经济？",
+      "gold_chunk_id": "宪法_chunk_2",
+      "author_gold_chunk_id": "宪法_chunk_4"
+    },
+    {
+      "id": "q06",
+      "query": "宪法关于设立特别行政区以及在华外国人权利的规定是什么？",
+      "gold_chunk_id": "宪法_chunk_3",
+      "author_gold_chunk_id": "宪法_chunk_6"
+    },
+    {
+      "id": "q07",
+      "query": "公民对国家机关工作人员的违法失职行为享有哪些监督权利？",
+      "gold_chunk_id": "宪法_chunk_3",
+      "author_gold_chunk_id": "宪法_chunk_7"
+    },
+    {
+      "id": "q08",
+      "query": "全国人民代表大会常务委员会有哪些职权？",
+      "gold_chunk_id": "宪法_chunk_4",
+      "author_gold_chunk_id": "宪法_chunk_10"
+    },
+    {
+      "id": "q09",
+      "query": "国家主席有哪些职权？",
+      "gold_chunk_id": "宪法_chunk_5",
+      "author_gold_chunk_id": "宪法_chunk_12"
+    },
+    {
+      "id": "q10",
+      "query": "地方各级人民代表大会的任期和代表选举方式是怎样规定的？",
+      "gold_chunk_id": "宪法_chunk_6",
+      "author_gold_chunk_id": "宪法_chunk_14"
+    },
+    {
+      "id": "q11",
+      "query": "县级以上地方各级人民代表大会常务委员会组成人员有什么兼职限制？",
+      "gold_chunk_id": "宪法_chunk_6",
+      "author_gold_chunk_id": "宪法_chunk_15"
+    },
+    {
+      "id": "q12",
+      "query": "监察委员会的性质、组成和任期是怎样规定的？",
+      "gold_chunk_id": "宪法_chunk_8",
+      "author_gold_chunk_id": "宪法_chunk_17"
+    },
+    {
+      "id": "q13",
+      "query": "检察官法是什么时候修订的？",
+      "gold_chunk_id": "检察官法_2019_04_23_chunk_0",
+      "author_gold_chunk_id": "检察官法_2019_04_23_chunk_0"
+    },
+    {
+      "id": "q14",
+      "query": "检察官遴选委员会由哪些人员组成？律师参加公开选拔需要什么条件？",
+      "gold_chunk_id": "检察官法_2019_04_23_chunk_2",
+      "author_gold_chunk_id": "检察官法_2019_04_23_chunk_2"
+    },
+    {
+      "id": "q15",
+      "query": "检察官在哪些情形下应当予以免职？",
+      "gold_chunk_id": "检察官法_2019_04_23_chunk_2",
+      "author_gold_chunk_id": "检察官法_2019_04_23_chunk_3"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "test_id": "layer2_01_multiple_vehicles",
+  "question": "I need to schedule service for my car. Can you tell me what services I have scheduled?",
+  "num_sessions": 2,
+  "num_chunks": 6,
+  "top_k": 3,
+  "naive": {
+    "num_queries": 1,
+    "num_retrieved": 3,
+    "coverage": {
+      "本田已确认预约(FS-447291)": false,
+      "特斯拉Model 3作为第二辆车存在": true
+    },
+    "recall": 0.5
+  },
+  "agentic": {
+    "num_queries": 5,
+    "num_retrieved": 5,
+    "coverage": {
+      "本田已确认预约(FS-447291)": true,
+      "特斯拉Model 3作为第二辆车存在": true
+    },
+    "recall": 1.0,
+    "trace": [
+      {
+        "query": "I need to schedule service for my car. Can you tell me what services I have scheduled?",
+        "hits": [
+          "layer2_01_multiple_vehicles_auto_service_001_bb3f4d906a15",
+          "layer2_01_multiple_vehicles_auto_insurance_001_43b7c0ba546d",
+          "layer2_01_multiple_vehicles_auto_service_001_390cf406d83a"
+        ]
+      },
+      {
+        "query": "Honda service appointment scheduled",
+        "hits": [
+          "layer2_01_multiple_vehicles_auto_service_001_d681caad725c",
+          "layer2_01_multiple_vehicles_auto_service_001_390cf406d83a",
+          "layer2_01_multiple_vehicles_auto_service_001_bb3f4d906a15"
+        ]
+      },
+      {
+        "query": "Tesla service appointment scheduled",
+        "hits": [
+          "layer2_01_multiple_vehicles_auto_service_001_d681caad725c",
+          "layer2_01_multiple_vehicles_auto_service_001_390cf406d83a",
+          "layer2_01_multiple_vehicles_auto_insurance_001_fecfa473bd7a"
+        ]
+      },
+      {
+        "query": "Honda Accord service appointment scheduled",
+        "hits": [
+          "layer2_01_multiple_vehicles_auto_service_001_d681caad725c",
+          "layer2_01_multiple_vehicles_auto_service_001_390cf406d83a",
+          "layer2_01_multiple_vehicles_auto_service_001_bb3f4d906a15"
+        ]
+      },
+      {
+        "query": "Tesla Model service appointment scheduled",
+        "hits": [
+          "layer2_01_multiple_vehicles_auto_service_001_d681caad725c",
+          "layer2_01_multiple_vehicles_auto_service_001_390cf406d83a",
+          "layer2_01_multiple_vehicles_auto_insurance_001_43b7c0ba546d"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+﻿🎯 离线规则脱敏演示 (regex 模式，无需 Ollama)
+============================================================
+共 5 个代表性样本，覆盖密钥 / 令牌 / 私钥 / PII 等类别
+
+
+================================================================
+样本: 工具调用日志 (HTTP 请求/响应)  （命中 4 处敏感信息）
+================================================================
+--- 脱敏前 (BEFORE) ---
+[2024-05-12 09:14:22] TOOL_CALL http_request
+  url: https://api.example.com/v1/users/8842
+  headers: {"Authorization": "Bearer sk-proj-ABCD1234efgh5678IJKL9012mnop3456qrst", "X-Api-Key": "AIzaSyD-EXAMPLEfakeKEY1234567890abcdef12"}
+  response: {"user_id": 8842, "email": "alice.wang@example.com", "phone": "13912345678"}
+
+--- 脱敏后 (AFTER) ---
+[2024-05-12 09:14:22] TOOL_CALL http_request
+  url: https://api.example.com/v1/users/8842
+  headers: {"Authorization": "Bearer [REDACTED_API_KEY]", "X-Api-Key": "[REDACTED_SECRET]"}
+  response: {"user_id": 8842, "email": "[REDACTED_EMAIL]", "phone": "[REDACTED_PHONE]"}
+
+--- 命中明细 ---
+   [API Key (sk-)] sk-proj-ABCD1234efgh5678IJKL9012mnop3456qrst  ->  [REDACTED_API_KEY]
+   [口令 / 密钥赋值] AIzaSyD-EXAMPLEfakeKEY1234567890abcdef12  ->  [REDACTED_SECRET]
+   [邮箱地址] alice.wang@example.com  ->  [REDACTED_EMAIL]
+   [手机号] 13912345678  ->  [REDACTED_PHONE]
+
+================================================================
+样本: 客服对话 (PII 泄露)  （命中 3 处敏感信息）
+================================================================
+--- 脱敏前 (BEFORE) ---
+USER: 你好，我要办理报销，我的身份证号是 11010119900307721X，手机号 13800138000。
+ASSISTANT: 好的，请再提供一下银行卡号以便核对。
+USER: 卡号是 4111 1111 1111 1111，另外我的美国社保号是 123-45-6789。
+ASSISTANT: 收到，我这就为您登记。
+
+--- 脱敏后 (AFTER) ---
+USER: 你好，我要办理报销，我的身份证号是 11010119900307721X，手机号 [REDACTED_PHONE]。
+ASSISTANT: 好的，请再提供一下银行卡号以便核对。
+USER: 卡号是 [REDACTED_CREDIT_CARD]，另外我的美国社保号是 [REDACTED_SSN]。
+ASSISTANT: 收到，我这就为您登记。
+
+--- 命中明细 ---
+   [手机号] 13800138000  ->  [REDACTED_PHONE]
+   [信用卡号] 4111 1111 1111 1111  ->  [REDACTED_CREDIT_CARD]
+   [美国社保号(SSN)] 123-45-6789  ->  [REDACTED_SSN]
+
+================================================================
+样本: 数据库连接报错 (凭据泄露)  （命中 4 处敏感信息）
+================================================================
+--- 脱敏前 (BEFORE) ---
+[ERROR] db.connect failed after 3 retries
+  dsn: postgres://admin:S3cr3t_P4ssw0rd@db.internal:5432/prod
+  fallback_config: {"db_password": "hunter2xyz", "aws_access_key_id": "AKIAIOSFODNN7EXAMPLE"}
+  host_ip: 192.168.10.24
+
+--- 脱敏后 (AFTER) ---
+[ERROR] db.connect failed after 3 retries
+  dsn: postgres://admin:[REDACTED_URL_CRED]@db.internal:5432/prod
+  fallback_config: {"db_password": "[REDACTED_SECRET]", "aws_access_key_id": "[REDACTED_AWS_KEY]"}
+  host_ip: [REDACTED_IP]

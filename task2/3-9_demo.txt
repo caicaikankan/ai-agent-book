@@ -1,0 +1,79 @@
+﻿┌──────────────────────────────────────────────────────────────────────┐
+│ 实验 3-9 离线演示                                                    │
+│ 智能体化记忆检索 vs. 朴素单次检索（本地 BM25，无需 API / port 4242） │
+└──────────────────────────────────────────────────────────────────────┘
+python.exe : INFO:chunker:Initialized chunker with strategy: ChunkingStrategy.FIXED_ROUNDS
+At line:15 char:4382
++ ... pgrep\bin'; & D:\ai-agent-book-main\.venv\Scripts\python.exe offline_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO:chunker:In...gy.FIXED_ROUNDS:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+INFO:chunker:Rounds per chunk: 20
+INFO:chunker:Overlap rounds: 2
+INFO:chunker:Processing conversation auto_insurance_001 with 50 rounds
+INFO:chunker:Created 3 chunks for conversation auto_insurance_001
+INFO:chunker:Processing conversation auto_service_001 with 47 rounds
+INFO:chunker:Created 3 chunks for conversation auto_service_001
+INFO:chunker:Chunked test case layer2_01_multiple_vehicles: 6 total chunks
+INFO:indexer:Using built-in local BM25 backend (offline mode, no port 4242 needed)
+INFO:indexer:Initialized indexer with mode: IndexMode.HYBRID
+INFO:indexer:Indexed 6 documents into local BM25 backend
+INFO:indexer:Added 6 chunks to index. Total chunks: 6
+
+用例: Multiple Vehicle Services - Disambiguation Required
+用户问题: I need to schedule service for my car. Can you tell me what services 
+I have scheduled?
+跨会话记忆: 共 2 个历史会话，切分为 6 个记忆块（每块 20 轮）
+  • 会话 auto_insurance_001（State Farm Insurance / Auto Insurance）：3 块
+  • 会话 auto_service_001（Firestone Auto Care / Service Scheduling）：3 块
+
+策略 A · 朴素单次检索（baseline）
+INFO:indexer:Search returned 3 results from local BM25 backend
+  单次查询命中 3 块: auto_service_001#1-20, auto_insurance_001#1-20, 
+auto_service_001#19-38
+
+策略 B · 智能体化多轮检索（memory-RAG）
+INFO:indexer:Search returned 3 results from local BM25 backend
+  [第1轮] 查询: I need to schedule service for my car. Can you tell me what 
+services I have scheduled?
+          命中 3 块: auto_service_001#1-20, auto_insurance_001#1-20, 
+auto_service_001#19-38
+  [评估] 从首轮结果中发现车辆实体: ['Honda', 'Tesla', 'Honda Accord', 'Tesla 
+Model']
+INFO:indexer:Search returned 3 results from local BM25 backend
+  [追查] 查询: Honda service appointment scheduled
+          命中 3 块: auto_service_001#37-47, auto_service_001#19-38, 
+auto_service_001#1-20
+INFO:indexer:Search returned 3 results from local BM25 backend
+  [追查] 查询: Tesla service appointment scheduled
+          命中 3 块: auto_service_001#37-47, auto_service_001#19-38, 
+auto_insurance_001#19-38
+INFO:indexer:Search returned 3 results from local BM25 backend
+  [追查] 查询: Honda Accord service appointment scheduled
+          命中 3 块: auto_service_001#37-47, auto_service_001#19-38, 
+auto_service_001#1-20
+INFO:indexer:Search returned 3 results from local BM25 backend
+  [追查] 查询: Tesla Model service appointment scheduled
+          命中 3 块: auto_service_001#37-47, auto_service_001#19-38, 
+auto_insurance_001#1-20
+
+                       检索质量对比（决定性证据召回）                        
+┌─────────────────────────────────────────┬──────────────┬──────────────────┐
+│ 指标                                    │ 朴素单次检索 │ 智能体化多轮检索 │
+├─────────────────────────────────────────┼──────────────┼──────────────────┤
+│ 检索查询次数                            │      1       │        5         │
+│ 检索到的记忆块数                        │      3       │        5         │
+│ 覆盖事实: 本田已确认预约(FS-447291)     │      ✗       │        ✓         │
+│ 覆盖事实: 特斯拉Model 3作为第二辆车存在 │      ✓       │        ✓         │
+│ 决定性证据召回率                        │     50%      │       100%       │
+│ 能否完整消歧作答                        │     不能     │        能        │
+└─────────────────────────────────────────┴──────────────┴──────────────────┘
+┌─────────────────────────────────── 结论 ────────────────────────────────────┐
+│ 朴素单次检索只发一次查询，命中被「保养预约」这类关键词主导的文本块，容易漏  │
+│ 掉另一辆车的关键信息；智能体化检索从首轮结果里发现「还有第二辆车」，再对每  │
+│ 辆车追加聚焦查询，最终把两辆车的服务状态都取回，从而在多会话检索任务上超过  │
+│ naive recall。                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+✓ 结果已写入 d:\ai-agent-book\task2\3-9_offline_demo.json

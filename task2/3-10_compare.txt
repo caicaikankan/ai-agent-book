@@ -1,0 +1,7 @@
+﻿python.exe : [错误] 找不到语料文件: document_store.json
+At line:15 char:4382
++ ... pgrep\bin'; & D:\ai-agent-book-main\.venv\Scripts\python.exe compare_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([错误] 找不到语料文件: document_store.json:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
