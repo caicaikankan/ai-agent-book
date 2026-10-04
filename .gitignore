@@ -1,0 +1,28 @@
+# ===== 密钥（绝不提交）=====
+.env
+.env.*
+!.env.example
+
+# ===== Python 虚拟环境 =====
+.venv/
+venv/
+
+# ===== Python / 测试缓存 =====
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ===== 运行时生成的向量库 / 数据库（可重建，非实验证据）=====
+task2/data/mem0_qdrant/
+task2/data/mem0_history.db
+*.sqlite
+*.db
+*.pkl
+
+# ===== Node / 系统杂项 =====
+node_modules/
+.DS_Store
+Thumbs.db
