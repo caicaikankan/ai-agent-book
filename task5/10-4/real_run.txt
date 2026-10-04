@@ -1,0 +1,125 @@
+﻿真实目标：Andrew Ng; 真实网站/独立 browser context 数：3
+  BUS [t=  0.38s #1  ] coordinator -> agent-00    | task_assigned  | {"target": "Andrew Ng", "url": "https://med.stanford.edu/profiles/browse", "t...
+  BUS [t=  0.38s #2  ] coordinator -> agent-01    | task_assigned  | {"target": "Andrew Ng", "url": "https://law.stanford.edu/directory/?tax_and_t...
+  BUS [t=  0.38s #3  ] coordinator -> agent-02    | task_assigned  | {"target": "Andrew Ng", "url": "https://ed.stanford.edu/faculty", "task_id": ...
+  BUS [t=  0.38s #4  ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "medicine-profiles"}
+  BUS [t=  0.38s #5  ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "law-faculty"}
+  BUS [t=  0.38s #6  ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "education-faculty"}
+  BUS [t=  0.44s #7  ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://med.stanford.edu/profiles/browse", "so...
+  BUS [t=  0.45s #8  ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://law.stanford.edu/directory/?tax_and_te...
+  BUS [t=  0.47s #9  ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://ed.stanford.edu/faculty", "source": "e...
+  BUS [t=  1.70s #10 ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "education-faculty"}
+  BUS [t=  1.72s #11 ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "education-faculty"}
+  BUS [t=  1.72s #12 ]    agent-02 -> coordinator | not_found      | {"reason": "target name absent from rendered page", "source": "education-facu...
+  BUS [t=  1.72s #13 ]    agent-02 -> coordinator | status_update  | {"state": "已完成", "note": "页面中未找到目标", "source": "education-faculty"}
+  BUS [t=  1.74s #14 ]    agent-02 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "education-faculty"}
+  BUS [t=  5.44s #15 ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "medicine-profiles"}
+  BUS [t=  5.45s #16 ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "medicine-profiles"}
+  BUS [t=  5.45s #17 ]    agent-00 -> coordinator | not_found      | {"reason": "target name absent from rendered page", "source": "medicine-profi...
+  BUS [t=  5.45s #18 ]    agent-00 -> coordinator | status_update  | {"state": "已完成", "note": "页面中未找到目标", "source": "medicine-profiles"}
+  BUS [t=  5.45s #19 ]    agent-00 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "medicine-profiles"}
+  BUS [t= 23.89s #20 ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "law-faculty"}
+  BUS [t= 23.91s #21 ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "law-faculty"}
+  BUS [t= 23.91s #22 ]    agent-01 -> coordinator | not_found      | {"reason": "target name absent from rendered page", "source": "law-faculty"}
+  BUS [t= 23.91s #23 ]    agent-01 -> coordinator | status_update  | {"state": "已完成", "note": "页面中未找到目标", "source": "law-faculty"}
+  BUS [t= 23.91s #24 ]    agent-01 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "law-faculty"}
+{
+  "target": "Andrew Ng",
+  "sites": [
+    {
+      "name": "medicine-profiles",
+      "college": "School of Medicine",
+      "url": "https://med.stanford.edu/profiles/browse"
+    },
+    {
+      "name": "law-faculty",
+      "college": "Stanford Law School",
+      "url": "https://law.stanford.edu/directory/?tax_and_terms=1067"
+    },
+    {
+      "name": "education-faculty",
+      "college": "Graduate School of Education",
+      "url": "https://ed.stanford.edu/faculty"
+    }
+  ],
+  "parallel": {
+    "outcome": "not_found",
+    "winner": null,
+    "profile": null,
+    "duplicate_hits": [],
+    "acks": [],
+    "expected_loser_acks": [],
+    "missing_loser_acks": [],
+    "errors": {},
+    "failure_summary": {
+      "count": 0,
+      "by_type": {}
+    },
+    "not_found_reasons": {
+      "agent-02": "target name absent from rendered page",
+      "agent-00": "target name absent from rendered page",
+      "agent-01": "target name absent from rendered page"
+    },
+    "status_table": {
+      "agent-00": {
+        "source": "medicine-profiles",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-01": {
+        "source": "law-faculty",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-02": {
+        "source": "education-faculty",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      }
+    },
+    "terminate_broadcasts": 0,
+    "parallel_seconds": 23.532,
+    "contexts_closed": 3,
+    "resource_failures": {}
+  },
+  "serial": {
+    "seconds": 30.25,
+    "visited": 3,
+    "results": [
+      {
+        "site": "medicine-profiles",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 5.3439999999973224
+      },
+      {
+        "site": "law-faculty",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 24.047000000005937
+      },
+      {
+        "site": "education-faculty",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 0.8279999999940628
+      }
+    ]
+  },
+  "resource_audit": {
+    "parallel_contexts_created": 3,
+    "parallel_contexts_closed": 3,
+    "serial_contexts_created": 3,
+    "serial_contexts_closed": 3
+  },
+  "measured_at": "2026-10-01T16:07:53+0800",
+  "measured_speedup": 1.285
+}
+资源清理：PASS; 单次级联广播：PASS
+搜索完成：未找到目标教师；失败统计={'count': 0, 'by_type': {}}

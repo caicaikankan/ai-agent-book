@@ -1,0 +1,112 @@
+{
+  "target": "Andrew Ng",
+  "sites": [
+    {
+      "name": "law",
+      "college": "Law School",
+      "url": "https://law.stanford.edu/directory/?tax_and_terms=1067"
+    },
+    {
+      "name": "education",
+      "college": "Graduate School of Education",
+      "url": "https://ed.stanford.edu/faculty"
+    },
+    {
+      "name": "profile",
+      "college": "Stanford Profiles",
+      "url": "https://profiles.stanford.edu/andrew-ng"
+    }
+  ],
+  "parallel": {
+    "outcome": "found",
+    "winner": "agent-02",
+    "profile": {
+      "found": true,
+      "name": "Andrew Ng",
+      "college": "Stanford University",
+      "position": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+      "research": "",
+      "evidence": "Andrew Ng\nSENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+      "provider": "openai",
+      "url": "https://profiles.stanford.edu/andrew-ng"
+    },
+    "duplicate_hits": [],
+    "acks": [],
+    "expected_loser_acks": [],
+    "missing_loser_acks": [],
+    "errors": {},
+    "failure_summary": {
+      "count": 0,
+      "by_type": {}
+    },
+    "not_found_reasons": {
+      "agent-01": "target name absent from rendered page",
+      "agent-00": "target name absent from rendered page"
+    },
+    "status_table": {
+      "agent-00": {
+        "source": "law",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-01": {
+        "source": "education",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-02": {
+        "source": "profile",
+        "state": "已完成",
+        "note": "找到目标教师"
+      }
+    },
+    "terminate_broadcasts": 1,
+    "parallel_seconds": 39.657,
+    "contexts_closed": 3,
+    "resource_failures": {}
+  },
+  "serial": {
+    "seconds": 49.859,
+    "visited": 3,
+    "results": [
+      {
+        "site": "law",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 24.672000000005937
+      },
+      {
+        "site": "education",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 0.8279999999940628
+      },
+      {
+        "site": "profile",
+        "profile": {
+          "found": true,
+          "name": "Andrew Ng",
+          "college": "Stanford University",
+          "position": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+          "research": "",
+          "evidence": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+          "provider": "openai",
+          "url": "https://profiles.stanford.edu/andrew-ng"
+        },
+        "seconds": 24.328000000008615
+      }
+    ]
+  },
+  "resource_audit": {
+    "parallel_contexts_created": 3,
+    "parallel_contexts_closed": 3,
+    "serial_contexts_created": 3,
+    "serial_contexts_closed": 3
+  },
+  "measured_at": "2026-10-01T16:13:48+0800",
+  "measured_speedup": 1.257
+}

@@ -1,0 +1,139 @@
+﻿真实目标：Andrew Ng; 真实网站/独立 browser context 数：3
+  BUS [t=  0.34s #1  ] coordinator -> agent-00    | task_assigned  | {"target": "Andrew Ng", "url": "https://law.stanford.edu/directory/?tax_and_t...
+  BUS [t=  0.34s #2  ] coordinator -> agent-01    | task_assigned  | {"target": "Andrew Ng", "url": "https://ed.stanford.edu/faculty", "task_id": ...
+  BUS [t=  0.34s #3  ] coordinator -> agent-02    | task_assigned  | {"target": "Andrew Ng", "url": "https://profiles.stanford.edu/andrew-ng", "ta...
+  BUS [t=  0.34s #4  ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "law"}
+  BUS [t=  0.34s #5  ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "education"}
+  BUS [t=  0.34s #6  ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "创建独立 Chromium context", "source": "profile"}
+  BUS [t=  0.39s #7  ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://law.stanford.edu/directory/?tax_and_te...
+  BUS [t=  0.41s #8  ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://ed.stanford.edu/faculty", "source": "e...
+  BUS [t=  0.42s #9  ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在加载 https://profiles.stanford.edu/andrew-ng", "sou...
+  BUS [t=  2.66s #10 ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "education"}
+  BUS [t=  2.67s #11 ]    agent-01 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "education"}
+  BUS [t=  2.67s #12 ]    agent-01 -> coordinator | not_found      | {"reason": "target name absent from rendered page", "source": "education"}
+  BUS [t=  2.67s #13 ]    agent-01 -> coordinator | status_update  | {"state": "已完成", "note": "页面中未找到目标", "source": "education"}
+  BUS [t=  2.67s #14 ]    agent-01 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "education"}
+  BUS [t= 11.62s #15 ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "profile"}
+  BUS [t= 11.64s #16 ]    agent-02 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "profile"}
+  BUS [t= 24.17s #17 ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在读取渲染后的教师页面", "source": "law"}
+  BUS [t= 24.19s #18 ]    agent-00 -> coordinator | status_update  | {"state": "执行中", "note": "正在做证据约束的教师信息抽取", "source": "law"}
+  BUS [t= 24.19s #19 ]    agent-00 -> coordinator | not_found      | {"reason": "target name absent from rendered page", "source": "law"}
+  BUS [t= 24.19s #20 ]    agent-00 -> coordinator | status_update  | {"state": "已完成", "note": "页面中未找到目标", "source": "law"}
+  BUS [t= 24.19s #21 ]    agent-00 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "law"}
+  BUS [t= 39.98s #22 ]    agent-02 -> coordinator | target_found   | {"data": {"found": true, "name": "Andrew Ng", "college": "Stanford University...
+  BUS [t= 39.98s #23 ] coordinator -> ALL         | terminate      | {"reason": "target_found_by_agent-02", "winner": "agent-02"}
+  BUS [t= 39.98s #24 ]    agent-02 -> coordinator | status_update  | {"state": "已完成", "note": "找到目标教师", "source": "profile"}
+  BUS [t= 40.00s #25 ]    agent-02 -> coordinator | resource_closed | {"browser_context_closed": true, "source": "profile"}
+{
+  "target": "Andrew Ng",
+  "sites": [
+    {
+      "name": "law",
+      "college": "Law School",
+      "url": "https://law.stanford.edu/directory/?tax_and_terms=1067"
+    },
+    {
+      "name": "education",
+      "college": "Graduate School of Education",
+      "url": "https://ed.stanford.edu/faculty"
+    },
+    {
+      "name": "profile",
+      "college": "Stanford Profiles",
+      "url": "https://profiles.stanford.edu/andrew-ng"
+    }
+  ],
+  "parallel": {
+    "outcome": "found",
+    "winner": "agent-02",
+    "profile": {
+      "found": true,
+      "name": "Andrew Ng",
+      "college": "Stanford University",
+      "position": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+      "research": "",
+      "evidence": "Andrew Ng\nSENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+      "provider": "openai",
+      "url": "https://profiles.stanford.edu/andrew-ng"
+    },
+    "duplicate_hits": [],
+    "acks": [],
+    "expected_loser_acks": [],
+    "missing_loser_acks": [],
+    "errors": {},
+    "failure_summary": {
+      "count": 0,
+      "by_type": {}
+    },
+    "not_found_reasons": {
+      "agent-01": "target name absent from rendered page",
+      "agent-00": "target name absent from rendered page"
+    },
+    "status_table": {
+      "agent-00": {
+        "source": "law",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-01": {
+        "source": "education",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-02": {
+        "source": "profile",
+        "state": "已完成",
+        "note": "找到目标教师"
+      }
+    },
+    "terminate_broadcasts": 1,
+    "parallel_seconds": 39.657,
+    "contexts_closed": 3,
+    "resource_failures": {}
+  },
+  "serial": {
+    "seconds": 49.859,
+    "visited": 3,
+    "results": [
+      {
+        "site": "law",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 24.672000000005937
+      },
+      {
+        "site": "education",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 0.8279999999940628
+      },
+      {
+        "site": "profile",
+        "profile": {
+          "found": true,
+          "name": "Andrew Ng",
+          "college": "Stanford University",
+          "position": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+          "research": "",
+          "evidence": "SENIOR DIRECTOR OF FINANCE, VICE PROVOST AND DEAN OF RESEARCH",
+          "provider": "openai",
+          "url": "https://profiles.stanford.edu/andrew-ng"
+        },
+        "seconds": 24.328000000008615
+      }
+    ]
+  },
+  "resource_audit": {
+    "parallel_contexts_created": 3,
+    "parallel_contexts_closed": 3,
+    "serial_contexts_created": 3,
+    "serial_contexts_closed": 3
+  },
+  "measured_at": "2026-10-01T16:13:48+0800",
+  "measured_speedup": 1.257
+}
+资源清理：PASS; 单次级联广播：PASS

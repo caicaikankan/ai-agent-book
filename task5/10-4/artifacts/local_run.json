@@ -1,0 +1,98 @@
+{
+  "target": "Andrew Ng",
+  "sites": [
+    {
+      "name": "medicine-profiles",
+      "college": "School of Medicine",
+      "url": "https://med.stanford.edu/profiles/browse"
+    },
+    {
+      "name": "law-faculty",
+      "college": "Stanford Law School",
+      "url": "https://law.stanford.edu/directory/?tax_and_terms=1067"
+    },
+    {
+      "name": "education-faculty",
+      "college": "Graduate School of Education",
+      "url": "https://ed.stanford.edu/faculty"
+    }
+  ],
+  "parallel": {
+    "outcome": "not_found",
+    "winner": null,
+    "profile": null,
+    "duplicate_hits": [],
+    "acks": [],
+    "expected_loser_acks": [],
+    "missing_loser_acks": [],
+    "errors": {},
+    "failure_summary": {
+      "count": 0,
+      "by_type": {}
+    },
+    "not_found_reasons": {
+      "agent-02": "target name absent from rendered page",
+      "agent-00": "target name absent from rendered page",
+      "agent-01": "target name absent from rendered page"
+    },
+    "status_table": {
+      "agent-00": {
+        "source": "medicine-profiles",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-01": {
+        "source": "law-faculty",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      },
+      "agent-02": {
+        "source": "education-faculty",
+        "state": "已完成",
+        "note": "页面中未找到目标"
+      }
+    },
+    "terminate_broadcasts": 0,
+    "parallel_seconds": 23.532,
+    "contexts_closed": 3,
+    "resource_failures": {}
+  },
+  "serial": {
+    "seconds": 30.25,
+    "visited": 3,
+    "results": [
+      {
+        "site": "medicine-profiles",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 5.3439999999973224
+      },
+      {
+        "site": "law-faculty",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 24.047000000005937
+      },
+      {
+        "site": "education-faculty",
+        "profile": {
+          "found": false,
+          "reason": "target name absent from rendered page"
+        },
+        "seconds": 0.8279999999940628
+      }
+    ]
+  },
+  "resource_audit": {
+    "parallel_contexts_created": 3,
+    "parallel_contexts_closed": 3,
+    "serial_contexts_created": 3,
+    "serial_contexts_closed": 3
+  },
+  "measured_at": "2026-10-01T16:07:53+0800",
+  "measured_speedup": 1.285
+}

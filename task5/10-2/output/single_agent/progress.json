@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "fingerprint": "e6f5df003707f37b8ca67e96f646ee1d58630562dd1c84e3a2dd461fae6451d0",
+  "provider": "OpenAI-compatible custom endpoint",
+  "model": "Qwen/Qwen3-8B",
+  "thinking": "provider_default",
+  "translations": {
+    "Chapter 1: Foundations of LLM Inference": "\n\n# 第1章：LLM推理基础\n\n大型语言模型在能够对任何内容进行推理之前，会将文本转换为数字。每一段文本首先会被拆分为**标记**（token），这是模型处理的最小单元。随后，每个标记会被映射为一个**嵌入向量**（embedding），即一个密集的向量，用于在高维空间中捕捉其语义。\n\n当用户发送请求时，他们输入的文本被称为**提示**（prompt）。将模型应用于该提示以生成答案的过程称为**推理**（inference）。用户从发送提示到收到首个响应之间的时延被称为**延迟**（latency），这是用户直接感知到的性能指标。\n\n一个最简的推理调用示例如下：\n\n```python\ndef generate(prompt: str, model) -> str:\n    tokens = model.tokenize(prompt)      # 将提示拆分为标记\n    embeddings = model.embed(tokens)     # 将每个标记映射为嵌入向量\n    output = model.forward(embeddings)   # 执行推理\n    return model.detokenize(output)\n```\n\n用户体验主要受两个数值影响。首先是提示中的标记数量，因为更长的提示需要更多的计算资源。其次是首个标记的延迟，因为首标记响应缓慢会让整个系统显得卡顿。贯穿本书始终，我们反复探讨这些核心概念：标记、嵌入向量、提示、推理和延迟。现在准确理解这些定义将有助于避免后续的混淆。",
+    "Chapter 2: The Transformer and Attention": "\n\n# 第2章：Transformer与注意力机制\n\n现代语言模型均基于**Transformer**架构构建。其核心思想是**注意力机制**（attention）：与传统的严格从左到右逐字处理不同，模型允许每个标记与其他所有标记进行交互，并决定哪些标记更重要。这正是Transformer能够将代词与前面多个标记位置的名词建立联系的原因。\n\n注意力机制作用于每个标记的**嵌入向量**（embedding）。对于每个标记，模型会计算三个向量——查询向量（query）、键向量（key）和值向量（value）——并利用它们来确定每个标记应关注其他标记的程度。\n\n```python\ndef attention(query, key, value):\n    scores = query @ key.T          # 标记间的相似度计算\n    weights = softmax(scores)       # 注意力权重\n    return weights @ value          # 加权后的嵌入向量\n```\n\n由于注意力机制需要将每个标记与其他所有标记进行比较，其计算成本会随着提示长度的增加而迅速增长。这是下一章我们将重点解决的延迟问题的根本原因。然而，正是这种注意力机制赋予了Transformer强大的能力：在推理过程中，它能让模型灵活地在整个提示序列中路由信息，而非受限于固定的处理流程。",
+    "Chapter 3: Optimizing Inference Latency": "\n\n# 第3章：优化推理延迟\n\n当模型运行正常后，下一个挑战就是速度。目标是在降低**延迟**的同时提升**吞吐量**，即系统每秒处理的请求数。这两个指标通常存在权衡关系。\n\n最重要的优化技巧是**键值缓存**（KV cache）。在推理过程中，若不使用缓存，模型需要在每一步重新计算所有先前标记的注意力。通过缓存历史标记的键和值向量，模型只需处理最新标记，这使得长提示的延迟大幅降低。\n\n```python\ndef decode_step(new_token, kv_cache):\n    q, k, v = project(new_token)         # 仅处理新标记\n    kv_cache.append(k, v)                # 重用历史键和值\n    return attention(q, kv_cache.keys, kv_cache.values)\n```\n\n第二个优化技巧是**批量处理**（batching）：将多个提示合并处理以保持硬件利用率。更大的批量可以提升吞吐量，但可能增加单个请求的延迟，因此服务系统会谨慎调整批量大小。\n\n核心结论是：推理性能需要平衡。我们每避免一次重新计算，每成功合并一个提示，就能同时推动系统向更低延迟和更高吞吐量迈进。",
+    "Chapter 4: Fine-tuning and Deployment": "\n\n# 第4章：微调与部署\n\n通用模型很少能直接适配特定产品。通常的解决方案是**微调**（fine-tuning）：在更小、更具任务针对性的数据集上继续训练模型，使其在保持通用能力的同时适应特定领域。\n\n微调会改变模型将**提示**转化为答案的方式，但不会改变基础流程：文本被转换为**标记**，每个标记被映射为**嵌入向量**，并通过**推理**生成结果。真正发生变化的是模型所学习到的参数权重。\n\n```python\ndef fine_tune(model, dataset):\n    for prompt, target in dataset:\n        loss = model.loss(prompt, target)   # 将输出与目标进行对比\n        model.update(loss)                  # 调整权重\n    return model\n```\n\n微调之后是**部署**（deployment）：将模型封装为API服务，使真实用户能够发送提示并获取答案。此时之前讨论的问题会再次凸显：延迟必须保持低位，吞吐量必须维持高位，而上一章提到的键值缓存和批量处理技术则承担了主要的性能优化工作。\n\n从**标记**、**嵌入向量**、**提示**、**推理**、**延迟**，到**微调**和**部署**，整个流程至此完整闭环。一个曾仅作为研究工具的模型，现在已转变为人们实际可用的服务。"
+  },
+  "tracker_calls": [
+    {
+      "agent": "SingleAgent",
+      "prompt_tokens": 368,
+      "completion_tokens": 1008,
+      "note": "翻译 Chapter 1: Foundations of LLM Inference",
+      "latency_seconds": 44.4940792999987,
+      "provider": "OpenAI-compatible custom endpoint",
+      "model": "Qwen/Qwen3-8B",
+      "thinking": "provider_default",
+      "outcome": "success"
+    },
+    {
+      "agent": "SingleAgent",
+      "prompt_tokens": 960,
+      "completion_tokens": 695,
+      "note": "翻译 Chapter 2: The Transformer and Attention",
+      "latency_seconds": 27.81720249999489,
+      "provider": "OpenAI-compatible custom endpoint",
+      "model": "Qwen/Qwen3-8B",
+      "thinking": "provider_default",
+      "outcome": "success"
+    },
+    {
+      "agent": "SingleAgent",
+      "prompt_tokens": 1524,
+      "completion_tokens": 738,
+      "note": "翻译 Chapter 3: Optimizing Inference Latency",
+      "latency_seconds": 26.229543900000863,
+      "provider": "OpenAI-compatible custom endpoint",
+      "model": "Qwen/Qwen3-8B",
+      "thinking": "provider_default",
+      "outcome": "success"
+    },
+    {
+      "agent": "SingleAgent",
+      "prompt_tokens": 2101,
+      "completion_tokens": 899,
+      "note": "翻译 Chapter 4: Fine-tuning and Deployment",
+      "latency_seconds": 40.80596260000311,
+      "provider": "OpenAI-compatible custom endpoint",
+      "model": "Qwen/Qwen3-8B",
+      "thinking": "provider_default",
+      "outcome": "success"
+    }
+  ]
+}
