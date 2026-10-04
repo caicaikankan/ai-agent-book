@@ -1,0 +1,104 @@
+﻿
+==============================================================================
+  能力一｜并行工具调用：并行 vs 串行的墙钟时间对比
+==============================================================================
+[  0.00s] [90mSYSTEM[0m | 有 4 个相互独立的只读感知工具需要调用（无副作用，可安全并行）。
+[  0.00s] [90mSYSTEM[0m | [0m[串行] 逐个 await（同步 ReAct 的默认做法）……
+[  0.00s] [93mTOOL  [0m | → read_config.json 启动（模拟 I/O 耗时 0.8s）
+[  0.82s] [93mTOOL  [0m | ✓ read_config.json 完成（实测 0.82s）
+[  0.82s] [93mTOOL  [0m | → web_search(‘异步 Agent’) 启动（模拟 I/O 耗时 1.2s）
+[  2.03s] [93mTOOL  [0m | ✓ web_search(‘异步 Agent’) 完成（实测 1.22s）
+[  2.03s] [93mTOOL  [0m | → db_query(orders) 启动（模拟 I/O 耗时 1.5s）
+[  3.54s] [93mTOOL  [0m | ✓ db_query(orders) 完成（实测 1.50s）
+[  3.54s] [93mTOOL  [0m | → vector_lookup(memory) 启动（模拟 I/O 耗时 1.0s）
+[  4.55s] [93mTOOL  [0m | ✓ vector_lookup(memory) 完成（实测 1.02s）
+[  4.55s] [90mSYSTEM[0m | [0m[并行] 一次性发起，asyncio.gather 并发等待……
+[  4.55s] [93mTOOL  [0m | → read_config.json 启动（模拟 I/O 耗时 0.8s）
+[  4.55s] [93mTOOL  [0m | → web_search(‘异步 Agent’) 启动（模拟 I/O 耗时 1.2s）
+[  4.55s] [93mTOOL  [0m | → db_query(orders) 启动（模拟 I/O 耗时 1.5s）
+[  4.55s] [93mTOOL  [0m | → vector_lookup(memory) 启动（模拟 I/O 耗时 1.0s）
+[  5.36s] [93mTOOL  [0m | ✓ read_config.json 完成（实测 0.80s）
+[  5.55s] [93mTOOL  [0m | ✓ vector_lookup(memory) 完成（实测 1.00s）
+[  5.75s] [93mTOOL  [0m | ✓ web_search(‘异步 Agent’) 完成（实测 1.20s）
+[  6.05s] [93mTOOL  [0m | ✓ db_query(orders) 完成（实测 1.50s）
+
+  ── 结果对比 ─────────────────────────────────────────────
+  工具                              标称延迟
+  read_config.json               0.8s
+  web_search(‘异步 Agent’)         1.2s
+  db_query(orders)               1.5s
+  vector_lookup(memory)          1.0s
+  ─────────────────────────────────────────────────────────
+  串行总耗时（Σ 各工具）                  4.55s
+  并行总耗时（gather）                 1.50s
+  并行理论下界（最慢单个）                  1.50s
+  加速比 = 串行 / 并行                 3.03x
+  ─────────────────────────────────────────────────────────
+  结论：独立的只读调用并行化后，墙钟时间由「求和」降到「取最大」。
+
+
+==============================================================================
+  能力二｜打断与取消：长任务运行中被打断，随后系统恢复
+==============================================================================
+[  0.00s] [90mSYSTEM[0m | 启动三个并行后台分析任务（fast/mid/slow）……
+[  0.00s] [95mTASK  [0m | 启动真实子进程任务 T1: `python analyze_fast.py` (速度 3%/逻辑秒)
+[  0.00s] [95mTASK  [0m | 启动真实子进程任务 T2: `python analyze_mid.py` (速度 2%/逻辑秒)
+[  0.00s] [95mTASK  [0m | 启动真实子进程任务 T3: `python analyze_slow.py` (速度 1%/逻辑秒)
+[  1.02s] [96mUSER  [0m | （即时提问）现在几点了？
+[  1.02s] [92mAGENT [0m | 现在 15:37:33。三个后台任务仍在并行推进，未被这次提问阻塞。
+[  1.17s] [95mTASK  [0m | T1 `python analyze_fast.py` 进度 21% (pid=77684)
+[  1.63s] [95mTASK  [0m | T2 `python analyze_mid.py` 进度 20% (pid=66176)
+[  2.03s] [96mUSER  [0m | （打断）取消
+[  2.03s] [95mTASK  [0m | T1 子进程已终止 🛑 (pid=77684, 进度 36%)
+[  2.03s] [95mTASK  [0m | T3 子进程已终止 🛑 (pid=67516, 进度 12%)
+[  2.03s] [95mTASK  [0m | T2 子进程已终止 🛑 (pid=66176, 进度 24%)
+[  2.07s] [90mSYSTEM[0m | 已执行打断：取消了 ['T1', 'T2', 'T3']（进度在被取消处冻结）
+
+  ── 打断后各任务状态（进度冻结在中途）───────────────────
+  task_id 命令                        状态              进度
+  T1      python analyze_fast.py    cancelled      36%
+  T2      python analyze_mid.py     cancelled      24%
+  T3      python analyze_slow.py    cancelled      12%
+  ─────────────────────────────────────────────────────────
+[  2.07s] [90mSYSTEM[0m | 打断处理完毕，系统恢复空闲，可继续接受新任务……
+[  2.07s] [95mTASK  [0m | 启动真实子进程任务 T4: `python re_run_summary.py` (速度 4%/逻辑秒)
+[  2.92s] [95mTASK  [0m | T4 `python re_run_summary.py` 进度 22% (pid=82996)
+[  3.52s] [95mTASK  [0m | T4 `python re_run_summary.py` 进度 40% (pid=82996)
+[  4.28s] [95mTASK  [0m | T4 `python re_run_summary.py` 进度 63% (pid=82996)
+[  4.88s] [95mTASK  [0m | T4 `python re_run_summary.py` 进度 81% (pid=82996)
+[  5.63s] [95mTASK  [0m | T4 `python re_run_summary.py` 进度 100% (pid=82996)
+[  5.64s] [95mTASK  [0m | T4 完成 ✅ (pid=82996, returncode=0)
+[  5.64s] [92mAGENT [0m | 已从打断中恢复，新任务 T4 正常完成：{"async_mentions": 10, "bytes": 6941……
+  结论：打断只冻结被取消的任务，运行时本身无损，可立即继续工作。
+
+
+==============================================================================
+  能力三｜状态管理：检查点持久化与跨会话恢复
+==============================================================================
+[  0.00s] [90mSYSTEM[0m | 会话 A 开始：构造轨迹并启动两个后台任务……
+[  0.00s] [94mTRAJ  [0m | + user.input         用户消息：分析日志
+[  0.00s] [94mTRAJ  [0m | + agent.tool_call    调用工具 run_terminal_command
+[  0.00s] [94mTRAJ  [0m | + tool.result        工具结果 run_terminal_command
+[  0.00s] [95mTASK  [0m | 启动真实子进程任务 T1: `python analyze_fast.py` (速度 3%/逻辑秒)
+[  0.00s] [95mTASK  [0m | 启动真实子进程任务 T2: `python analyze_slow.py` (速度 1%/逻辑秒)
+[  1.16s] [95mTASK  [0m | T1 `python analyze_fast.py` 进度 21% (pid=86984)
+[  1.20s] [95mSTATE [0m | 已保存检查点 -> D:\ai-agent-book\task4\async-agent\checkpoints\agent_state.json（3 条轨迹事件，2 个任务）
+[  1.20s] [95mTASK  [0m | T1 子进程已终止 🛑 (pid=86984, 进度 21%)
+[  1.20s] [95mTASK  [0m | T2 子进程已终止 🛑 (pid=77668, 进度 7%)
+[  1.26s] [90mSYSTEM[0m | 会话 A 结束（进程退出，内存中的运行时已销毁）。
+[  1.26s] [90mSYSTEM[0m | 会话 B 开始：新建空运行时，从检查点恢复……
+[  1.27s] [95mSTATE [0m | 已从检查点恢复 <- D:\ai-agent-book\task4\async-agent\checkpoints\agent_state.json（3 条轨迹事件，2 个任务）
+
+  ── 恢复校验 ─────────────────────────────────────────────
+  轨迹事件数     保存前 3  ->  恢复后 3  [一致 ✓]
+  可重建 LLM 上下文消息 4 条（system + 轨迹回放）
+  task_id 命令                             保存前进度  恢复后状态           进度
+  T1      python analyze_fast.py           21%  suspended      21%
+  T2      python analyze_slow.py            7%  suspended       7%
+  ─────────────────────────────────────────────────────────
+  检查点文件：D:\ai-agent-book\task4\async-agent\checkpoints\agent_state.json
+  结论：轨迹与任务进度完整落盘并跨会话还原；运行中的任务被标记为 suspended，
+        保留了最后已知进度，供上层决定「重跑」还是「按进度续跑」。
+
+
+演示结束。

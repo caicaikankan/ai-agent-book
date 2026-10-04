@@ -1,0 +1,75 @@
+﻿......F.........                                                         [100%]
+================================== FAILURES ===================================
+_______ test_cancel_terminates_real_child_process_and_freezes_progress ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001ABF79EA240>
+
+    def test_cancel_terminates_real_child_process_and_freezes_progress(monkeypatch):
+        async def scenario():
+            monkeypatch.setattr(tasks, "TICK_REAL", 0.02)
+    
+            async def on_complete(_):
+                raise AssertionError("cancelled process must not complete")
+    
+            manager = tasks.TaskManager(on_complete, lambda *_: None)
+            state = manager.start("python analyze_slow.py")
+            while state.pid is None:
+                await asyncio.sleep(0.001)
+            await asyncio.sleep(0.05)
+            pid = state.pid
+            assert manager.cancel(state.task_id)
+            with pytest.raises(asyncio.CancelledError):
+                await state._task
+            frozen = state.progress
+            await asyncio.sleep(0.05)
+            assert state.status == "cancelled"
+            assert state.progress == frozen < 100
+            assert state.executable_receipt["cancelled"] is True
+            assert state.returncode is not None
+            with pytest.raises(ProcessLookupError):
+                os.kill(pid, 0)
+    
+>       asyncio.run(scenario())
+
+test_real_tasks.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\XGY\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        monkeypatch.setattr(tasks, "TICK_REAL", 0.02)
+    
+        async def on_complete(_):
+            raise AssertionError("cancelled process must not complete")
+    
+        manager = tasks.TaskManager(on_complete, lambda *_: None)
+        state = manager.start("python analyze_slow.py")
+        while state.pid is None:
+            await asyncio.sleep(0.001)
+        await asyncio.sleep(0.05)
+        pid = state.pid
+        assert manager.cancel(state.task_id)
+        with pytest.raises(asyncio.CancelledError):
+            await state._task
+        frozen = state.progress
+        await asyncio.sleep(0.05)
+        assert state.status == "cancelled"
+        assert state.progress == frozen < 100
+        assert state.executable_receipt["cancelled"] is True
+        assert state.returncode is not None
+>       with pytest.raises(ProcessLookupError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProcessLookupError
+
+test_real_tasks.py:79: Failed
+=========================== short test summary info ===========================
+FAILED test_real_tasks.py::test_cancel_terminates_real_child_process_and_freezes_progress - Failed: DID NOT RAISE ProcessLookupError
+1 failed, 15 passed in 0.60s

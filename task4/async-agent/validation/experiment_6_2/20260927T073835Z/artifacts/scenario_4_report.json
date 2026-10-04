@@ -1,0 +1,44 @@
+{
+  "first_completed": "T1",
+  "query_receipts": [
+    {
+      "task_id": "T2",
+      "status": "running",
+      "progress": 66.0,
+      "queried_at": 5.243
+    },
+    {
+      "task_id": "T3",
+      "status": "running",
+      "progress": 33.0,
+      "queried_at": 5.243
+    }
+  ],
+  "cancelled_ids": [
+    "T3"
+  ],
+  "completed_results": {
+    "T1": {
+      "async_mentions": 10,
+      "bytes": 69415,
+      "error_keyword_count": 19,
+      "experiment_mentions": 18,
+      "heading_count": 20,
+      "input_path": "D:\\ai-agent-book\\book\\chapter4.md",
+      "input_sha256": "fbb0eee9792c2a0632ba5df5ecb0b43d70ede739be679ac10b657d13f1f6287a",
+      "job": "fast",
+      "lines": 448
+    },
+    "T2": {
+      "async_mentions": 10,
+      "bytes": 69415,
+      "error_keyword_count": 19,
+      "experiment_mentions": 18,
+      "heading_count": 20,
+      "input_path": "D:\\ai-agent-book\\book\\chapter4.md",
+      "input_sha256": "fbb0eee9792c2a0632ba5df5ecb0b43d70ede739be679ac10b657d13f1f6287a",
+      "job": "mid",
+      "lines": 448
+    }
+  }
+}

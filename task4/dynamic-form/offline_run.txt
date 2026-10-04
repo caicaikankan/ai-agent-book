@@ -1,0 +1,44 @@
+﻿====================================================================
+用户请求: 我想订一张去北京的机票
+运行模式: 离线（内置 schema 确定性渲染，无需 API Key）
+====================================================================
+
+[步骤 1] 生成澄清表单 HTML ...
+  已保存到 D:\ai-agent-book\task4\dynamic-form\generated_form.html （共 5043 字符，可手动在浏览器打开看级联效果）
+
+[步骤 2] 结构化校验表单字段与级联逻辑：
+  [PASS] 出发城市(文本输入)
+  [PASS] 出发日期(日期选择器)
+  [PASS] 旅行类型(单选:单程)
+  [PASS] 旅行类型(单选:往返)
+  [PASS] 返程日期(日期选择器)
+  [PASS] 返程字段级联逻辑(仅往返显示)
+
+  级联逻辑证据（脚本节选）:
+    | const FORM_CONFIG = {"fields": [{"name": "departure_city"}, {"name": "departure_date"}, {"name": "trip_type"}, {"name": "return_date", "container_id": "return_date_field", "show_when": {"field": "trip_type", "equals": "round_trip"}}, {"name": "cabin_class"}, {"name": "baggage_count", "options_when": {"field": "cabin_class", "map": {"economy": [{"value": "0", "label": "仅手提行李"}, {"value": "1", "label": "1 件（≤23kg）"}], "business": [{"value": "0", "label": "仅手提行李"}, {"value": "1", "label": "1 件（≤32kg）"}, {"value": "2", "label": "2 件（≤32kg）"}], "first": [{"value": "1", "label": "1 件（≤32kg）"}, {"value": "2", "label": "2 件（≤32kg）"}, {"value": "3", "label": "3 件（≤32kg）"}]}}}], "constants": {"destination_city": "北京"}};
+    | box.style.display = show ? '' : 'none';
+    | if (box && box.style.display === 'none') return;
+
+[步骤 3] 模拟用户一次性提交表单（往返场景）：
+{
+  "departure_city": "上海",
+  "departure_date": "2026-08-01",
+  "trip_type": "round_trip",
+  "return_date": "2026-08-07",
+  "cabin_class": "business",
+  "baggage_count": "2",
+  "destination_city": "北京"
+}
+
+[步骤 3] 解析 JSON 并继续任务，输出订票摘要：
+--------------------------------------------------------------------
+已收到您的订票信息：上海 → 北京，出发日期 2026-08-01。
+行程类型：往返，返程日期 2026-08-07。
+舱位：公务舱，免费托运 2 件。
+正在为您检索航班...
+--------------------------------------------------------------------  （离线确定性模板）
+
+====================================================================
+表单字段/级联校验: 全部通过
+提交 JSON 解析: 成功（见上方订票摘要）
+====================================================================

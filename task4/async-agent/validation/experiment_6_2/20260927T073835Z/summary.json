@@ -1,0 +1,74 @@
+{
+  "experiment": "6-2",
+  "campaign_id": "20260927T073835Z",
+  "generated_at": "2026-09-27T07:38:54.332213+00:00",
+  "tick_real_seconds": 0.15,
+  "elapsed_seconds": 19.215,
+  "scenario_status": {
+    "async_command_and_immediate_question": "recorded",
+    "queued_batch_to_japanese_html": "recorded",
+    "interrupt_terminates_and_recovers": "recorded",
+    "parallel_progress_threshold_cancellation": "recorded"
+  },
+  "acceptance": {
+    "status": "passed",
+    "gates": {
+      "exact_four_scenarios": true,
+      "real_subprocess_receipts_only": true,
+      "scenario_1_nonblocking_and_immediate_response": true,
+      "scenario_2_deferred_events_batched_once": true,
+      "scenario_2_japanese_html_artifact": true,
+      "scenario_3_os_process_cancelled_then_recovered": true,
+      "scenario_4_exact_rates_and_fast_first": true,
+      "scenario_4_query_once_and_cancel_only_under_threshold": true,
+      "scenario_4_integrated_report_hashed": true
+    },
+    "protocol_coverage": {
+      "long_job_at_least_three_seconds": {
+        "enforced_by": [
+          "scenario_1_nonblocking_and_immediate_response"
+        ],
+        "all_gates_passed": true
+      },
+      "placeholder_return_is_nonblocking": {
+        "enforced_by": [
+          "scenario_1_nonblocking_and_immediate_response"
+        ],
+        "all_gates_passed": true
+      },
+      "all_terminal_jobs_are_real_subprocesses": {
+        "enforced_by": [
+          "real_subprocess_receipts_only"
+        ],
+        "all_gates_passed": true
+      },
+      "cancelled_jobs_have_os_return_codes": {
+        "enforced_by": [
+          "scenario_3_os_process_cancelled_then_recovered"
+        ],
+        "all_gates_passed": true
+      },
+      "completed_jobs_have_stdout_and_input_hashes": {
+        "enforced_by": [
+          "real_subprocess_receipts_only"
+        ],
+        "all_gates_passed": true
+      },
+      "all_artifacts_are_hash_manifested": {
+        "enforced_by": [
+          "scenario_2_japanese_html_artifact",
+          "scenario_4_integrated_report_hashed"
+        ],
+        "all_gates_passed": true
+      },
+      "no_simulated_terminal_result_can_pass": {
+        "enforced_by": [
+          "real_subprocess_receipts_only"
+        ],
+        "all_gates_passed": true
+      }
+    },
+    "protocol_sha256": "71d955cbf5c047ced9be9a9464461084e94b9c5cd32b3d769cff3b6a65816421"
+  },
+  "status": "passed"
+}
